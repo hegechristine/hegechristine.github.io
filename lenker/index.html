@@ -391,12 +391,91 @@
 
   /* ============== NEWSLETTER ============== */
   .newsletter {
+    margin: 50px 0 36px;
+    perspective: 1200px;
+  }
+
+  .newsletter-flip {
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.75s cubic-bezier(0.4, 0.0, 0.2, 1);
+    min-height: 380px;
+  }
+
+  .newsletter-flip.is-flipped {
+    transform: rotateY(180deg);
+  }
+
+  .newsletter-face {
     background: var(--olive);
     color: var(--cream-light);
     border-radius: 6px;
     padding: 28px 26px;
-    margin: 50px 0 36px;
     box-shadow: 6px 6px 0 var(--ink);
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+  }
+
+  .newsletter-face--front {
+    position: relative;
+  }
+
+  .newsletter-face--back {
+    position: absolute;
+    inset: 0;
+    transform: rotateY(180deg);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+
+  .newsletter-face--back .check-circle {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background: var(--rust);
+    color: var(--cream-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 22px;
+    box-shadow: 0 4px 0 var(--ink);
+  }
+
+  .newsletter-face--back .check-circle svg {
+    width: 32px;
+    height: 32px;
+    stroke-width: 3;
+  }
+
+  .newsletter-face--back h2 {
+    font-family: 'Archivo Black', sans-serif;
+    font-size: 1.7rem;
+    line-height: 1.1;
+    color: var(--cream-light);
+    margin-bottom: 14px;
+  }
+
+  .newsletter-face--back h2 .italic {
+    color: var(--sand);
+    font-weight: 400;
+  }
+
+  .newsletter-face--back p {
+    font-family: 'Newsreader', serif;
+    font-style: italic;
+    font-size: 1.05rem;
+    line-height: 1.45;
+    max-width: 340px;
+    color: rgba(245, 236, 214, 0.9);
+  }
+
+  .newsletter-face--back .back-foot {
+    margin-top: 22px;
+    color: rgba(245, 236, 214, 0.55);
+    font-size: 0.66rem;
   }
 
   .newsletter-kicker {
@@ -758,16 +837,34 @@
 
   <!-- ===== NEWSLETTER ===== -->
   <section class="newsletter">
-    <div class="newsletter-kicker">NYHETSBREV</div>
-    <h2 class="newsletter-title">Innsikt, tips og oppdateringer rett i <span class="italic">innboksen.</span></h2>
+    <div class="newsletter-flip" id="newsletter-flip">
 
-    <!-- Synlig custom skjema -->
-    <form id="newsletter-form" class="hc-newsletter-form">
-      <input type="text" name="name" placeholder="Navn" required autocomplete="name">
-      <input type="email" name="email" placeholder="E-post" required autocomplete="email">
-      <button type="submit">Ja, takk! →</button>
-      <div class="form-message" id="form-message"></div>
-    </form>
+      <!-- FRONT: skjema -->
+      <div class="newsletter-face newsletter-face--front">
+        <div class="newsletter-kicker">NYHETSBREV</div>
+        <h2 class="newsletter-title">Innsikt, tips og oppdateringer rett i <span class="italic">innboksen.</span></h2>
+
+        <form id="newsletter-form" class="hc-newsletter-form">
+          <input type="text" name="name" placeholder="Navn" required autocomplete="name">
+          <input type="email" name="email" placeholder="E-post" required autocomplete="email">
+          <button type="submit">Ja, takk! →</button>
+          <div class="form-message" id="form-message"></div>
+        </form>
+
+        <div class="newsletter-foot kicker">INGEN SPAM. AVMELD NÅR DU VIL.</div>
+      </div>
+
+      <!-- BACK: takk-melding -->
+      <div class="newsletter-face newsletter-face--back" aria-live="polite">
+        <div class="check-circle" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        <h2>Takk, du er <span class="italic">på listen!</span></h2>
+        <p>Sjekk innboksen din om litt — første hilsen er på vei.</p>
+        <div class="back-foot">DU KAN ALLTID AVMELDE DEG.</div>
+      </div>
+
+    </div>
 
     <!-- Skjult Kajabi-embed (genererer authenticity_token og fungerer som proxy) -->
     <div id="kajabi-hidden-wrap" style="position: absolute; left: -9999px; top: -9999px; visibility: hidden; pointer-events: none;" aria-hidden="true">
@@ -776,8 +873,6 @@
 
     <!-- Skjult iframe for å fange Kajabi sin response uten å navigere bort -->
     <iframe name="kajabi-response-frame" style="display: none;" aria-hidden="true"></iframe>
-
-    <div class="newsletter-foot kicker">INGEN SPAM. AVMELD NÅR DU VIL.</div>
   </section>
 
   <script>
@@ -836,8 +931,10 @@
             if (redirectUrl) {
               window.location.href = redirectUrl;
             } else {
-              setMessage(successMessage, '#e8dcb8');
+              const flip = document.getElementById('newsletter-flip');
+              if (flip) flip.classList.add('is-flipped');
               customForm.reset();
+              setMessage('');
               button.disabled = false;
               button.textContent = 'Ja, takk! →';
             }
