@@ -27,19 +27,20 @@
   }
 
   /* ============== TOKENS ============== */
+  /* Synced to Hege Christine designsystem v1.0 */
   :root {
-    --cream: #ede4d0;
-    --cream-card: #f5ecd6;
-    --cream-light: #f8f1de;
-    --ink: #2c3328;
-    --ink-soft: #4a5042;
-    --rust: #c44a2c;
-    --rust-deep: #a83d22;
-    --olive: #5d6852;
-    --olive-dark: #4a543f;
-    --sage: #c5d2b4;
-    --sand: #f0d9a8;
-    --grid: rgba(44, 51, 40, 0.06);
+    --cream: #EFE6D4;        /* cream-200 (deck) */
+    --cream-card: #F4EFDF;   /* cream-100 */
+    --cream-light: #FBF8F0;  /* cream-50 */
+    --ink: #2E3230;          /* ink-600 (deck charcoal) */
+    --ink-soft: #4E5350;     /* ink-400 */
+    --rust: #C5522C;         /* rust-400 (deck terracotta) */
+    --rust-deep: #A94221;    /* rust-500 */
+    --olive: #5E5F4C;        /* olive-600 (deck) */
+    --olive-dark: #4A4B3C;   /* olive-700 */
+    --sage: #AFBEA0;         /* sage-300 (deck) */
+    --sand: #F0D9A8;         /* sand-200 (deck) */
+    --grid: rgba(46, 50, 48, 0.08);
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -137,17 +138,25 @@
     align-items: center;
   }
 
+  /* HC-monogram (designsystem v1.0) — kvadrat med rust-fyll og cream-tekst */
   .profile-photo {
     width: 86px;
     height: 86px;
-    border-radius: 50%;
-    border: 2px solid var(--rust);
-    overflow: hidden;
+    border-radius: var(--radius-1, 2px);
+    background: var(--rust);
+    color: var(--cream-light);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Archivo Black', sans-serif;
+    font-weight: 900;
+    font-size: 30px;
+    letter-spacing: -0.04em;
+    line-height: 1;
+    padding-top: 0.05em;
+    border: 2px solid var(--ink);
     flex-shrink: 0;
-    background: var(--sand);
-    background-image: url('https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=200&h=200&fit=crop&crop=face');
-    background-size: cover;
-    background-position: center;
+    user-select: none;
   }
 
   .profile-name {
@@ -722,7 +731,7 @@
     </div>
 
     <div class="profile-main">
-      <div class="profile-photo" aria-hidden="true"></div>
+      <div class="profile-photo" aria-label="Hege Christine HC-monogram">HC</div>
       <div>
         <h1 class="profile-name">Hege <span class="italic">Christine</span></h1>
         <span class="profile-handle kicker">@HEGECHRISTINE</span>

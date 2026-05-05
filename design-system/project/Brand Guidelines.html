@@ -1,0 +1,662 @@
+<!doctype html>
+<html lang="no">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Hege Christine · Brand Guidelines</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=Newsreader:ital,wght@0,400;0,500;1,400;1,500;1,600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/tokens.css">
+<link rel="stylesheet" href="assets/marks.css">
+<link rel="stylesheet" href="assets/decorations.css">
+<style>
+  body {
+    background: var(--cream-200);
+    color: var(--ink-600);
+    padding: 60px 0;
+    display: flex;
+    justify-content: center;
+  }
+  .page {
+    width: 1280px;
+    background: var(--cream-50);
+    padding: 80px;
+    box-shadow: 0 0 0 1px rgba(46,50,48,0.08), 0 24px 60px rgba(46,50,48,0.08);
+  }
+  /* HEADER */
+  .gh {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: var(--space-7);
+    align-items: end;
+    padding-bottom: var(--space-6);
+    border-bottom: 2px solid var(--ink-600);
+    margin-bottom: var(--space-8);
+  }
+  .gh__eyebrow {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--olive-600);
+    font-weight: 600;
+    margin-bottom: var(--space-4);
+    display: flex; align-items: center; gap: var(--space-3);
+  }
+  .gh__eyebrow::before { content: ""; width: 36px; height: 2px; background: var(--rust-400); }
+  .gh h1 {
+    font-family: var(--font-display);
+    font-size: 96px;
+    font-weight: 900;
+    line-height: 0.92;
+    letter-spacing: -0.04em;
+    margin: 0;
+    color: var(--ink-600);
+  }
+  .gh h1 em {
+    font-family: var(--font-editorial);
+    font-style: italic;
+    font-weight: 500;
+    color: var(--rust-400);
+    letter-spacing: -0.01em;
+  }
+  .gh__meta {
+    text-align: right;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--olive-600);
+    line-height: 1.8;
+  }
+  .gh__meta b { color: var(--ink-600); }
+
+  /* SECTION */
+  .sec {
+    margin-bottom: var(--space-9);
+  }
+  .sec__head {
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    gap: var(--space-5);
+    align-items: baseline;
+    padding-bottom: var(--space-4);
+    border-bottom: 1px solid var(--ink-600);
+    margin-bottom: var(--space-6);
+  }
+  .sec__num {
+    font-family: var(--font-mono);
+    font-size: 14px;
+    letter-spacing: 0.18em;
+    color: var(--rust-400);
+    font-weight: 600;
+  }
+  .sec__title {
+    font-family: var(--font-display);
+    font-size: 42px;
+    font-weight: 800;
+    letter-spacing: -0.025em;
+    margin: 0;
+    line-height: 1;
+  }
+  .sec__lede {
+    font-family: var(--font-editorial);
+    font-style: italic;
+    font-size: 19px;
+    line-height: 1.4;
+    color: var(--olive-700);
+    grid-column: 2;
+    margin: var(--space-3) 0 0;
+    max-width: 56ch;
+  }
+
+  /* ============ 01 LOGO ============ */
+  .logo-grid {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: var(--space-7);
+  }
+  .logo-card {
+    border: 1px solid var(--ink-600);
+    padding: var(--space-7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 280px;
+    position: relative;
+  }
+  .logo-card--ink { background: var(--ink-600); }
+  .logo-card--cream { background: var(--cream-200); }
+  .logo-card--sage { background: var(--sage-300); }
+  .logo-card__caption {
+    position: absolute;
+    bottom: 12px; left: 16px;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--olive-600);
+  }
+  .logo-card--ink .logo-card__caption { color: var(--cream-200); opacity: 0.7; }
+
+  .marks-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-4);
+    align-items: end;
+    padding: var(--space-6);
+    border: 1px solid var(--ink-600);
+    margin-top: var(--space-5);
+  }
+  .marks-row > div {
+    display: flex; flex-direction: column; align-items: center; gap: var(--space-3);
+  }
+  .marks-row .lbl {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--olive-600);
+  }
+
+  /* ============ 02 TYPE ============ */
+  .type-stack > div {
+    padding: var(--space-5) 0;
+    border-bottom: 1px solid var(--olive-200);
+    display: grid;
+    grid-template-columns: 180px 1fr;
+    gap: var(--space-5);
+    align-items: baseline;
+  }
+  .type-stack .meta {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--olive-600);
+    line-height: 1.7;
+  }
+  .type-stack .meta b { color: var(--ink-600); display: block; font-size: 12px; }
+
+  .ts-display {
+    font-family: var(--font-display);
+    font-size: 96px;
+    font-weight: 900;
+    line-height: 0.95;
+    letter-spacing: -0.035em;
+    margin: 0;
+  }
+  .ts-display em {
+    font-family: var(--font-editorial);
+    font-style: italic;
+    font-weight: 500;
+    color: var(--rust-400);
+    letter-spacing: -0.01em;
+  }
+  .ts-h1 { font-family: var(--font-display); font-size: 56px; font-weight: 900; line-height: 1; letter-spacing: -0.03em; margin: 0; }
+  .ts-h2 { font-family: var(--font-display); font-size: 36px; font-weight: 800; line-height: 1.05; letter-spacing: -0.025em; margin: 0; }
+  .ts-h3 { font-family: var(--font-display); font-size: 24px; font-weight: 700; line-height: 1.1; letter-spacing: -0.015em; margin: 0; }
+  .ts-lede { font-family: var(--font-editorial); font-style: italic; font-size: 22px; font-weight: 500; line-height: 1.35; color: var(--olive-700); margin: 0; }
+  .ts-body { font-family: var(--font-body); font-size: 16px; line-height: 1.55; color: var(--olive-700); margin: 0; max-width: 56ch; }
+  .ts-mono { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.24em; text-transform: uppercase; color: var(--ink-600); margin: 0; font-weight: 600; }
+
+  /* ============ 03 COLOR ============ */
+  .palette {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 2px;
+    margin-bottom: var(--space-6);
+  }
+  .palette > div {
+    aspect-ratio: 1/1.15;
+    padding: var(--space-4);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+  .palette .name { font-weight: 700; }
+  .palette .hex { opacity: 0.85; font-size: 11px; letter-spacing: 0.08em; }
+  .pl-ink   { background: var(--ink-600);   color: var(--cream-100); }
+  .pl-olive { background: var(--olive-600); color: var(--cream-100); }
+  .pl-sage  { background: var(--sage-300);  color: var(--ink-600); }
+  .pl-cream { background: var(--cream-200); color: var(--ink-600); border: 1px solid var(--olive-200); }
+  .pl-sand  { background: var(--sand-200);  color: var(--ink-600); }
+  .pl-rust  { background: var(--rust-400);  color: var(--cream-100); }
+
+  .scale {
+    display: grid;
+    grid-template-columns: 90px repeat(11, 1fr);
+    gap: 2px;
+    align-items: center;
+    margin-bottom: 6px;
+  }
+  .scale .lbl {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-600);
+    font-weight: 600;
+  }
+  .scale .step {
+    aspect-ratio: 1.2/1;
+    font-family: var(--font-mono);
+    font-size: 9px;
+    color: rgba(0,0,0,0.7);
+    padding: 4px 5px;
+    display: flex;
+    align-items: flex-end;
+  }
+  .scale .step.dark { color: var(--cream-100); }
+
+  /* ============ 04 LAYOUT ============ */
+  .layout-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-5);
+  }
+  .layout-card {
+    border: 1px solid var(--ink-600);
+    aspect-ratio: 4/5;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: var(--space-5);
+  }
+  .layout-card .lbl-tl, .layout-card .lbl-bl {
+    font-family: var(--font-mono);
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--olive-600);
+    font-weight: 600;
+    position: relative;
+    z-index: 1;
+  }
+  .layout-card h4 {
+    font-family: var(--font-display);
+    font-size: 28px;
+    font-weight: 900;
+    line-height: 0.95;
+    letter-spacing: -0.025em;
+    margin: 0;
+    position: relative; z-index: 1;
+    color: var(--ink-600);
+  }
+  .layout-card h4 em { font-family: var(--font-editorial); font-style: italic; font-weight: 500; color: var(--rust-400); }
+  .layout-card.dark { background: var(--ink-600); }
+  .layout-card.dark h4 { color: var(--cream-200); }
+  .layout-card.dark .lbl-tl, .layout-card.dark .lbl-bl { color: rgba(239,230,212,0.6); }
+
+  /* ============ 05 RULES ============ */
+  .rules {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1px;
+    background: var(--ink-600);
+    border: 1px solid var(--ink-600);
+  }
+  .rules > div {
+    background: var(--cream-50);
+    padding: var(--space-6);
+  }
+  .rule__num {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    color: var(--rust-400);
+    font-weight: 600;
+    margin-bottom: var(--space-3);
+  }
+  .rule h4 {
+    font-family: var(--font-display);
+    font-size: 22px;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+    margin: 0 0 var(--space-3);
+  }
+  .rule p {
+    font-family: var(--font-body);
+    font-size: 15px;
+    line-height: 1.55;
+    color: var(--olive-700);
+    margin: 0;
+  }
+  .rule p em { font-family: var(--font-editorial); color: var(--rust-400); font-weight: 500; }
+
+  /* ============ FOOTER ============ */
+  .gf {
+    margin-top: var(--space-9);
+    padding-top: var(--space-6);
+    border-top: 2px solid var(--ink-600);
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: var(--space-6);
+    align-items: center;
+  }
+  .gf__quote {
+    font-family: var(--font-editorial);
+    font-style: italic;
+    font-size: 22px;
+    color: var(--ink-600);
+    margin: 0;
+  }
+  .gf__meta {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--olive-600);
+    text-align: right;
+    line-height: 1.8;
+  }
+
+  @media print {
+    body { padding: 0; background: white; }
+    .page { box-shadow: none; width: auto; max-width: 1280px; padding: 40px; }
+    .sec { page-break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <!-- HEADER -->
+  <header class="gh">
+    <div>
+      <div class="gh__eyebrow">Brand Guidelines · V1.0 · 2026</div>
+      <h1>Hege<br/><em>Christine</em></h1>
+    </div>
+    <div class="gh__meta">
+      Online business strategist<br/>
+      <b>hegechristine.no</b><br/><br/>
+      Edit · Don't add
+    </div>
+  </header>
+
+  <!-- 01 LOGO -->
+  <section class="sec">
+    <div class="sec__head">
+      <div class="sec__num">01</div>
+      <div>
+        <h2 class="sec__title">Logo</h2>
+        <p class="sec__lede">HC-monogrammet er hovedmerket. Wordmark «Hege Christine» brukes når full identitet er nødvendig.</p>
+      </div>
+    </div>
+
+    <div class="logo-grid">
+      <div class="logo-card logo-card--cream">
+        <div class="hc-mark hc-mark--2xl hc-mark--ink"><span>HC</span></div>
+        <span class="logo-card__caption">Primary · Ink on Cream</span>
+      </div>
+      <div class="logo-card logo-card--ink">
+        <div class="hc-mark hc-mark--2xl hc-mark--cream"><span>HC</span></div>
+        <span class="logo-card__caption">Reverse · Cream on Ink</span>
+      </div>
+    </div>
+
+    <div class="marks-row">
+      <div>
+        <div class="hc-mark hc-mark--xs hc-mark--ink"><span>HC</span></div>
+        <div class="lbl">XS · 24px</div>
+      </div>
+      <div>
+        <div class="hc-mark hc-mark--sm hc-mark--ink"><span>HC</span></div>
+        <div class="lbl">SM · 32px</div>
+      </div>
+      <div>
+        <div class="hc-mark hc-mark--md hc-mark--ink"><span>HC</span></div>
+        <div class="lbl">MD · 44px</div>
+      </div>
+      <div>
+        <div class="hc-mark hc-mark--lg hc-mark--ink"><span>HC</span></div>
+        <div class="lbl">LG · 64px</div>
+      </div>
+    </div>
+
+    <div class="logo-grid" style="margin-top: var(--space-6);">
+      <div class="logo-card logo-card--cream" style="min-height: 180px;">
+        <span class="wordmark wordmark--lg">Hege<em>Christine</em></span>
+        <span class="logo-card__caption">Wordmark · Standard</span>
+      </div>
+      <div class="logo-card logo-card--sage" style="min-height: 180px;">
+        <div style="display: flex; align-items: center; gap: 16px;">
+          <div class="hc-mark hc-mark--lg hc-mark--ink"><span>HC</span></div>
+          <span class="wordmark">Hege<em>Christine</em></span>
+        </div>
+        <span class="logo-card__caption">Lockup · Mark + Wordmark</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 02 TYPE -->
+  <section class="sec">
+    <div class="sec__head">
+      <div class="sec__num">02</div>
+      <div>
+        <h2 class="sec__title">Typografi</h2>
+        <p class="sec__lede">Tre familier, klare roller. Archivo bærer alt. Newsreader er stemmen. JetBrains Mono er presisjon.</p>
+      </div>
+    </div>
+
+    <div class="type-stack">
+      <div>
+        <div class="meta"><b>Display</b>Archivo Black<br/>900 · 96px<br/>-0.035em</div>
+        <p class="ts-display">Design <em>din</em> uke.</p>
+      </div>
+      <div>
+        <div class="meta"><b>H1</b>Archivo Black<br/>900 · 56px<br/>-0.03em</div>
+        <h1 class="ts-h1">Bygg en business du faktisk vil leve med.</h1>
+      </div>
+      <div>
+        <div class="meta"><b>H2</b>Archivo<br/>800 · 36px</div>
+        <h2 class="ts-h2">Strategi før struktur. Struktur før skala.</h2>
+      </div>
+      <div>
+        <div class="meta"><b>H3</b>Archivo<br/>700 · 24px</div>
+        <h3 class="ts-h3">Et brev i uka. Ingen hacks.</h3>
+      </div>
+      <div>
+        <div class="meta"><b>Lede</b>Newsreader Italic<br/>500 · 22px</div>
+        <p class="ts-lede">Det handler ikke om mer. Det handler om mindre, mer presist.</p>
+      </div>
+      <div>
+        <div class="meta"><b>Body</b>Archivo<br/>400 · 16px</div>
+        <p class="ts-body">Strategi, mentoring og workshops for solopreneurer som heller vil designe enn default-e. Bygget rundt rytme, intensjon og tilbud som faktisk holder.</p>
+      </div>
+      <div>
+        <div class="meta"><b>Mono</b>JetBrains Mono<br/>600 · 11px<br/>0.24em</div>
+        <p class="ts-mono">Episode 038 · The Edit · 22 min</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 03 COLOR -->
+  <section class="sec">
+    <div class="sec__head">
+      <div class="sec__num">03</div>
+      <div>
+        <h2 class="sec__title">Farger</h2>
+        <p class="sec__lede">Cream som papir. Ink som blekk. Olive og Sage som hvile. Rust som retning. Sand som varme.</p>
+      </div>
+    </div>
+
+    <div class="palette">
+      <div class="pl-ink"><span class="name">Ink</span><span class="hex">#2E3230</span></div>
+      <div class="pl-olive"><span class="name">Olive</span><span class="hex">#5E5F4C</span></div>
+      <div class="pl-sage"><span class="name">Sage</span><span class="hex">#AFBEA0</span></div>
+      <div class="pl-cream"><span class="name">Cream</span><span class="hex">#EFE6D4</span></div>
+      <div class="pl-sand"><span class="name">Sand</span><span class="hex">#F0D9A8</span></div>
+      <div class="pl-rust"><span class="name">Rust</span><span class="hex">#C5522C</span></div>
+    </div>
+
+    <div style="margin-top: var(--space-6);">
+      <div class="scale">
+        <span class="lbl">Ink</span>
+        <div class="step" style="background:#EDEEEC">50</div>
+        <div class="step" style="background:#D4D6D1">100</div>
+        <div class="step" style="background:#A6AAA2">200</div>
+        <div class="step" style="background:#777D73">300</div>
+        <div class="step dark" style="background:#4E5350">400</div>
+        <div class="step dark" style="background:#383B39">500</div>
+        <div class="step dark" style="background:#2E3230">600</div>
+        <div class="step dark" style="background:#22251F">700</div>
+        <div class="step dark" style="background:#17190E">800</div>
+        <div class="step dark" style="background:#0C0D08">900</div>
+        <div class="step dark" style="background:#000">—</div>
+      </div>
+      <div class="scale">
+        <span class="lbl">Olive</span>
+        <div class="step" style="background:#F4F4EF">50</div>
+        <div class="step" style="background:#E7E7DE">100</div>
+        <div class="step" style="background:#CFCFBD">200</div>
+        <div class="step" style="background:#B3B39B">300</div>
+        <div class="step dark" style="background:#94957A">400</div>
+        <div class="step dark" style="background:#76775F">500</div>
+        <div class="step dark" style="background:#5E5F4C">600</div>
+        <div class="step dark" style="background:#4A4B3C">700</div>
+        <div class="step dark" style="background:#3A3B30">800</div>
+        <div class="step dark" style="background:#2B2C23">900</div>
+        <div class="step dark" style="background:#1B1C16">950</div>
+      </div>
+      <div class="scale">
+        <span class="lbl">Rust</span>
+        <div class="step" style="background:#FAEDE6">50</div>
+        <div class="step" style="background:#F4D6C6">100</div>
+        <div class="step" style="background:#E9AC91">200</div>
+        <div class="step dark" style="background:#DB835E">300</div>
+        <div class="step dark" style="background:#C5522C">400</div>
+        <div class="step dark" style="background:#A94221">500</div>
+        <div class="step dark" style="background:#8B361B">600</div>
+        <div class="step dark" style="background:#6D2915">700</div>
+        <div class="step dark" style="background:#4F1D10">800</div>
+        <div class="step dark" style="background:#2F110A">900</div>
+        <div class="step dark" style="background:#000">—</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 04 LAYOUT MOTIFS -->
+  <section class="sec">
+    <div class="sec__head">
+      <div class="sec__num">04</div>
+      <div>
+        <h2 class="sec__title">Visuelle Motiver</h2>
+        <p class="sec__lede">Grid som papir. Hjørnemerker som anker. Diagonaler som retning. Aldri pynt — alltid struktur.</p>
+      </div>
+    </div>
+
+    <div class="layout-grid">
+      <div class="layout-card bg-grid bg-grid--strong">
+        <div class="lbl-tl">A · Grid · Light</div>
+        <h4>Design <em>din</em> uke</h4>
+        <div class="lbl-bl">Bg · Grid på cream</div>
+      </div>
+      <div class="layout-card dark bg-grid--on-dark bg-grid--strong">
+        <div class="lbl-tl">B · Grid · Dark</div>
+        <h4>Strategi <em>før</em> skala</h4>
+        <div class="lbl-bl">Bg · Grid på ink</div>
+      </div>
+      <div class="layout-card bg-dots">
+        <div class="lbl-tl">C · Dots</div>
+        <h4>Bare <em>intensjonelt</em></h4>
+        <div class="lbl-bl">Bg · Dots på cream</div>
+      </div>
+    </div>
+
+    <div class="marks-row" style="grid-template-columns: repeat(6, 1fr); margin-top: var(--space-5);">
+      <div>
+        <div class="corner-mark corner-mark--a corner-mark--sm"><span></span><span></span><span></span></div>
+        <div class="lbl">A</div>
+      </div>
+      <div>
+        <div class="corner-mark corner-mark--b corner-mark--sm"><span></span><span></span><span></span><span></span></div>
+        <div class="lbl">B</div>
+      </div>
+      <div>
+        <div class="corner-mark corner-mark--c corner-mark--sm"></div>
+        <div class="lbl">C</div>
+      </div>
+      <div>
+        <div class="corner-mark corner-mark--d corner-mark--sm"><span></span><span></span></div>
+        <div class="lbl">D</div>
+      </div>
+      <div>
+        <div class="corner-mark corner-mark--e corner-mark--sm"></div>
+        <div class="lbl">E</div>
+      </div>
+      <div>
+        <div class="corner-mark corner-mark--f corner-mark--sm"></div>
+        <div class="lbl">F</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 05 RULES -->
+  <section class="sec">
+    <div class="sec__head">
+      <div class="sec__num">05</div>
+      <div>
+        <h2 class="sec__title">Regler</h2>
+        <p class="sec__lede">Fem ting som alltid gjelder. Når i tvil, gå tilbake til disse.</p>
+      </div>
+    </div>
+
+    <div class="rules">
+      <div class="rule">
+        <div class="rule__num">REGEL 01</div>
+        <h4>Alltid Ink. Aldri sort.</h4>
+        <p>Brødtekst og overskrifter er <em>Ink #2E3230</em>. Ren sort er for hardt — Ink har varme i seg.</p>
+      </div>
+      <div class="rule">
+        <div class="rule__num">REGEL 02</div>
+        <h4>Rust er retning, ikke pynt.</h4>
+        <p>Rust brukes til <em>én ting per skjerm</em>: en handling, en aksent, ett ord. Aldri to.</p>
+      </div>
+      <div class="rule">
+        <div class="rule__num">REGEL 03</div>
+        <h4>Newsreader for stemme.</h4>
+        <p>Italic Newsreader er <em>stemmen min</em> — sitater og 1–2 ord i overskrifter. Aldri lange brødtekster.</p>
+      </div>
+      <div class="rule">
+        <div class="rule__num">REGEL 04</div>
+        <h4>Grid alltid synlig.</h4>
+        <p>Grid-papir er identitet, ikke dekorasjon. Vis det <em>lavt</em> men konsekvent — også på mørke flater.</p>
+      </div>
+      <div class="rule">
+        <div class="rule__num">REGEL 05</div>
+        <h4>Mindre, mer presist.</h4>
+        <p>Tre ting per side, ikke ti. Hvitrom er innhold. <em>Edit, don't add.</em></p>
+      </div>
+      <div class="rule">
+        <div class="rule__num">REGEL 06</div>
+        <h4>Skarpe hjørner.</h4>
+        <p>Radius er 0–4px. Aldri runde knapper med mindre det er en tag eller pille. Arkitektonisk, ikke mykt.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="gf">
+    <div class="hc-mark hc-mark--lg hc-mark--ink"><span>HC</span></div>
+    <p class="gf__quote">Edit, don't add.</p>
+    <div class="gf__meta">
+      Hege Christine Brunsvik<br/>
+      hegechristine.no<br/>
+      Brand Guidelines · V1.0
+    </div>
+  </footer>
+
+</div>
+
+</body>
+</html>

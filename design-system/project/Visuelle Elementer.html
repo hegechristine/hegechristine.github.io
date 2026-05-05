@@ -1,0 +1,482 @@
+<!doctype html>
+<html lang="no">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Hege Christine · Visuelle Elementer</title>
+<link rel="stylesheet" href="assets/fonts.css">
+<style>
+  :root{
+    --ink:#1F2320;
+    --ink-2:#262A26;
+    --cream:#EFE6D4;
+    --cream-50:#FBF8F0;
+    --olive:#5E5F4C;
+    --olive-2:#7A7C66;
+    --sage:#AFBEA0;
+    --rust:#C5522C;
+    --rust-soft:#DB835E;
+    --sand:#F0D9A8;
+    --line: rgba(239,230,212,0.18);
+    --line-strong: rgba(239,230,212,0.45);
+  }
+  *,*::before,*::after{box-sizing:border-box}
+  html,body{margin:0;padding:0;background:#0e1110;font-family:'Archivo',system-ui,sans-serif;color:var(--cream);}
+  body{display:flex;justify-content:center;padding:40px 0;}
+
+  .board{
+    width:1920px;background:var(--ink);
+    padding:80px 80px 64px;position:relative;
+    box-shadow:0 0 0 1px rgba(255,255,255,0.04);
+  }
+
+  /* ============ HEADER ============ */
+  .head{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:48px;}
+  .head .title{
+    font-family:'Archivo',sans-serif;font-weight:900;
+    font-size:64px;line-height:0.95;letter-spacing:-0.03em;color:var(--cream);margin:0;
+  }
+  .head .sub{
+    margin-top:14px;
+    font-family:'JetBrains Mono',monospace;font-size:13px;letter-spacing:0.24em;text-transform:uppercase;
+    color:var(--olive-2);font-weight:500;
+  }
+  .head .logo{display:flex;align-items:center;gap:18px;}
+  .head .logo .mark{
+    width:60px;height:60px;border:1.5px solid var(--cream);
+    display:flex;align-items:center;justify-content:center;
+    font-family:'Archivo',sans-serif;font-weight:900;font-size:22px;letter-spacing:-0.02em;
+  }
+  .head .logo .name{
+    font-family:'Newsreader',serif;font-weight:500;font-style:italic;font-size:32px;color:var(--cream);line-height:1;
+  }
+  .head .logo .name b{font-family:'Archivo',sans-serif;font-style:normal;font-weight:800;letter-spacing:-0.015em;color:var(--cream);}
+  .head .logo .tag{
+    margin-top:10px;
+    font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.28em;text-transform:uppercase;color:var(--olive-2);
+  }
+
+  .hdiv{height:1px;background:var(--line);margin:32px 0 40px;}
+
+  /* ============ SECTION TITLE ============ */
+  .sec-title{
+    font-family:'JetBrains Mono',monospace;font-size:13px;letter-spacing:0.24em;text-transform:uppercase;
+    font-weight:600;color:var(--cream);margin:0 0 24px;display:flex;align-items:center;gap:14px;
+  }
+  .sec-title .num{color:var(--rust);font-weight:600;}
+
+  /* ============ ROWS ============ */
+  .row{display:grid;gap:48px;margin-bottom:56px;}
+  .row.r1{grid-template-columns: 1.4fr 1fr 1fr;}
+  .row.r2{grid-template-columns: 1.5fr 1fr;}
+  .row.r3{grid-template-columns: 1fr 1fr;}
+
+  /* ============ 01 RAMMER ============ */
+  .frames{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;}
+  .frame{
+    aspect-ratio: 3/4;
+    border:1.5px solid var(--cream);
+    background:transparent;
+    position:relative;
+  }
+  .frame.f-corner::after{
+    content:"";position:absolute;right:-1.5px;bottom:-1.5px;
+    width:24%;height:18%;background:var(--rust);
+  }
+  .frame.f-grid{
+    background-image:
+      linear-gradient(var(--line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--line) 1px, transparent 1px);
+    background-size: 12.5% 10%;
+  }
+  .frame.f-fill{background:var(--sage);border-color:var(--cream);}
+  .frame.f-fill::before{
+    content:"";position:absolute;inset:8px;border:1px solid rgba(31,35,32,0.5);
+  }
+
+  /* ============ 02 LINJER ============ */
+  .lines{display:flex;flex-direction:column;gap:36px;justify-content:center;height:100%;}
+  .line-row{display:flex;align-items:center;gap:16px;}
+  .line-row .lbl{
+    font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.28em;text-transform:uppercase;
+    color:var(--olive-2);min-width:36px;
+  }
+  .line-row .l{flex:1;height:1px;background:var(--cream);position:relative;}
+  /* a · simple line with rust accent */
+  .line-row.a .l::after{content:"";position:absolute;right:30%;top:-3px;width:60px;height:5px;background:var(--rust);}
+  /* b · ticked line */
+  .line-row.b .l{background:transparent;height:14px;display:flex;align-items:center;}
+  .line-row.b .l::before{content:"";position:absolute;left:0;right:0;top:50%;height:1px;background:var(--cream);}
+  .line-row.b .ticks{position:absolute;left:0;right:0;top:0;bottom:0;display:flex;justify-content:space-between;}
+  .line-row.b .ticks span{width:1px;background:var(--cream);}
+  /* c · weighted progress */
+  .line-row.c .l{height:3px;background:rgba(239,230,212,0.25);}
+  .line-row.c .l::after{content:"";position:absolute;left:0;top:0;bottom:0;width:38%;background:var(--rust);}
+  .line-row.c .l::before{content:"";position:absolute;left:38%;top:-3px;width:9px;height:9px;background:var(--rust);}
+  /* d · numbered scale */
+  .line-row.d{flex-direction:column;align-items:stretch;gap:6px;}
+  .line-row.d .scale{display:flex;justify-content:space-between;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.2em;color:var(--olive-2);}
+  .line-row.d .l{height:1px;background:var(--cream);}
+
+  /* ============ 03 HJØRNEELEMENTER ============ */
+  .corners{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
+  .corner{
+    aspect-ratio:1;border:1px dashed var(--line);position:relative;
+  }
+  .corner span{position:absolute;display:block;}
+  /* a offset */
+  .corner.a span:nth-child(1){top:0;left:0;width:42%;height:2px;background:var(--cream);}
+  .corner.a span:nth-child(2){top:0;left:0;width:2px;height:42%;background:var(--cream);}
+  .corner.a span:nth-child(3){top:0;left:0;width:18%;height:5px;background:var(--rust);transform:translate(8%,-3px);}
+  /* b double */
+  .corner.b span:nth-child(1){top:6px;left:6px;width:38%;height:1px;background:var(--cream);}
+  .corner.b span:nth-child(2){top:6px;left:6px;width:1px;height:38%;background:var(--cream);}
+  .corner.b span:nth-child(3){top:14px;left:14px;width:30%;height:1px;background:var(--rust);}
+  .corner.b span:nth-child(4){top:14px;left:14px;width:1px;height:30%;background:var(--rust);}
+  /* c dots into corner */
+  .corner.c{
+    background-image: radial-gradient(circle, var(--cream) 1px, transparent 1.5px);
+    background-size: 14% 14%;
+    background-position: 6px 6px;
+    background-repeat: no-repeat;
+    background-image:
+      radial-gradient(circle, var(--cream) 1px, transparent 1.5px),
+      radial-gradient(circle, var(--cream) 1px, transparent 1.5px),
+      radial-gradient(circle, var(--cream) 1px, transparent 1.5px),
+      radial-gradient(circle, var(--cream) 1px, transparent 1.5px);
+  }
+  .corner.c{position:relative;}
+  .corner.c::before{
+    content:"";position:absolute;top:8px;left:8px;width:55%;height:55%;
+    background-image: radial-gradient(circle, rgba(239,230,212,0.7) 1px, transparent 1.5px);
+    background-size: 16px 16px;
+  }
+  /* d big rust L */
+  .corner.d span:nth-child(1){top:6px;left:6px;width:48%;height:6px;background:var(--rust);}
+  .corner.d span:nth-child(2){top:6px;left:6px;width:6px;height:48%;background:var(--rust);}
+  /* e triangle */
+  .corner.e::before{
+    content:"";position:absolute;left:14px;bottom:14px;width:0;height:0;
+    border-left:48px solid transparent;border-bottom:48px solid var(--cream);
+  }
+  /* f square */
+  .corner.f::before{
+    content:"";position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+    width:30%;height:30%;border:1.5px solid var(--cream);
+  }
+
+  /* ============ 04 BOKSER ============ */
+  .blocks{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;}
+  .block{
+    border:1.5px solid var(--cream);padding:24px 22px;
+    aspect-ratio:1/1.15;display:flex;flex-direction:column;
+    background:transparent;
+  }
+  .block .lbl{
+    font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.24em;text-transform:uppercase;
+    font-weight:600;color:var(--cream);margin-bottom:14px;
+  }
+  .block p{
+    font-family:'Archivo',sans-serif;font-weight:400;font-size:14px;line-height:1.5;color:var(--cream);
+    margin:0;flex:1;
+  }
+  .block .underline{margin-top:14px;width:48px;height:2px;background:var(--rust);}
+  .block.cream{background:var(--cream);border-color:var(--cream);color:var(--ink);}
+  .block.cream .lbl,.block.cream p{color:var(--ink);}
+  .block.cream .underline{background:var(--rust);}
+  .block.outline{background:transparent;}
+  .block.rust{background:var(--rust);border-color:var(--rust);color:var(--cream);}
+  .block.rust .lbl,.block.rust p{color:var(--cream);}
+  .block.rust .underline{background:var(--cream);}
+  .block.sage{background:var(--sage);border-color:var(--sage);color:var(--ink);}
+  .block.sage .lbl,.block.sage p{color:var(--ink);}
+  .block.sage .underline{background:var(--rust);}
+
+  /* ============ 05 SIGNATUR ============ */
+  .sig{
+    border:1.5px solid var(--cream);padding:36px 40px;display:grid;
+    grid-template-columns: 88px 1fr auto;gap:32px;align-items:center;
+    position:relative;min-height:200px;
+  }
+  .sig .mark{
+    width:88px;height:88px;border:1.5px solid var(--cream);
+    display:flex;align-items:center;justify-content:center;
+    font-family:'Archivo',sans-serif;font-weight:900;font-size:28px;letter-spacing:-0.02em;
+  }
+  .sig .name{
+    font-family:'Newsreader',serif;font-weight:500;font-style:italic;font-size:36px;color:var(--cream);line-height:1;
+  }
+  .sig .name b{font-family:'Archivo',sans-serif;font-style:normal;font-weight:800;letter-spacing:-0.015em;color:var(--cream);margin-right:8px;}
+  .sig .role{
+    margin-top:10px;
+    font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.24em;text-transform:uppercase;color:var(--olive-2);font-weight:500;
+  }
+  .sig .meta{
+    margin-top:22px;
+    font-family:'Archivo',sans-serif;font-weight:400;font-size:14px;line-height:1.6;color:var(--cream);
+  }
+  .sig .grid-art{
+    width:200px;height:140px;
+    background-image:
+      linear-gradient(var(--line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--line) 1px, transparent 1px);
+    background-size:25% 25%;
+    position:relative;
+  }
+  .sig .grid-art::after{
+    content:"";position:absolute;left:25%;top:0;bottom:0;width:1px;background:var(--rust);
+  }
+
+  /* ============ 06 BAKGRUNNSEFFEKTER ============ */
+  .bgs{display:grid;grid-template-columns:repeat(5,1fr);gap:20px;}
+  .bg{
+    aspect-ratio:1/0.88;border:1px solid var(--line);position:relative;
+  }
+  .bg .lbl{
+    position:absolute;left:0;right:0;bottom:-26px;text-align:center;
+    font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.24em;text-transform:uppercase;color:var(--olive-2);
+  }
+  .bg.grid{
+    background-image:
+      linear-gradient(rgba(239,230,212,0.6) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(239,230,212,0.6) 1px, transparent 1px);
+    background-size:16.6% 16.6%;
+  }
+  .bg.grid-fine{
+    background-image:
+      linear-gradient(rgba(239,230,212,0.45) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(239,230,212,0.45) 1px, transparent 1px);
+    background-size:8.3% 10%;
+  }
+  .bg.grid-accent{
+    background-image:
+      linear-gradient(rgba(239,230,212,0.45) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(239,230,212,0.45) 1px, transparent 1px);
+    background-size:16.6% 16.6%;
+    position:relative;
+  }
+  .bg.grid-accent::after{
+    content:"";position:absolute;left:33.2%;top:0;bottom:0;width:2px;background:var(--rust);
+  }
+  .bg.diag::before{
+    content:"";position:absolute;inset:0;background:
+      linear-gradient(135deg, transparent calc(50% - 0.5px), var(--line-strong) 50%, transparent calc(50% + 0.5px));
+  }
+  .bg.dots{
+    background-image: radial-gradient(circle, var(--line-strong) 1px, transparent 1.5px);
+    background-size:14% 18%;
+  }
+  .bg.fill{
+    background:var(--sage);border-color:var(--sage);position:relative;
+  }
+  .bg.fill::before{
+    content:"";position:absolute;left:14%;top:0;bottom:0;width:1px;background:var(--rust);
+  }
+
+  /* ============ 07 PROGRESS ============ */
+  .progress{display:flex;flex-direction:column;gap:30px;}
+  .pg{
+    display:grid;grid-template-columns:repeat(4,1fr);gap:0;align-items:center;position:relative;
+  }
+  .pg .step{
+    font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.24em;color:var(--olive-2);font-weight:500;
+    position:relative;padding-left:8px;
+  }
+  .pg .step.active{color:var(--cream);}
+  .pg .step::after{
+    content:"";position:absolute;left:36px;right:-12px;top:50%;height:1px;background:rgba(239,230,212,0.25);
+  }
+  .pg .step:last-child::after{display:none;}
+  /* row a — square marker on step 2 */
+  .pg.a .step.active{position:relative;}
+  .pg.a .step.active::before{
+    content:"";position:absolute;left:0;top:50%;width:9px;height:9px;background:var(--rust);transform:translateY(-50%);
+  }
+  .pg.a .step.active::after{background:var(--rust);}
+  /* row b — arrow on step 2 */
+  .pg.b .step.active::after{
+    background:var(--rust);height:2px;
+  }
+  .pg.b .step.active .arrow{
+    position:absolute;right:-18px;top:50%;transform:translateY(-50%);
+    width:0;height:0;border-left:7px solid var(--rust);border-top:5px solid transparent;border-bottom:5px solid transparent;
+  }
+  /* row c — long underline */
+  .pg.c .step::after{height:2px;background:rgba(239,230,212,0.18);}
+  .pg.c .step.active::after{background:var(--rust);}
+
+  /* ============ FOOTER ============ */
+  .foot{
+    display:flex;justify-content:space-between;align-items:center;
+    margin-top:32px;padding-top:24px;border-top:1px solid var(--line);
+    font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.24em;text-transform:uppercase;color:var(--olive-2);
+  }
+  .foot em{font-family:'Newsreader',serif;font-style:italic;color:var(--rust);text-transform:none;letter-spacing:0;font-size:14px;font-weight:500;}
+
+</style>
+</head>
+<body>
+
+<div class="board">
+
+  <!-- HEADER -->
+  <div class="head">
+    <div>
+      <h1 class="title">Visuelle Elementer</h1>
+      <div class="sub">Rammer · Linjer · Effekter — V1.0</div>
+    </div>
+    <div class="logo">
+      <div class="mark">HC</div>
+      <div>
+        <div class="name"><b>Hege</b><em>Christine</em></div>
+        <div class="tag">Struktur · Klarhet · Fremtdrift</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="hdiv"></div>
+
+  <!-- ROW 1 — Rammer / Linjer / Hjørner -->
+  <div class="row r1">
+
+    <!-- 01 RAMMER -->
+    <div>
+      <div class="sec-title"><span class="num">01.</span> Rammer / Bilderammer</div>
+      <div class="frames">
+        <div class="frame"></div>
+        <div class="frame f-corner"></div>
+        <div class="frame f-grid"></div>
+        <div class="frame f-fill"></div>
+      </div>
+    </div>
+
+    <!-- 02 LINJER -->
+    <div>
+      <div class="sec-title"><span class="num">02.</span> Linjer / Delere</div>
+      <div class="lines">
+        <div class="line-row a"><span class="lbl">A</span><div class="l"></div></div>
+        <div class="line-row b"><span class="lbl">B</span>
+          <div class="l"><div class="ticks"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div></div>
+        </div>
+        <div class="line-row c"><span class="lbl">C</span><div class="l"></div></div>
+        <div class="line-row d">
+          <div class="scale"><span>01</span><span>06</span></div>
+          <div class="l"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 03 HJØRNER -->
+    <div>
+      <div class="sec-title"><span class="num">03.</span> Hjørneelementer</div>
+      <div class="corners">
+        <div class="corner a"><span></span><span></span><span></span></div>
+        <div class="corner b"><span></span><span></span><span></span><span></span></div>
+        <div class="corner c"></div>
+        <div class="corner d"><span></span><span></span></div>
+        <div class="corner e"></div>
+        <div class="corner f"></div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ROW 2 — Bokser / Signatur -->
+  <div class="row r2">
+
+    <!-- 04 BOKSER -->
+    <div>
+      <div class="sec-title"><span class="num">04.</span> Bokser &amp; Blokker</div>
+      <div class="blocks">
+        <div class="block cream">
+          <div class="lbl">Tittel her</div>
+          <p>Beskrivende tekst kan stå her. Kort og presist.</p>
+          <div class="underline"></div>
+        </div>
+        <div class="block outline">
+          <div class="lbl">Tittel her</div>
+          <p>Beskrivende tekst kan stå her. Kort og presist.</p>
+          <div class="underline" style="background:var(--cream);"></div>
+        </div>
+        <div class="block rust">
+          <div class="lbl">Tittel her</div>
+          <p>Beskrivende tekst kan stå her. Kort og presist.</p>
+          <div class="underline"></div>
+        </div>
+        <div class="block sage">
+          <div class="lbl">Tittel her</div>
+          <p>Beskrivende tekst kan stå her. Kort og presist.</p>
+          <div class="underline"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 05 SIGNATUR -->
+    <div>
+      <div class="sec-title"><span class="num">05.</span> Signatur / E-post</div>
+      <div class="sig">
+        <div class="mark">HC</div>
+        <div>
+          <div class="name"><b>Hege</b><em>Christine</em></div>
+          <div class="role">Strategi &amp; Struktur</div>
+          <div class="meta">hegechristine.no<br/>@hegechristine</div>
+        </div>
+        <div class="grid-art"></div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ROW 3 — Bakgrunner / Progress -->
+  <div class="row r3">
+
+    <!-- 06 BAKGRUNN -->
+    <div>
+      <div class="sec-title"><span class="num">06.</span> Bakgrunnseffekter</div>
+      <div class="bgs" style="padding-bottom:30px;">
+        <div class="bg grid"><span class="lbl">Grid</span></div>
+        <div class="bg grid-fine"><span class="lbl">Grid · tett</span></div>
+        <div class="bg grid-accent"><span class="lbl">Grid + aksent</span></div>
+        <div class="bg diag"><span class="lbl">Diagonal</span></div>
+        <div class="bg dots"><span class="lbl">Prikker</span></div>
+      </div>
+    </div>
+
+    <!-- 07 PROGRESS -->
+    <div>
+      <div class="sec-title"><span class="num">07.</span> Progress / Steg</div>
+      <div class="progress">
+        <div class="pg a">
+          <div class="step">01</div>
+          <div class="step active">02</div>
+          <div class="step">03</div>
+          <div class="step">04</div>
+        </div>
+        <div class="pg b">
+          <div class="step">01</div>
+          <div class="step active">02<span class="arrow"></span></div>
+          <div class="step">03</div>
+          <div class="step">04</div>
+        </div>
+        <div class="pg c">
+          <div class="step">01</div>
+          <div class="step active">02</div>
+          <div class="step">03</div>
+          <div class="step">04</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- FOOTER -->
+  <div class="foot">
+    <div>Brand Board Elementer — V1.0</div>
+    <div><em>Edit, don't add.</em></div>
+    <div>hegechristine.no</div>
+  </div>
+
+</div>
+
+</body>
+</html>

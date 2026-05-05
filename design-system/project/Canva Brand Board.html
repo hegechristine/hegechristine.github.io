@@ -1,0 +1,444 @@
+<!doctype html>
+<html lang="no">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Hege Christine — Brand Board</title>
+<link rel="stylesheet" href="assets/fonts.css">
+<template id="__bundler_thumbnail">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400">
+  <rect width="400" height="400" fill="#EFE6D4"/>
+  <rect x="60" y="60" width="280" height="280" fill="none" stroke="#2E3230" stroke-width="3"/>
+  <text x="200" y="200" text-anchor="middle" font-family="Archivo, sans-serif" font-weight="800" font-size="56" fill="#2E3230">BRAND</text>
+  <text x="200" y="250" text-anchor="middle" font-family="Newsreader, serif" font-style="italic" font-size="24" fill="#C5522C">board</text>
+</svg>
+</template>
+<style>
+  :root{
+    --ink:#2E3230; --cream:#EFE6D4; --cream-50:#FBF8F0;
+    --olive:#5E5F4C; --olive-700:#4A4B3C; --olive-200:#CFCFBD;
+    --sage:#AFBEA0; --rust:#C5522C; --sand:#F0D9A8;
+  }
+  *,*::before,*::after{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{
+    font-family:'Archivo',system-ui,sans-serif;
+    background:var(--cream);
+    color:var(--ink);
+    -webkit-font-smoothing:antialiased;
+  }
+  .board{max-width:1080px;margin:0 auto;padding:64px 56px 96px;}
+  /* Header */
+  .head{display:flex;justify-content:space-between;align-items:flex-end;border-bottom:2px solid var(--ink);padding-bottom:24px;margin-bottom:48px;}
+  .head__brand{display:flex;align-items:baseline;gap:14px;}
+  .logomark{
+    display:inline-grid;place-content:center;
+    width:48px;height:48px;background:var(--ink);color:var(--cream);
+    font-family:'Archivo',sans-serif;font-weight:800;font-size:18px;letter-spacing:-0.04em;
+  }
+  .wordmark{font-family:'Archivo Black','Archivo',sans-serif;font-weight:900;font-size:32px;letter-spacing:-0.03em;line-height:1;}
+  .wordmark em{font-family:'Newsreader',serif;font-style:italic;font-weight:600;color:var(--rust);}
+  .head__meta{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:var(--olive);text-align:right;line-height:1.6;}
+  /* Section */
+  .sec{margin-top:64px;}
+  .sec__label{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;font-weight:600;color:var(--ink);display:flex;align-items:center;gap:12px;margin-bottom:16px;}
+  .sec__label::before{content:"";width:28px;height:2px;background:var(--rust);}
+  .sec__title{font-family:'Archivo Black','Archivo',sans-serif;font-weight:900;font-size:48px;line-height:1;letter-spacing:-0.03em;margin:0 0 8px;}
+  .sec__lede{font-family:'Archivo',sans-serif;font-weight:400;font-size:20px;line-height:1.45;color:var(--olive-700);margin:0 0 32px;max-width:60ch;}
+
+  /* COLOR */
+  .palette{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border:2px solid var(--ink);}
+  .swatch{padding:24px 20px;border-right:1px solid var(--ink);border-bottom:1px solid var(--ink);min-height:200px;display:flex;flex-direction:column;justify-content:space-between;}
+  .swatch:nth-child(3n){border-right:0;}
+  .swatch:nth-last-child(-n+3){border-bottom:0;}
+  .swatch__name{font-family:'Archivo',sans-serif;font-weight:700;font-size:18px;letter-spacing:-0.02em;}
+  .swatch__role{font-family:'Newsreader',serif;font-style:italic;font-size:14px;line-height:1.3;margin-top:4px;opacity:0.85;}
+  .swatch__hex{font-family:'JetBrains Mono',monospace;font-weight:600;font-size:14px;letter-spacing:0.05em;}
+  .swatch__rgb{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.06em;opacity:0.75;margin-top:2px;}
+  .sw-cream{background:var(--cream);color:var(--ink);}
+  .sw-ink{background:var(--ink);color:var(--cream);}
+  .sw-rust{background:var(--rust);color:var(--cream);}
+  .sw-olive{background:var(--olive);color:var(--cream);}
+  .sw-sage{background:var(--sage);color:var(--ink);}
+  .sw-sand{background:var(--sand);color:var(--ink);}
+
+  /* Tints strip */
+  .tints{margin-top:24px;display:grid;grid-template-columns:repeat(6,1fr);border:2px solid var(--ink);}
+  .tint{height:64px;display:flex;align-items:flex-end;padding:8px;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.06em;border-right:1px solid var(--ink);}
+  .tint:last-child{border-right:0;}
+
+  /* TYPE ROLES */
+  .roles{border:2px solid var(--ink);}
+  .role{display:grid;grid-template-columns:200px 1fr 180px;gap:24px;padding:28px 24px;border-bottom:1px solid var(--ink);align-items:center;}
+  .role:last-child{border-bottom:0;}
+  .role__canva{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:var(--olive);font-weight:600;line-height:1.5;}
+  .role__canva b{display:block;font-family:'Archivo',sans-serif;font-weight:700;font-size:14px;color:var(--ink);letter-spacing:-0.01em;text-transform:none;margin-bottom:4px;}
+  .role__sample{min-width:0;}
+  .role__spec{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.06em;color:var(--olive);line-height:1.6;}
+  .role__spec b{display:block;color:var(--ink);font-family:'Archivo',sans-serif;font-weight:600;font-size:13px;letter-spacing:0;text-transform:none;margin-bottom:2px;}
+
+  /* Type samples */
+  .s-h1{font-family:'Archivo Black','Archivo',sans-serif;font-weight:900;font-size:64px;line-height:0.92;letter-spacing:-0.035em;}
+  .s-h2{font-family:'Archivo Black','Archivo',sans-serif;font-weight:900;font-size:40px;line-height:1.0;letter-spacing:-0.025em;}
+  .s-h3{font-family:'Archivo Black','Archivo',sans-serif;font-weight:900;font-size:28px;line-height:1.1;letter-spacing:-0.02em;}
+  .s-h4{font-family:'Archivo',sans-serif;font-weight:700;font-size:22px;line-height:1.2;letter-spacing:-0.015em;}
+  .s-h5{font-family:'Archivo',sans-serif;font-weight:600;font-size:18px;line-height:1.25;letter-spacing:-0.01em;}
+  .s-h6{font-family:'Archivo',sans-serif;font-weight:600;font-size:14px;line-height:1.3;letter-spacing:0.04em;text-transform:uppercase;}
+  .s-body{font-family:'Archivo',sans-serif;font-weight:400;font-size:16px;line-height:1.5;color:var(--olive-700);}
+  .s-quote{font-family:'Newsreader',serif;font-style:italic;font-weight:500;font-size:24px;line-height:1.35;color:var(--ink);}
+  .s-cap{font-family:'JetBrains Mono',monospace;font-weight:600;font-size:12px;letter-spacing:0.14em;text-transform:uppercase;color:var(--olive);}
+  em.rust{font-family:'Newsreader',serif;font-style:italic;font-weight:600;color:var(--rust);}
+
+  /* Recipe cards */
+  .recipes{display:grid;grid-template-columns:1fr 1fr;gap:0;border:2px solid var(--ink);margin-top:0;}
+  .recipe{padding:28px 24px;border-right:1px solid var(--ink);}
+  .recipe:last-child{border-right:0;}
+  .recipe h4{font-family:'Archivo Black','Archivo',sans-serif;font-weight:900;font-size:18px;letter-spacing:-0.02em;margin:0 0 12px;}
+  .recipe ul{margin:0;padding-left:18px;font-family:'Archivo',sans-serif;font-size:14px;line-height:1.6;color:var(--olive-700);}
+  .recipe ul li b{color:var(--ink);font-weight:600;}
+
+  /* Rules */
+  .rules{display:grid;grid-template-columns:repeat(2,1fr);gap:0;border:2px solid var(--ink);}
+  .rule{padding:24px;border-right:1px solid var(--ink);border-bottom:1px solid var(--ink);}
+  .rule:nth-child(2n){border-right:0;}
+  .rule:nth-last-child(-n+2){border-bottom:0;}
+  .rule__n{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.14em;color:var(--rust);font-weight:600;text-transform:uppercase;}
+  .rule h4{font-family:'Archivo Black','Archivo',sans-serif;font-weight:900;font-size:20px;letter-spacing:-0.02em;margin:8px 0 8px;}
+  .rule p{font-family:'Archivo',sans-serif;font-size:14px;line-height:1.5;color:var(--olive-700);margin:0;}
+
+  /* Footer */
+  .foot{margin-top:80px;padding-top:24px;border-top:2px solid var(--ink);display:flex;justify-content:space-between;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:var(--olive);}
+</style>
+</head>
+<body>
+<div class="board">
+
+  <!-- HEADER -->
+  <header class="head">
+    <div class="head__brand">
+      <span class="logomark">HC</span>
+      <div class="wordmark">Hege <em>Christine</em></div>
+    </div>
+    <!-- Wordmark uses Archivo Black for both words. Rust is the only differentiator. -->
+    <div class="head__meta">
+      Brand Board · v1.0<br/>
+      For Canva Brand Kit<br/>
+      Apr 2026
+    </div>
+  </header>
+
+  <!-- COLOR -->
+  <section class="sec">
+    <div class="sec__label">01 · Farger</div>
+    <h2 class="sec__title">Palett</h2>
+    <p class="sec__lede">Seks kjernefarger. Rust er eneste action-farge — bruk sparsomt.</p>
+
+    <div class="palette">
+      <div class="swatch sw-cream">
+        <div>
+          <div class="swatch__name">Cream</div>
+          <div class="swatch__role">Primær bakgrunn · papir</div>
+        </div>
+        <div>
+          <div class="swatch__hex">#EFE6D4</div>
+          <div class="swatch__rgb">RGB 239 230 212</div>
+        </div>
+      </div>
+      <div class="swatch sw-ink">
+        <div>
+          <div class="swatch__name">Ink / Charcoal</div>
+          <div class="swatch__role">Tekst · border · mørk flate</div>
+        </div>
+        <div>
+          <div class="swatch__hex">#2E3230</div>
+          <div class="swatch__rgb">RGB 46 50 48</div>
+        </div>
+      </div>
+      <div class="swatch sw-rust">
+        <div>
+          <div class="swatch__name">Rust</div>
+          <div class="swatch__role">Aksent · CTA · kursiv</div>
+        </div>
+        <div>
+          <div class="swatch__hex">#C5522C</div>
+          <div class="swatch__rgb">RGB 197 82 44</div>
+        </div>
+      </div>
+      <div class="swatch sw-olive">
+        <div>
+          <div class="swatch__name">Olive</div>
+          <div class="swatch__role">Sekundær nøytral · dyp flate</div>
+        </div>
+        <div>
+          <div class="swatch__hex">#5E5F4C</div>
+          <div class="swatch__rgb">RGB 94 95 76</div>
+        </div>
+      </div>
+      <div class="swatch sw-sage">
+        <div>
+          <div class="swatch__name">Sage</div>
+          <div class="swatch__role">Surface · seksjon · frame</div>
+        </div>
+        <div>
+          <div class="swatch__hex">#AFBEA0</div>
+          <div class="swatch__rgb">RGB 175 190 160</div>
+        </div>
+      </div>
+      <div class="swatch sw-sand">
+        <div>
+          <div class="swatch__name">Sand</div>
+          <div class="swatch__role">Highlight · kun på mørke flater</div>
+        </div>
+        <div>
+          <div class="swatch__hex">#F0D9A8</div>
+          <div class="swatch__rgb">RGB 240 217 168</div>
+        </div>
+      </div>
+    </div>
+
+    <p class="s-cap" style="margin-top:24px;">Rust-skala — fra mykt brød til dyp terracotta</p>
+    <div class="tints">
+      <div class="tint" style="background:#FAEDE6;color:#2E3230;">#FAEDE6</div>
+      <div class="tint" style="background:#F4D6C6;color:#2E3230;">#F4D6C6</div>
+      <div class="tint" style="background:#E9AC91;color:#2E3230;">#E9AC91</div>
+      <div class="tint" style="background:#DB835E;color:#FBF8F0;">#DB835E</div>
+      <div class="tint" style="background:#C5522C;color:#FBF8F0;">#C5522C</div>
+      <div class="tint" style="background:#8B361B;color:#FBF8F0;">#8B361B</div>
+    </div>
+
+    <p class="s-cap" style="margin-top:24px;">Olive-skala — fra papir til natt</p>
+    <div class="tints">
+      <div class="tint" style="background:#F4F4EF;color:#2E3230;">#F4F4EF</div>
+      <div class="tint" style="background:#CFCFBD;color:#2E3230;">#CFCFBD</div>
+      <div class="tint" style="background:#94957A;color:#FBF8F0;">#94957A</div>
+      <div class="tint" style="background:#5E5F4C;color:#FBF8F0;">#5E5F4C</div>
+      <div class="tint" style="background:#3A3B30;color:#FBF8F0;">#3A3B30</div>
+      <div class="tint" style="background:#1B1C16;color:#FBF8F0;">#1B1C16</div>
+    </div>
+  </section>
+
+  <!-- TYPE -->
+  <section class="sec">
+    <div class="sec__label">02 · Typografi</div>
+    <h2 class="sec__title">Tre fonter, klare roller</h2>
+    <p class="sec__lede">Archivo bærer alt. Newsreader er stemmen. JetBrains Mono er etiketten.</p>
+
+    <div class="roles">
+
+      <div class="role">
+        <div class="role__canva">
+          <b>H1 · Hovedoverskrift</b>
+          Title (Canva)
+        </div>
+        <div class="role__sample">
+          <p class="s-h1" style="margin:0;">Edit, <em class="rust">don't</em> add.</p>
+        </div>
+        <div class="role__spec">
+          <b>Archivo Black</b>
+          Black · 900<br/>
+          56–120 pt<br/>
+          Tracking −3%<br/>
+          Line 0.92
+        </div>
+      </div>
+
+      <div class="role">
+        <div class="role__canva">
+          <b>H2 · Seksjon</b>
+          Subtitle (Canva)
+        </div>
+        <div class="role__sample">
+          <p class="s-h2" style="margin:0;">Rolig strategi for travle liv.</p>
+        </div>
+        <div class="role__spec">
+          <b>Archivo Black</b>
+          Black · 900<br/>
+          36–48 pt<br/>
+          Tracking −2,5%<br/>
+          Line 1.0
+        </div>
+      </div>
+
+      <div class="role">
+        <div class="role__canva">
+          <b>H3 · Deloverskrift</b>
+          Heading (Canva)
+        </div>
+        <div class="role__sample">
+          <p class="s-h3" style="margin:0;">Mentoring — ett år, din struktur.</p>
+        </div>
+        <div class="role__spec">
+          <b>Archivo Black</b>
+          Black · 900<br/>
+          24–28 pt<br/>
+          Tracking −2%<br/>
+          Line 1.1
+        </div>
+      </div>
+
+      <div class="role">
+        <div class="role__canva">
+          <b>H4 · Underoverskrift</b>
+          Subheading (Canva)
+        </div>
+        <div class="role__sample">
+          <p class="s-h4" style="margin:0;">Et år, din struktur — i ditt tempo.</p>
+        </div>
+        <div class="role__spec">
+          <b>Archivo</b>
+          Bold · 700<br/>
+          20–24 pt<br/>
+          Tracking −1,5%<br/>
+          Line 1.2
+        </div>
+      </div>
+
+      <div class="role">
+        <div class="role__canva">
+          <b>H5 · Liten tittel</b>
+          Subheading 2 (Canva)
+        </div>
+        <div class="role__sample">
+          <p class="s-h5" style="margin:0;">Slik bygger du uka di på nytt.</p>
+        </div>
+        <div class="role__spec">
+          <b>Archivo</b>
+          SemiBold · 600<br/>
+          16–20 pt<br/>
+          Tracking −1%<br/>
+          Line 1.25
+        </div>
+      </div>
+
+      <div class="role">
+        <div class="role__canva">
+          <b>H6 · Eyebrow / etikett</b>
+          Heading-label (Canva)
+        </div>
+        <div class="role__sample">
+          <p class="s-h6" style="margin:0;">Modul 03 · Energi-audit</p>
+        </div>
+        <div class="role__spec">
+          <b>Archivo</b>
+          SemiBold · 600<br/>
+          12–14 pt UPPERCASE<br/>
+          Tracking 0.04em<br/>
+          Line 1.3
+        </div>
+      </div>
+
+      <div class="role">
+        <div class="role__canva">
+          <b>Brødtekst</b>
+          Body (Canva)
+        </div>
+        <div class="role__sample">
+          <p class="s-body" style="margin:0;">Seks år med solopreneurer har lært meg én ting: de fleste bygger en business, men glemmer å designe et liv rundt den. Dette er motsatsen.</p>
+        </div>
+        <div class="role__spec">
+          <b>Archivo</b>
+          Regular · 400<br/>
+          14–18 pt<br/>
+          Line 1.5<br/>
+          Color · Olive 700
+        </div>
+      </div>
+
+      <div class="role">
+        <div class="role__canva">
+          <b>Sitat</b>
+          Quote (Canva)
+        </div>
+        <div class="role__sample">
+          <p class="s-quote" style="margin:0;">Det handler ikke om mer. Det handler om å designe en uke du faktisk vil leve.</p>
+        </div>
+        <div class="role__spec">
+          <b>Newsreader</b>
+          Medium Italic · 500<br/>
+          22–28 pt<br/>
+          Line 1.35<br/>
+          Color · Ink<br/>
+          Kun for sitater
+        </div>
+      </div>
+
+      <div class="role">
+        <div class="role__canva">
+          <b>Bildetekst</b>
+          Caption (Canva)
+        </div>
+        <div class="role__sample">
+          <p class="s-cap" style="margin:0;">Episode 042 · The Edit · Utgitt mandag</p>
+        </div>
+        <div class="role__spec">
+          <b>JetBrains Mono</b>
+          SemiBold · 600<br/>
+          11–12 pt<br/>
+          UPPERCASE<br/>
+          Letter-space 0.14em
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Recipes -->
+    <div class="recipes" style="margin-top:24px;">
+      <div class="recipe">
+        <h4>Slik finner du fontene i Canva</h4>
+        <ul>
+          <li><b>Archivo Black</b> — egen font i Canva. Søk «Archivo Black». Brukes på H1, H2, H3.</li>
+          <li><b>Archivo</b> — søk «Archivo» (uten «Black» eller «Narrow»). Vektmenyen gir 400, 500, 600, 700. Brukes på H4–H6 og brødtekst.</li>
+          <li><b>Newsreader</b> — søk «Newsreader». Medium + kursiv. <b>Kun</b> i sitater.</li>
+          <li><b>JetBrains Mono</b> — søk «JetBrains Mono». SemiBold + caps for bildetekst og meta.</li>
+        </ul>
+      </div>
+      <div class="recipe">
+        <h4>Tre regler å følge</h4>
+        <ul>
+          <li>All tekst i <b>Ink #2E3230</b> som standard. Aldri ren sort.</li>
+          <li><b>H1–H3</b> alltid i Archivo Black. <b>H4–H6</b> og brødtekst i vanlig Archivo.</li>
+          <li><b>Newsreader Italic i Rust</b> kan brukes som aksent på 1–2 ord i H1–H2 — sparsomt. <b>Sitater</b> i Newsreader Italic Ink.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- BRAND RULES -->
+  <section class="sec">
+    <div class="sec__label">03 · Brand-regler</div>
+    <h2 class="sec__title">Edit, don't add.</h2>
+    <p class="sec__lede">Fire prinsipper som styrer hver flate.</p>
+    <!-- Brand rules section -->
+
+    <div class="rules">
+      <div class="rule">
+        <span class="rule__n">01 · Intensjon</span>
+        <h4>Intensjon over intuisjon</h4>
+        <p>Hvert element må forsvare plassen sin. Visuell støy fjernes før den legges til.</p>
+      </div>
+      <div class="rule">
+        <span class="rule__n">02 · Arkitektur</span>
+        <h4>Rutenett som metafor</h4>
+        <p>Kalenderen, uka, livet — bygget på grid. Layouten viser strukturen, ikke skjuler den.</p>
+      </div>
+      <div class="rule">
+        <span class="rule__n">03 · Rolig autoritet</span>
+        <h4>Direkte, ikke skrikende</h4>
+        <p>Tung typografi, lavmælt palett. Troverdighet fremfor trend.</p>
+      </div>
+      <div class="rule">
+        <span class="rule__n">04 · Rom</span>
+        <h4>Hvit plass er innhold</h4>
+        <p>Pauser i design gir samme klarhet som pauser i uka. Buffer inn.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer class="foot">
+    <span>Hege Christine · Brand Board · v1.0</span>
+    <span>hegechristine.no</span>
+  </footer>
+
+</div>
+</body>
+</html>

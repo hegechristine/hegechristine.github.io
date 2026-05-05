@@ -1,0 +1,749 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Hege Christine · Can You Design Your Life?</title>
+<link rel="stylesheet" href="assets/fonts.css"> rel="stylesheet">
+<script src="deck-stage.js"></script>
+<style>
+  :root{
+    --ink:#2E3230;
+    --ink-deep:#22251F;
+    --cream:#EFE6D4;
+    --cream-50:#FBF8F0;
+    --olive:#5E5F4C;
+    --olive-700:#4A4B3C;
+    --sage:#AFBEA0;
+    --sage-50:#F1F4EC;
+    --rust:#C5522C;
+    --rust-soft:#DB835E;
+    --sand:#F0D9A8;
+  }
+  *,*::before,*::after{box-sizing:border-box}
+  html,body{margin:0;padding:0;background:#1a1a1a;font-family:'Archivo',system-ui,sans-serif;color:var(--ink);}
+  deck-stage{display:block;width:100vw;height:100vh;}
+
+  section{
+    width:1920px;height:1080px;position:relative;overflow:hidden;
+    font-family:'Archivo',sans-serif;color:var(--ink);
+    padding:120px;
+  }
+
+  /* italics */
+  em.r{font-family:'Newsreader',serif;font-style:italic;font-weight:500;color:var(--rust);}
+  em.s{font-family:'Newsreader',serif;font-style:italic;font-weight:500;color:var(--sand);}
+  em.c{font-family:'Newsreader',serif;font-style:italic;font-weight:500;color:var(--cream);}
+  em.i{font-family:'Newsreader',serif;font-style:italic;font-weight:500;color:var(--ink);}
+
+  /* shared subtle index */
+  .ix{
+    position:absolute;left:120px;top:60px;
+    font-family:'JetBrains Mono',monospace;font-size:14px;letter-spacing:0.24em;
+    text-transform:uppercase;font-weight:600;opacity:0.6;
+  }
+  .ix-r{left:auto;right:120px;}
+
+  /* HUGE display type */
+  .hero{
+    font-family:'Archivo',sans-serif;font-weight:800;
+    font-size:220px;line-height:0.88;letter-spacing:-0.05em;margin:0;
+  }
+  .h-l{
+    font-family:'Archivo',sans-serif;font-weight:800;
+    font-size:200px;line-height:0.88;letter-spacing:-0.045em;margin:0;
+  }
+  .h-m{
+    font-family:'Archivo',sans-serif;font-weight:800;
+    font-size:148px;line-height:0.92;letter-spacing:-0.04em;margin:0;
+  }
+  .h-s{
+    font-family:'Archivo',sans-serif;font-weight:800;
+    font-size:96px;line-height:0.95;letter-spacing:-0.035em;margin:0;
+  }
+
+
+  /* ============ 01 · TITLE ============ */
+  .s01{background:var(--olive);color:var(--cream);}
+  .s01 .title{
+    position:absolute;left:120px;top:160px;
+    font-family:'Archivo',sans-serif;font-weight:800;
+    font-size:220px;line-height:0.88;letter-spacing:-0.05em;margin:0;color:var(--cream);
+  }
+  .s01 .rule{position:absolute;left:120px;bottom:200px;width:480px;height:2px;background:var(--cream);opacity:0.4;}
+  .s01 .name{
+    position:absolute;left:120px;bottom:140px;
+    font-family:'Archivo',sans-serif;font-weight:500;font-size:44px;color:var(--sand);letter-spacing:-0.01em;
+  }
+  .s01 .ev{
+    position:absolute;left:120px;bottom:80px;
+    font-family:'JetBrains Mono',monospace;font-size:14px;letter-spacing:0.24em;
+    text-transform:uppercase;color:var(--cream);opacity:0.5;font-weight:600;
+  }
+
+
+  /* ============ 02 · NEW CHAPTER ============ */
+  .s02{background:var(--cream);}
+  .s02 .h{position:absolute;left:120px;top:160px;}
+  .s02 .h em{font-family:'Newsreader',serif;font-style:italic;font-weight:500;color:var(--rust);}
+  .s02 .sub{
+    position:absolute;left:120px;top:780px;right:120px;
+    font-family:'Newsreader',serif;font-style:italic;font-weight:400;font-size:48px;
+    color:var(--olive-700);max-width:1200px;line-height:1.35;
+  }
+  .s02 .ix{color:var(--rust);}
+
+
+  /* ============ 03 · KEEP IT UP ============ */
+  .s03{background:var(--rust);color:var(--cream);}
+  .s03 .h{
+    position:absolute;left:120px;top:50%;transform:translateY(-50%);right:120px;
+    color:var(--cream);
+  }
+  .s03 .h em{color:var(--sand);}
+  .s03 .ix{color:var(--cream);opacity:0.7;}
+
+
+  /* ============ 04 · TWO PILLARS — full bleed split ============ */
+  .s04{padding:0;background:var(--cream);}
+  .s04 .col{position:absolute;top:0;height:100%;display:flex;flex-direction:column;justify-content:center;padding:120px 100px;}
+  .s04 .left{left:0;width:50%;background:var(--cream);color:var(--ink);}
+  .s04 .right{right:0;width:50%;background:var(--ink);color:var(--cream);}
+  .s04 .lab{
+    font-family:'JetBrains Mono',monospace;font-size:18px;letter-spacing:0.24em;
+    text-transform:uppercase;font-weight:600;margin-bottom:48px;color:var(--rust);
+  }
+  .s04 .left .lab{color:var(--rust);}
+  .s04 .right .lab{color:var(--sand);}
+  .s04 .h{font-family:'Archivo',sans-serif;font-weight:800;font-size:124px;line-height:0.9;letter-spacing:-0.04em;margin:0;}
+  .s04 .h em{font-family:'Newsreader',serif;font-style:italic;font-weight:500;}
+  .s04 .left em{color:var(--rust);}
+  .s04 .right em{color:var(--rust-soft);}
+
+
+  /* ============ 05 · BIO ============ */
+  .s05{background:var(--olive);color:var(--cream);}
+  .s05 .h{
+    position:absolute;left:120px;top:100px;right:120px;
+    font-family:'Archivo',sans-serif;font-weight:800;font-size:124px;line-height:0.92;letter-spacing:-0.04em;color:var(--cream);margin:0;
+  }
+  .s05 .h em{color:var(--rust);}
+  .s05 .who{
+    position:absolute;left:120px;bottom:120px;
+    font-family:'Newsreader',serif;font-style:italic;font-weight:400;font-size:40px;color:var(--sand);max-width:900px;line-height:1.4;margin:0;
+  }
+  .s05 .meta{
+    position:absolute;right:120px;bottom:120px;
+    font-family:'JetBrains Mono',monospace;font-size:14px;letter-spacing:0.24em;
+    text-transform:uppercase;color:var(--cream);opacity:0.5;font-weight:600;text-align:right;
+  }
+
+
+  /* ============ 06 · ENERGY AUDIT — split bold ============ */
+  .s06{padding:0;background:var(--cream);}
+  .s06 .col{position:absolute;top:0;height:100%;width:50%;display:flex;flex-direction:column;justify-content:center;padding:160px 100px;}
+  .s06 .left{left:0;background:var(--cream);}
+  .s06 .right{right:0;background:var(--ink);color:var(--cream);}
+  .s06 .lab{
+    font-family:'JetBrains Mono',monospace;font-size:18px;letter-spacing:0.24em;
+    text-transform:uppercase;font-weight:600;margin-bottom:64px;
+  }
+  .s06 .left .lab{color:var(--rust);}
+  .s06 .right .lab{color:var(--rust-soft);}
+  .s06 .q{font-family:'Archivo',sans-serif;font-weight:800;font-size:148px;line-height:0.9;letter-spacing:-0.04em;margin:0 0 64px;color:var(--rust);}
+  .s06 .right .q{color:var(--rust-soft);}
+  .s06 .a{font-family:'Newsreader',serif;font-style:italic;font-weight:400;font-size:36px;line-height:1.4;margin:0;max-width:600px;color:var(--olive-700);}
+  .s06 .right .a{color:var(--sand);}
+
+
+  /* ============ 07 · TWO MODES ============ */
+  .s07{background:var(--cream);}
+  .s07 .h{position:absolute;left:120px;top:160px;}
+  .s07 .h em{color:var(--rust);}
+  .s07 .row{
+    position:absolute;left:120px;right:120px;bottom:160px;
+    display:grid;grid-template-columns:1fr 1fr;gap:120px;
+  }
+  .s07 .col h4{font-family:'Archivo',sans-serif;font-weight:800;font-size:64px;letter-spacing:-0.025em;margin:0 0 24px;line-height:1;}
+  .s07 .col p{font-family:'Newsreader',serif;font-style:italic;font-weight:400;font-size:32px;line-height:1.4;margin:0;color:var(--olive-700);}
+  .s07 .col.fast h4{color:var(--ink);opacity:0.4;}
+  .s07 .col.fast p{opacity:0.5;}
+  .s07 .col.design h4{color:var(--rust);}
+
+
+  /* ============ 08 · CALENDAR DOESN'T LIE ============ */
+  .s08{background:var(--cream);}
+  .s08 .h{position:absolute;left:120px;top:200px;}
+  .s08 .h em{color:var(--rust);}
+  .s08 .sub{
+    position:absolute;left:120px;top:780px;right:120px;
+    font-family:'Newsreader',serif;font-style:italic;font-weight:400;font-size:44px;
+    color:var(--olive-700);max-width:1300px;line-height:1.35;
+  }
+
+
+  /* ============ 09 · STRANGER QUESTION ============ */
+  .s09{background:var(--ink);color:var(--cream);}
+  .s09 .body{
+    position:absolute;left:160px;top:50%;transform:translateY(-50%);right:160px;
+    font-family:'Archivo',sans-serif;font-weight:600;font-size:88px;line-height:1.1;letter-spacing:-0.025em;color:var(--cream);margin:0;
+  }
+  .s09 .body em{color:var(--rust-soft);}
+  .s09 .ix{color:var(--cream);opacity:0.5;}
+
+
+  /* ============ 10 · F*CK BALANCE ============ */
+  .s10{background:var(--cream);}
+  .s10 .h{position:absolute;left:120px;top:160px;right:120px;}
+  .s10 .h em{color:var(--rust);}
+  .s10 .one{
+    position:absolute;left:120px;bottom:140px;right:120px;
+    font-family:'Archivo',sans-serif;font-weight:800;font-size:200px;line-height:0.88;letter-spacing:-0.045em;color:var(--rust);text-align:right;
+  }
+  .s10 .one em{color:var(--ink);}
+
+
+  /* ============ 11 · SEASONS ============ */
+  .s11{background:var(--sage);}
+  .s11 .h{position:absolute;left:120px;top:160px;}
+  .s11 .h em{color:var(--rust);}
+  .s11 .sub{
+    position:absolute;left:120px;top:740px;right:120px;
+    font-family:'Newsreader',serif;font-style:italic;font-weight:400;font-size:40px;
+    color:var(--ink);max-width:1300px;line-height:1.4;
+  }
+  .s11 .sub em{color:var(--rust);}
+
+
+  /* ============ 12 · BRAVERY OF SUBTRACTION ============ */
+  .s12{background:var(--cream);}
+  .s12 .h{position:absolute;left:120px;top:50%;transform:translateY(-50%);right:120px;}
+  .s12 .h em{color:var(--rust);}
+
+
+  /* ============ 13 · EDIT DON'T ADD ============ */
+  .s13{background:var(--rust);color:var(--cream);}
+  .s13 .body{position:absolute;left:120px;top:50%;transform:translateY(-50%);right:120px;color:var(--cream);}
+  .s13 .body em{color:var(--ink);}
+
+
+  /* ============ 14 · BUFFER ============ */
+  .s14{background:var(--ink);color:var(--cream);}
+  .s14 .body{
+    position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+    text-align:center;width:1500px;
+  }
+  .s14 .h{
+    font-family:'Archivo',sans-serif;font-weight:800;font-size:320px;line-height:0.88;letter-spacing:-0.05em;color:var(--cream);margin:0;
+  }
+  .s14 .p{
+    margin-top:48px;
+    font-family:'Newsreader',serif;font-style:italic;font-weight:400;font-size:48px;line-height:1.4;color:var(--sand);
+  }
+  .s14 .p em{color:var(--rust-soft);font-style:italic;}
+
+
+  /* ============ 15 · WHITE SPACE ============ */
+  .s15{background:var(--cream);}
+  .s15 .body{
+    position:absolute;left:120px;top:50%;transform:translateY(-50%);right:120px;
+    font-family:'Archivo',sans-serif;font-weight:800;font-size:172px;line-height:0.92;letter-spacing:-0.04em;color:var(--ink);
+  }
+  .s15 .body em{color:var(--rust);}
+
+
+  /* ============ 16 · CLOSE YOUR EYES ============ */
+  .s16{background:var(--olive);color:var(--cream);}
+  .s16 .h{
+    position:absolute;left:120px;top:140px;
+    font-family:'Archivo',sans-serif;font-weight:800;font-size:220px;line-height:0.88;letter-spacing:-0.05em;margin:0;color:var(--cream);
+  }
+  .s16 .h em{color:var(--rust);}
+  .s16 .p{
+    position:absolute;left:120px;bottom:140px;right:120px;
+    font-family:'Newsreader',serif;font-style:italic;font-weight:400;font-size:48px;line-height:1.4;color:var(--sand);max-width:1500px;
+  }
+  .s16 .p em{color:var(--cream);font-style:italic;}
+
+
+  /* ============ 17 · TUESDAY MORNING ============ */
+  .s17{background:var(--cream);}
+  .s17 .h{position:absolute;left:120px;top:160px;}
+  .s17 .h em{color:var(--rust);}
+  .s17 .sub{
+    position:absolute;left:120px;top:780px;right:120px;
+    font-family:'Newsreader',serif;font-style:italic;font-weight:400;font-size:48px;
+    color:var(--olive-700);max-width:1300px;line-height:1.35;
+  }
+
+
+  /* ============ 18 · PLAN IN LAYERS ============ */
+  .s18{background:var(--cream);}
+  .s18 .h{position:absolute;left:120px;top:160px;}
+  .s18 .h em{color:var(--rust);}
+  .s18 .row{
+    position:absolute;left:120px;right:120px;bottom:140px;
+    display:grid;grid-template-columns:1fr 1fr;gap:120px;
+  }
+  .s18 .col{}
+  .s18 .col .lab{font-family:'JetBrains Mono',monospace;font-size:14px;letter-spacing:0.24em;text-transform:uppercase;color:var(--rust);font-weight:600;margin-bottom:20px;}
+  .s18 .col h4{font-family:'Archivo',sans-serif;font-weight:800;font-size:64px;letter-spacing:-0.025em;margin:0 0 20px;line-height:1;}
+  .s18 .col p{font-family:'Newsreader',serif;font-style:italic;font-weight:400;font-size:30px;line-height:1.4;margin:0;color:var(--olive-700);max-width:600px;}
+
+
+  /* ============ 19 · MONTHLY DATE ============ */
+  .s19{background:var(--sage);}
+  .s19 .h{position:absolute;left:120px;top:50%;transform:translateY(-50%);right:120px;}
+  .s19 .h em{color:var(--rust);}
+  .s19 .sub{
+    position:absolute;left:120px;bottom:120px;right:120px;
+    font-family:'Newsreader',serif;font-style:italic;font-weight:400;font-size:40px;
+    color:var(--ink);max-width:1300px;line-height:1.4;
+  }
+
+
+  /* ============ 20 · 168 ============ */
+  .s20{background:var(--ink);color:var(--cream);}
+  .s20 .body{
+    position:absolute;left:50%;top:50%;transform:translate(-50%,-55%);text-align:center;
+  }
+  .s20 .num{
+    font-family:'Archivo',sans-serif;font-weight:900;font-size:600px;line-height:0.82;letter-spacing:-0.06em;color:var(--rust);margin:0;
+  }
+  .s20 .lab{
+    margin-top:16px;font-family:'Archivo',sans-serif;font-weight:700;font-size:72px;letter-spacing:-0.025em;color:var(--cream);
+  }
+  .s20 .q{
+    margin-top:32px;font-family:'Newsreader',serif;font-style:italic;font-weight:400;font-size:40px;color:var(--sand);max-width:1100px;margin-left:auto;margin-right:auto;line-height:1.35;
+  }
+  .s20 .q em{color:var(--rust-soft);font-style:italic;}
+
+
+  /* ============ 21 · NO LIST ============ */
+  .s21{background:var(--cream);}
+  .s21 .h{position:absolute;left:120px;top:160px;}
+  .s21 .h em{color:var(--rust);}
+  .s21 .sub{
+    position:absolute;left:120px;top:780px;right:120px;
+    font-family:'Newsreader',serif;font-style:italic;font-weight:400;font-size:44px;color:var(--olive-700);max-width:1400px;line-height:1.35;
+  }
+  .s21 .sub em{color:var(--rust);font-style:italic;}
+
+
+  /* ============ 22 · BOUNDARIES QUOTE ============ */
+  .s22{background:var(--cream);}
+  .s22 .body{
+    position:absolute;left:120px;top:50%;transform:translateY(-50%);right:120px;
+    font-family:'Newsreader',serif;font-style:italic;font-weight:400;font-size:148px;line-height:1.05;color:var(--ink);letter-spacing:-0.025em;
+  }
+  .s22 .body em{color:var(--rust);font-weight:500;}
+  .s22 .who{
+    position:absolute;left:120px;bottom:100px;
+    font-family:'JetBrains Mono',monospace;font-size:16px;letter-spacing:0.24em;text-transform:uppercase;font-weight:600;color:var(--olive);
+  }
+
+
+  /* ============ 23 · ONE QUESTION ============ */
+  .s23{background:var(--rust);color:var(--cream);}
+  .s23 .lab{
+    position:absolute;left:120px;top:160px;
+    font-family:'JetBrains Mono',monospace;font-size:18px;letter-spacing:0.24em;text-transform:uppercase;color:var(--cream);font-weight:600;opacity:0.7;
+  }
+  .s23 .h{position:absolute;left:120px;top:240px;right:120px;color:var(--cream);}
+  .s23 .h em{color:var(--ink);}
+
+
+  /* ============ 24 · LESS BETTER ============ */
+  .s24{background:var(--cream);}
+  .s24 .h{
+    position:absolute;left:120px;top:50%;transform:translateY(-50%);right:120px;
+  }
+  .s24 .h em{color:var(--rust);}
+
+
+  /* ============ 25 · DESIGN DEFINITION ============ */
+  .s25{background:var(--olive);color:var(--cream);}
+  .s25 .lab{
+    position:absolute;left:120px;top:140px;
+    font-family:'JetBrains Mono',monospace;font-size:18px;letter-spacing:0.3em;text-transform:uppercase;color:var(--sand);font-weight:600;
+  }
+  .s25 .body{
+    position:absolute;left:120px;top:240px;right:120px;
+    font-family:'Newsreader',serif;font-style:italic;font-weight:400;font-size:96px;line-height:1.15;color:var(--cream);letter-spacing:-0.02em;
+  }
+  .s25 .body em{color:var(--rust);font-weight:500;}
+  .s25 .foot{
+    position:absolute;left:120px;bottom:140px;
+    font-family:'Archivo',sans-serif;font-weight:600;font-size:32px;letter-spacing:0.04em;text-transform:uppercase;color:var(--sand);
+  }
+
+
+  /* ============ 26 · NOT MORE / NOT PERFECT ============ */
+  .s26{background:var(--ink);color:var(--cream);padding:120px;}
+  .s26 .stack{
+    position:absolute;left:120px;top:100px;right:120px;
+    font-family:'Archivo',sans-serif;font-size:140px;line-height:0.98;letter-spacing:-0.04em;
+  }
+  .s26 .stack .l{display:block;}
+  .s26 .light{font-weight:500;color:var(--cream);}
+  .s26 .bold{font-weight:800;color:var(--cream);}
+  .s26 .stack em.r2{font-family:'Newsreader',serif;font-style:italic;font-weight:500;color:var(--rust);}
+  .s26 .stack em.s2{font-family:'Newsreader',serif;font-style:italic;font-weight:500;color:var(--sand);}
+  .s26 .rule{position:absolute;left:120px;bottom:200px;width:200px;height:3px;background:var(--rust);}
+  .s26 .cap{
+    position:absolute;left:120px;bottom:140px;
+    font-family:'Archivo',sans-serif;font-weight:500;font-size:36px;color:var(--sand);
+  }
+
+
+  /* ============ 27 · LIFE FIRST ============ */
+  .s27{background:var(--cream);}
+  .s27 .h{position:absolute;left:120px;top:160px;right:120px;}
+  .s27 .h em{color:var(--rust);}
+  .s27 .three{
+    position:absolute;left:120px;right:120px;bottom:140px;
+    display:grid;grid-template-columns:1fr 1fr 1fr;gap:80px;
+  }
+  .s27 .item{}
+  .s27 .item .n{
+    font-family:'Archivo',sans-serif;font-weight:800;font-size:120px;line-height:0.9;letter-spacing:-0.04em;color:var(--rust);margin-bottom:16px;
+  }
+  .s27 .item h4{font-family:'Archivo',sans-serif;font-weight:700;font-size:36px;margin:0 0 16px;letter-spacing:-0.02em;line-height:1.05;}
+  .s27 .item p{font-family:'Newsreader',serif;font-style:italic;font-weight:400;font-size:24px;line-height:1.45;margin:0;color:var(--olive-700);}
+
+
+  /* ============ 28 · DOWNLOAD ============ */
+  .s28{padding:0;background:var(--ink);}
+  .s28 .left{position:absolute;left:0;top:0;width:50%;height:100%;background:var(--ink);display:flex;align-items:center;justify-content:center;}
+  .s28 .qr-frame{width:540px;height:540px;background:var(--rust);padding:24px;}
+  .s28 .qr{
+    width:100%;height:100%;background:var(--cream);
+    background-image:
+      linear-gradient(var(--ink) 25%, transparent 25%, transparent 50%, var(--ink) 50%, var(--ink) 75%, transparent 75%),
+      linear-gradient(90deg, var(--ink) 25%, transparent 25%, transparent 50%, var(--ink) 50%, var(--ink) 75%, transparent 75%);
+    background-size:32px 32px;
+  }
+  .s28 .qr-cap{
+    position:absolute;left:25%;transform:translateX(-50%);bottom:140px;text-align:center;
+    color:var(--cream);font-family:'Archivo',sans-serif;font-weight:500;font-size:32px;line-height:1.4;
+  }
+  .s28 .qr-cap em{font-family:'Newsreader',serif;font-style:italic;color:var(--sand);}
+  .s28 .right{position:absolute;right:0;top:0;width:50%;height:100%;background:var(--cream);padding:140px 100px;display:flex;flex-direction:column;justify-content:center;}
+  .s28 .right h2{
+    font-family:'Archivo',sans-serif;font-weight:800;font-size:124px;line-height:0.92;letter-spacing:-0.04em;margin:0 0 48px;
+  }
+  .s28 .right h2 em{color:var(--rust);}
+  .s28 .right p{
+    font-family:'Newsreader',serif;font-style:italic;font-weight:400;font-size:36px;line-height:1.4;color:var(--olive-700);margin:0;max-width:680px;
+  }
+
+
+  /* ============ 29 · YOUR LIFE YOUR CHOICES ============ */
+  .s29{background:var(--cream);}
+  .s29 .h{
+    position:absolute;left:120px;top:50%;transform:translateY(-50%);right:120px;
+    font-family:'Archivo',sans-serif;font-weight:800;font-size:236px;line-height:0.88;letter-spacing:-0.045em;color:var(--ink);margin:0;
+  }
+  .s29 .h em{color:var(--rust);}
+
+
+  /* ============ 30 · THANK YOU ============ */
+  .s30{background:var(--olive);color:var(--cream);}
+  .s30 .h{
+    position:absolute;left:120px;top:200px;
+    font-family:'Archivo',sans-serif;font-weight:800;font-size:280px;line-height:0.88;letter-spacing:-0.05em;color:var(--cream);margin:0;
+  }
+  .s30 .h em{color:var(--rust);}
+  .s30 .rule{position:absolute;left:120px;bottom:280px;width:240px;height:2px;background:var(--cream);opacity:0.4;}
+  .s30 .cap{
+    position:absolute;left:120px;bottom:180px;
+    font-family:'Newsreader',serif;font-style:italic;font-weight:400;font-size:44px;color:var(--sand);
+  }
+  .s30 .sig{
+    position:absolute;right:120px;bottom:180px;text-align:right;
+    font-family:'Newsreader',serif;font-style:italic;font-weight:500;font-size:44px;color:var(--cream);
+  }
+  .s30 .sig small{display:block;font-family:'JetBrains Mono',monospace;font-size:14px;letter-spacing:0.24em;text-transform:uppercase;color:var(--sand);font-style:normal;font-weight:600;margin-top:16px;}
+
+</style>
+</head>
+<body>
+
+<deck-stage>
+
+  <!-- 01 -->
+  <section class="s01" data-screen-label="01 Title">
+    <div class="ix">01 / 30 · Energy &amp; Ocean 2026</div>
+    <h1 class="title">Can You<br/>Design<br/><em class="r" style="color:var(--rust);">Your Life?</em></h1>
+    <div class="rule"></div>
+    <div class="name">Hege Christine Brunsvik</div>
+    <div class="ev">Online business strategist · Mentor · Host of The Edit</div>
+  </section>
+
+  <!-- 02 -->
+  <section class="s02" data-screen-label="02 New Chapter">
+    <div class="ix">02 / 30</div>
+    <h2 class="hero h">Raise<br/>your <em>hand</em><br/>if you've started<br/>a new chapter.</h2>
+    <p class="sub">A big change. Moving somewhere new. Starting over after something ended. Building something on your own.</p>
+  </section>
+
+  <!-- 03 -->
+  <section class="s03" data-screen-label="03 Keep It Up">
+    <div class="ix">03 / 30</div>
+    <h2 class="h-l h">Now keep<br/>it up — if you<br/>actually feel<br/><em>in charge.</em></h2>
+  </section>
+
+  <!-- 04 -->
+  <section class="s04" data-screen-label="04 Two Pillars">
+    <div class="col left">
+      <div class="lab">01 · Intention</div>
+      <h2 class="h">The invisible<br/><em>intention.</em></h2>
+    </div>
+    <div class="col right">
+      <div class="lab">02 · Action</div>
+      <h2 class="h">The concrete<br/><em>action.</em></h2>
+    </div>
+  </section>
+
+  <!-- 05 -->
+  <section class="s05" data-screen-label="05 Bio">
+    <div class="ix" style="color:var(--cream);opacity:0.6;">05 / 30</div>
+    <h2 class="h">I designed<br/>a business,<br/>but forgot<br/>to design<br/><em>a life</em><br/>around it.</h2>
+    <p class="who">Hege Christine — six years working with hundreds of solopreneurs. They wanted freedom. Nobody told them how to design a life around the work.</p>
+    <div class="meta">Mom of three<br/>Host of The Edit</div>
+  </section>
+
+  <!-- 06 -->
+  <section class="s06" data-screen-label="06 Energy Audit">
+    <div class="col left">
+      <div class="lab">06 · ASK YOURSELF</div>
+      <h2 class="q">Who gives<br/>you energy?</h2>
+      <p class="a">You walk away feeling lighter. More clear. More like yourself.</p>
+    </div>
+    <div class="col right">
+      <div class="lab">06 · AND THEN</div>
+      <h2 class="q">Who<br/>drains<br/>you?</h2>
+      <p class="a">Out of obligation, habit, or guilt — and afterwards you just feel <em class="s" style="color:inherit;">heavier</em>.</p>
+    </div>
+  </section>
+
+  <!-- 07 -->
+  <section class="s07" data-screen-label="07 Two Modes">
+    <div class="ix">07 / 30 · Two modes of being</div>
+    <h2 class="h-l h">It's not a productivity hack.<br/>It's a <em>design choice.</em></h2>
+    <div class="row">
+      <div class="col fast">
+        <h4>Fast Mode.</h4>
+        <p>Thinking fast. Working fast. Reacting fast. Body stuck in stress — and calling it normal.</p>
+      </div>
+      <div class="col design">
+        <h4>Design Mode.</h4>
+        <p>Protecting your energy. Deciding what your energy is worth. Becoming the version of yourself you actually like.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 08 -->
+  <section class="s08" data-screen-label="08 Calendar">
+    <div class="ix">08 / 30</div>
+    <h2 class="hero h">Your<br/>calendar<br/>doesn't <em>lie.</em></h2>
+    <p class="sub">It shows exactly what you're prioritizing. We intend to slow down — and fill the week with obligations.</p>
+  </section>
+
+  <!-- 09 -->
+  <section class="s09" data-screen-label="09 Stranger">
+    <div class="ix">09 / 30</div>
+    <p class="body">If a stranger looked at your calendar from last week — what would they think is most important to you?<br/><br/><em>Is that what you want to be most important?</em></p>
+  </section>
+
+  <!-- 10 -->
+  <section class="s10" data-screen-label="10 Balance">
+    <div class="ix" style="color:var(--cream);opacity:0.7;">10 / 30</div>
+    <h2 class="h-m h">F*ck work-life<br/>balance.</h2>
+    <p class="one">It's not two<br/>things. <em>It's<br/>one life.</em></p>
+  </section>
+
+  <!-- 11 -->
+  <section class="s11" data-screen-label="11 Seasons">
+    <div class="ix">11 / 30</div>
+    <h2 class="hero h">Plan in<br/><em>seasons,</em><br/>not sprints.</h2>
+    <p class="sub">A year is not twelve sprints. It's four chapters. The scores will be uneven — that's the <em>point.</em></p>
+  </section>
+
+  <!-- 12 -->
+  <section class="s12" data-screen-label="12 Subtraction">
+    <div class="ix">12 / 30</div>
+    <h2 class="h-l h">Sometimes the<br/>bravest thing<br/>you can do is<br/><em>subtract.</em></h2>
+  </section>
+
+  <!-- 13 -->
+  <section class="s13" data-screen-label="13 Edit">
+    <div class="ix" style="color:var(--cream);opacity:0.7;">13 / 30</div>
+    <h2 class="hero body">Edit.<br/><em>Don't add.</em></h2>
+  </section>
+
+  <!-- 14 -->
+  <section class="s14" data-screen-label="14 Buffer">
+    <div class="ix" style="color:var(--cream);opacity:0.5;">14 / 30</div>
+    <div class="body">
+      <h2 class="h">Buffer.</h2>
+      <p class="p">The most important thing in your calendar is what's <em>not</em> there.</p>
+    </div>
+  </section>
+
+  <!-- 15 -->
+  <section class="s15" data-screen-label="15 White Space">
+    <div class="ix">15 / 30</div>
+    <p class="body">When life happens,<br/>adjust. <em>No guilt.</em></p>
+  </section>
+
+  <!-- 16 -->
+  <section class="s16" data-screen-label="16 Close Eyes">
+    <div class="ix" style="color:var(--cream);opacity:0.6;">16 / 30</div>
+    <h2 class="h">Close<br/>your <em>eyes.</em></h2>
+    <p class="p">It's a Tuesday morning. Three to nine months from now. You wake up and know exactly what the day looks like — because <em>you designed it.</em></p>
+  </section>
+
+  <!-- 17 -->
+  <section class="s17" data-screen-label="17 Tuesday">
+    <div class="ix">17 / 30</div>
+    <h2 class="hero h">What does<br/><em>that day</em><br/>look like?</h2>
+    <p class="sub">Don't just imagine it. Write it down. The hour you wake up. Who's there. What's on your plate. What's <em class="r" style="color:inherit;">not.</em></p>
+  </section>
+
+  <!-- 18 -->
+  <section class="s18" data-screen-label="18 Plan in Layers">
+    <div class="ix">18 / 30</div>
+    <h2 class="h-m h">Plan in <em>layers.</em></h2>
+    <div class="row">
+      <div class="col">
+        <div class="lab">Detail</div>
+        <h4>One to two weeks ahead.</h4>
+        <p>Specific. Actionable. The week you're actually living.</p>
+      </div>
+      <div class="col">
+        <div class="lab">Big picture</div>
+        <h4>The quarter.</h4>
+        <p>Themes, not tasks. The chapter you're inside. <em class="r" style="color:inherit;">Plan your pauses.</em></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 19 -->
+  <section class="s19" data-screen-label="19 Monthly Date">
+    <div class="ix">19 / 30</div>
+    <h2 class="h-l h">A monthly date<br/>with <em>yourself</em> —<br/>the most<br/>important meeting<br/>of the month.</h2>
+    <p class="sub">Look at your goals. Your calendar. Your energy. <em class="r" style="color:inherit;">Ask</em> — is this still right? Or am I just executing?</p>
+  </section>
+
+  <!-- 20 -->
+  <section class="s20" data-screen-label="20 168">
+    <div class="ix" style="color:var(--cream);opacity:0.5;">20 / 30</div>
+    <div class="body">
+      <h2 class="num">168</h2>
+      <div class="lab">hours in a week.</div>
+      <p class="q">Same as everyone. The only question is —<br/><em>what do you fill it with?</em></p>
+    </div>
+  </section>
+
+  <!-- 21 -->
+  <section class="s21" data-screen-label="21 No List">
+    <div class="ix">21 / 30</div>
+    <h2 class="hero h">Make a<br/>list of <em>no's.</em></h2>
+    <p class="sub">Most people only have a yes-list. <em>The no-list is where the design starts.</em></p>
+  </section>
+
+  <!-- 22 -->
+  <section class="s22" data-screen-label="22 Boundaries Quote">
+    <div class="ix">22 / 30</div>
+    <p class="body">"Boundaries aren't walls.<br/>They're <em>design decisions</em><br/>about where your<br/>energy goes."</p>
+    <div class="who">Hege Christine · The Edit, Ep. 38</div>
+  </section>
+
+  <!-- 23 -->
+  <section class="s23" data-screen-label="23 One Question">
+    <div class="lab">23 / 30 · The one question</div>
+    <h2 class="h-l h">What would<br/>I cut if<br/>no one was<br/><em>watching?</em></h2>
+  </section>
+
+  <!-- 24 -->
+  <section class="s24" data-screen-label="24 Less Better">
+    <div class="ix">24 / 30</div>
+    <h2 class="h-l h">You don't need<br/>more. You need<br/><em>less, better.</em></h2>
+  </section>
+
+  <!-- 25 -->
+  <section class="s25" data-screen-label="25 Definition">
+    <div class="lab">25 / 30 · Design · n.</div>
+    <p class="body">"The intentional shaping of a thing — a chair, a building, a week, <em>a life</em> — so it serves the people who live with it."</p>
+    <div class="foot">Same word. Same craft. Different scale.</div>
+  </section>
+
+  <!-- 26 -->
+  <section class="s26" data-screen-label="26 Manifesto">
+    <div class="ix" style="color:var(--cream);opacity:0.5;">26 / 30</div>
+    <div class="stack">
+      <span class="l light">Not more.</span>
+      <span class="l light">Not perfect.</span>
+      <span class="l bold">Just <em class="r2">intentional.</em></span>
+      <span class="l bold">Just aware.</span>
+      <span class="l bold">Just <em class="s2">here.</em></span>
+    </div>
+    <div class="rule"></div>
+    <div class="cap">It's your life. And it's <em class="r" style="font-family:'Newsreader',serif;font-style:italic;color:var(--rust);font-weight:500;">your</em> choices.</div>
+  </section>
+
+  <!-- 27 -->
+  <section class="s27" data-screen-label="27 Life First">
+    <div class="ix">27 / 30 · Take it home</div>
+    <h2 class="h-m h">Life first.<br/>Everything<br/>else fits<br/>around <em>that.</em></h2>
+    <div class="three">
+      <div class="item">
+        <div class="n">01</div>
+        <h4>Start with life.</h4>
+        <p>Family, health, rest — the things that matter.</p>
+      </div>
+      <div class="item">
+        <div class="n">02</div>
+        <h4>Assess realities.</h4>
+        <p>Look at your actual week with honest eyes.</p>
+      </div>
+      <div class="item">
+        <div class="n">03</div>
+        <h4>Design the week.</h4>
+        <p>Stop constantly doing. Learn to just be.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 28 -->
+  <section class="s28" data-screen-label="28 Workbook">
+    <div class="left">
+      <div class="qr-frame"><div class="qr"></div></div>
+    </div>
+    <div class="qr-cap">Download the Workbook:<br/><em>Design Your Ideal Week.</em></div>
+    <div class="right">
+      <h2>Do it<br/>tonight on the <em>terrace.</em></h2>
+      <p>Take what is draining you into the workbook. <em class="r" style="font-family:'Newsreader',serif;font-style:italic;color:var(--rust);font-weight:500;">That</em> is your starting point.</p>
+    </div>
+  </section>
+
+  <!-- 29 -->
+  <section class="s29" data-screen-label="29 Your Choices">
+    <div class="ix">29 / 30</div>
+    <h2 class="h">It's your<br/>life. And it's<br/><em>your</em> choices.</h2>
+  </section>
+
+  <!-- 30 -->
+  <section class="s30" data-screen-label="30 Thank You">
+    <div class="ix" style="color:var(--cream);opacity:0.5;">30 / 30</div>
+    <h2 class="h">Thank<br/><em>you.</em></h2>
+    <div class="rule"></div>
+    <div class="cap">Now go and design your week.</div>
+    <div class="sig">Hege <em class="r" style="font-family:inherit;color:var(--rust);">Christine</em><br/><small>hegechristine.no · The Edit</small></div>
+  </section>
+
+</deck-stage>
+
+</body>
+</html>
