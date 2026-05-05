@@ -576,25 +576,26 @@
 
   .hc-newsletter-form input[type="text"],
   .hc-newsletter-form input[type="email"] {
-    background: var(--cream-warm);
-    border: 1px solid rgba(44, 51, 40, 0.2);
-    color: var(--ink);
+    background: rgba(0, 0, 0, 0.18);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    color: var(--cream-light);
     padding: 12px 14px;
     border-radius: 3px;
-    font-family: 'Inter', sans-serif;
+    font-family: 'Archivo', sans-serif;
     font-size: 0.92rem;
     width: 100%;
     box-sizing: border-box;
+    transition: border-color 0.18s ease, background 0.18s ease;
   }
 
   .hc-newsletter-form input::placeholder {
-    color: rgba(44, 51, 40, 0.5);
+    color: rgba(239, 230, 212, 0.6);
   }
 
   .hc-newsletter-form input:focus {
     outline: none;
     border-color: var(--rust);
-    background: var(--cream-light);
+    background: rgba(0, 0, 0, 0.28);
   }
 
   .hc-newsletter-form button {
