@@ -31,7 +31,6 @@
   /* Synced to Hege Christine designsystem v1.0 */
   :root {
     --cream: #EFE6D4;        /* cream-200 (deck) */
-    --cream-card: #F4EFDF;   /* cream-100 */
     --cream-light: #FBF8F0;  /* cream-50 */
     --ink: #2E3230;          /* ink-600 (deck charcoal) */
     --ink-soft: #4E5350;     /* ink-400 */
@@ -513,52 +512,6 @@
   .newsletter-title .italic {
     color: var(--cream-light);
     font-weight: 400;
-  }
-
-  .newsletter form {
-    display: flex;
-    flex-direction: column;
-    gap: 9px;
-  }
-
-  .newsletter input {
-    background: rgba(0, 0, 0, 0.18);
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    color: var(--cream-light);
-    padding: 12px 14px;
-    border-radius: 3px;
-    font-family: 'Archivo', sans-serif;
-    font-size: 0.92rem;
-    width: 100%;
-    transition: border-color 0.18s ease;
-  }
-
-  .newsletter input::placeholder {
-    color: rgba(245, 236, 214, 0.5);
-  }
-
-  .newsletter input:focus {
-    outline: none;
-    border-color: var(--rust);
-  }
-
-  .newsletter-btn {
-    background: var(--rust);
-    color: var(--cream-light);
-    border: none;
-    padding: 13px;
-    border-radius: 3px;
-    font-family: 'JetBrains Mono', monospace;
-    font-weight: 600;
-    font-size: 0.78rem;
-    text-transform: uppercase;
-    letter-spacing: 0.18em;
-    cursor: pointer;
-    transition: background 0.18s ease;
-  }
-
-  .newsletter-btn:hover {
-    background: var(--rust-deep);
   }
 
   .newsletter-foot {
