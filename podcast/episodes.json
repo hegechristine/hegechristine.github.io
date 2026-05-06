@@ -1,10 +1,11 @@
 {
-  "updatedAt": "2026-05-06T11:30:50.188Z",
+  "updatedAt": "2026-05-06T11:50:57.671Z",
   "channel": {
     "title": "The Edit",
     "description": "The Edit er podkasten for deg som vil bygge en business som passer livet du vil leve – uten at alt hviler på deg. Her deler Hege Christine ærlige refleksjoner, praktiske strategier og små edits som gjør businessen din enklere å drive. Du får korte episoder om strategi, systemer, salg og smart arbeid – og dypere samtaler med gjester som deler sine reiser, valg og erfaringer. Dette er podkasten for deg som vil jobbe smartere, ta bedre beslutninger og bygge en bærekraftig business med mer ro og bedre struktur. Strategisk. Ærlig. Praktisk. Velkommen til The Edit!",
     "imageUrl": "https://d3t3ozftmdmh3i.cloudfront.net/staging/podcast_uploaded_nologo/13229545/13229545-1764775912328-a3788a7dba0e8.jpg",
     "spotifyShowUrl": "https://open.spotify.com/show/286EpL6ZfSuJVB47nXSQbZ",
+    "appleShowUrl": "https://podcasts.apple.com/us/podcast/the-edit/id1857930330",
     "rssUrl": "https://anchor.fm/s/4f734584/podcast/rss",
     "episodeCount": 24,
     "author": "Hege Christine"
@@ -29,7 +30,8 @@
       "season": "2026",
       "episode": "18",
       "guest": "Vetle Valsgård",
-      "type": "samtale"
+      "type": "samtale",
+      "appleEpisodeUrl": "https://podcasts.apple.com/us/podcast/23-fra-revisor-til-bestselger-vetle-valsg%C3%A5rd-om-%C3%A5-bygge/id1857930330?i=1000766155697&uo=4"
     },
     {
       "id": "f4c433ad-6953-449c-831f-46ad6dad3496",
@@ -50,7 +52,8 @@
       "season": "2026",
       "episode": "17",
       "guest": null,
-      "type": "samtale"
+      "type": "samtale",
+      "appleEpisodeUrl": "https://podcasts.apple.com/us/podcast/22-taper-du-penger-p%C3%A5-e-postsekvensen-din-slik-fikser-du-det/id1857930330?i=1000763958602&uo=4"
     },
     {
       "id": "0fbc3c25-47bb-4d98-a737-611e4dd2cd66",
@@ -71,7 +74,8 @@
       "season": "2026",
       "episode": "16",
       "guest": "Camilla Hager",
-      "type": "samtale"
+      "type": "samtale",
+      "appleEpisodeUrl": "https://podcasts.apple.com/us/podcast/21-fra-tekstbyr%C3%A5-til-solopren%C3%B8r-camilla-hager-om-friheten/id1857930330?i=1000762506737&uo=4"
     },
     {
       "id": "7b6d3293-7543-467a-97e0-00052b20f9f2",
@@ -92,7 +96,8 @@
       "season": "2026",
       "episode": "15",
       "guest": "Hva",
-      "type": "samtale"
+      "type": "samtale",
+      "appleEpisodeUrl": "https://podcasts.apple.com/us/podcast/20-hva-om-du-kan-sitte-igjen-med-mer-ved-%C3%A5-gj%C3%B8re-mindre/id1857930330?i=1000761220333&uo=4"
     },
     {
       "id": "f8f3fc36-8ce8-4aa2-86d3-45d5bccafa35",
@@ -113,7 +118,8 @@
       "season": "2026",
       "episode": "14",
       "guest": "Susanne Todnem",
-      "type": "samtale"
+      "type": "samtale",
+      "appleEpisodeUrl": "https://podcasts.apple.com/us/podcast/19-fra-%C3%A5-jobbe-mer-til-%C3%A5-jobbe-riktig-susanne-todnem/id1857930330?i=1000759957961&uo=4"
     },
     {
       "id": "0f6fed39-349f-48b9-be2e-07e04472d8bf",
@@ -134,7 +140,8 @@
       "season": "2026",
       "episode": "13",
       "guest": null,
-      "type": "samtale"
+      "type": "samtale",
+      "appleEpisodeUrl": "https://podcasts.apple.com/us/podcast/18-im-in-love-livet-med-claude/id1857930330?i=1000758341130&uo=4"
     },
     {
       "id": "ee7ebfbe-7f8a-4073-91c0-5a484e88a34b",
@@ -155,7 +162,8 @@
       "season": "2026",
       "episode": "12",
       "guest": null,
-      "type": "samtale"
+      "type": "samtale",
+      "appleEpisodeUrl": "https://podcasts.apple.com/us/podcast/17-fra-sms-chat-til-ai-automatisering-ane-hagen-bygde/id1857930330?i=1000756917974&uo=4"
     },
     {
       "id": "8882421b-7708-48b8-9148-c5c876f2cbcb",
@@ -176,7 +184,8 @@
       "season": "2026",
       "episode": "11",
       "guest": null,
-      "type": "samtale"
+      "type": "samtale",
+      "appleEpisodeUrl": "https://podcasts.apple.com/us/podcast/16-du-trenger-ikke-flere-f%C3%B8lgere-du-trenger-bedre-relasjoner/id1857930330?i=1000755697549&uo=4"
     },
     {
       "id": "eca78f61-cc4a-4808-ac67-0cc6feedfb6f",
@@ -197,7 +206,8 @@
       "season": "2026",
       "episode": "10",
       "guest": null,
-      "type": "samtale"
+      "type": "samtale",
+      "appleEpisodeUrl": "https://podcasts.apple.com/us/podcast/15-de-tre-c-ene-courses-coaching-og-community-og/id1857930330?i=1000754397771&uo=4"
     },
     {
       "id": "e481849d-0833-46ac-a491-ee2c2a0e6251",
@@ -218,7 +228,8 @@
       "season": "2026",
       "episode": "9",
       "guest": null,
-      "type": "samtale"
+      "type": "samtale",
+      "appleEpisodeUrl": "https://podcasts.apple.com/us/podcast/14-funnel-hacking-hvorfor-du-b%C3%B8r-stalke-konkurrentene-dine/id1857930330?i=1000752814985&uo=4"
     },
     {
       "id": "1963958f-3787-40fc-a871-90b93f0dc391",
@@ -239,7 +250,8 @@
       "season": "2026",
       "episode": "8",
       "guest": null,
-      "type": "samtale"
+      "type": "samtale",
+      "appleEpisodeUrl": "https://podcasts.apple.com/us/podcast/13-hvorfor-jeg-la-ned-en-business-som-fungerte-perfekt/id1857930330?i=1000751134633&uo=4"
     },
     {
       "id": "c93f82c7-3eb0-4964-9fcd-6763dd9e59a9",
@@ -260,7 +272,8 @@
       "season": "2026",
       "episode": "7",
       "guest": null,
-      "type": "samtale"
+      "type": "samtale",
+      "appleEpisodeUrl": "https://podcasts.apple.com/us/podcast/12-f%C3%A5-kontroll-med-kalenderen-din-med-denne-enkle-%C3%B8velsen/id1857930330?i=1000750075219&uo=4"
     },
     {
       "id": "d48e622d-219b-4249-a3de-8d0e0eea4e13",
@@ -281,7 +294,8 @@
       "season": "2026",
       "episode": "6",
       "guest": null,
-      "type": "samtale"
+      "type": "samtale",
+      "appleEpisodeUrl": "https://podcasts.apple.com/us/podcast/11-hvorfor-amerikansk-markedsf%C3%B8ring-skaper-friksjon/id1857930330?i=1000749017244&uo=4"
     },
     {
       "id": "9095450c-acde-491c-896a-f3f757255966",
@@ -302,7 +316,8 @@
       "season": "2026",
       "episode": "5",
       "guest": null,
-      "type": "samtale"
+      "type": "samtale",
+      "appleEpisodeUrl": "https://podcasts.apple.com/us/podcast/10-5-ting-du-skal-se-etter-i-en-kursplattform-og-hvorfor/id1857930330?i=1000747807548&uo=4"
     },
     {
       "id": "ea0bb501-b544-4a6d-9e71-45a1e65f8312",
@@ -323,7 +338,8 @@
       "season": "2026",
       "episode": "4",
       "guest": null,
-      "type": "samtale"
+      "type": "samtale",
+      "appleEpisodeUrl": "https://podcasts.apple.com/us/podcast/09-sosiale-medier-vs-e-postliste-hva-bygger-egentlig/id1857930330?i=1000746796550&uo=4"
     },
     {
       "id": "d6f8e383-1fde-475a-a8fc-0b46e3bc6e53",
@@ -344,7 +360,8 @@
       "season": "2026",
       "episode": "3",
       "guest": null,
-      "type": "samtale"
+      "type": "samtale",
+      "appleEpisodeUrl": "https://podcasts.apple.com/us/podcast/08-hva-jeg-ville-solgt-i-2026-6-produkttyper-som-faktisk/id1857930330?i=1000745841666&uo=4"
     },
     {
       "id": "7b02ed26-3893-4204-8bc9-f44b2c39a27b",
@@ -365,7 +382,8 @@
       "season": "2026",
       "episode": "2",
       "guest": null,
-      "type": "samtale"
+      "type": "samtale",
+      "appleEpisodeUrl": "https://podcasts.apple.com/us/podcast/07-amy-porterfield-legger-ned-dca-er-onlinekurs-d%C3%B8dt/id1857930330?i=1000744962463&uo=4"
     },
     {
       "id": "dcb8fa76-8b8a-49f3-95f2-6efa64c9a389",
@@ -386,7 +404,8 @@
       "season": "2026",
       "episode": "1",
       "guest": null,
-      "type": "samtale"
+      "type": "samtale",
+      "appleEpisodeUrl": "https://podcasts.apple.com/us/podcast/06-new-year-new-you-eller/id1857930330?i=1000743917708&uo=4"
     },
     {
       "id": "70c89265-bc66-4d56-80f4-d39b529aa11d",
@@ -407,7 +426,8 @@
       "season": "2025",
       "episode": "5",
       "guest": null,
-      "type": "samtale"
+      "type": "samtale",
+      "appleEpisodeUrl": "https://podcasts.apple.com/us/podcast/05-slik-skaper-du-ekte-endring/id1857930330?i=1000743136904&uo=4"
     },
     {
       "id": "9f9f5b92-311f-4a85-a753-0bd7f499ae64",
@@ -428,7 +448,8 @@
       "season": "2025",
       "episode": "4",
       "guest": null,
-      "type": "samtale"
+      "type": "samtale",
+      "appleEpisodeUrl": "https://podcasts.apple.com/us/podcast/04-noen-ganger-m%C3%A5-du-velge-deg-selv-f%C3%B8rst/id1857930330?i=1000742408364&uo=4"
     },
     {
       "id": "b9f55211-1bbc-477f-b219-62b5376e7faa",
@@ -449,7 +470,8 @@
       "season": "2025",
       "episode": "3",
       "guest": null,
-      "type": "samtale"
+      "type": "samtale",
+      "appleEpisodeUrl": "https://podcasts.apple.com/us/podcast/03-systemvalg-er-ikke-et-tech-valg-det-er-livsstilsvalg/id1857930330?i=1000741468092&uo=4"
     },
     {
       "id": "860e6c71-c8d6-4a0d-bccd-4c67a1fd369a",
@@ -470,7 +492,8 @@
       "season": "2025",
       "episode": "2",
       "guest": null,
-      "type": "samtale"
+      "type": "samtale",
+      "appleEpisodeUrl": "https://podcasts.apple.com/us/podcast/02-den-usynlige-kundereisen-og-hvorfor-den-styrer-alt/id1857930330?i=1000740345393&uo=4"
     },
     {
       "id": "6538b6f2-7835-45bd-9dbe-56f8ff09320e",
@@ -491,7 +514,8 @@
       "season": "2025",
       "episode": "1",
       "guest": null,
-      "type": "samtale"
+      "type": "samtale",
+      "appleEpisodeUrl": "https://podcasts.apple.com/us/podcast/01-hvorfor-the-edit/id1857930330?i=1000739370268&uo=4"
     },
     {
       "id": "301e2c87-be82-4972-9420-40b4b55bdf61",
@@ -512,7 +536,8 @@
       "season": "",
       "episode": "",
       "guest": null,
-      "type": "samtale"
+      "type": "samtale",
+      "appleEpisodeUrl": "https://podcasts.apple.com/us/podcast/velkommen-til-the-edit/id1857930330?i=1000739279157&uo=4"
     }
   ]
 }

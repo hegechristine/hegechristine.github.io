@@ -399,6 +399,10 @@
     position: relative;
     display: grid; grid-template-columns: 1.4fr 1fr;
     gap: var(--space-8); align-items: end;
+    max-width: 1320px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
   }
   .hero__kicker {
     font-family: var(--font-mono);
@@ -508,6 +512,11 @@
     display: grid; grid-template-columns: 1fr auto;
     gap: var(--space-5); align-items: end;
     border-bottom: 1px solid var(--ink-600);
+    max-width: 1320px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    box-sizing: border-box;
   }
   .list-head h2 {
     font-family: var(--font-display);
@@ -555,7 +564,14 @@
   .filter-pills button:not(.is-active):hover { color: var(--ink-600); }
 
   /* ---------- EPISODE LIST ---------- */
-  .ep-list { padding: 0 var(--space-7) var(--space-9); }
+  .ep-list {
+    padding: 0 var(--space-7) var(--space-9);
+    max-width: 1320px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    box-sizing: border-box;
+  }
 
   .ep {
     display: grid;
@@ -748,6 +764,11 @@
     gap: var(--space-8); align-items: start;
     border-bottom: 1px solid var(--ink-600);
     position: relative;
+    max-width: 1320px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    box-sizing: border-box;
   }
   .about__portrait {
     aspect-ratio: 4/5;
@@ -798,6 +819,11 @@
     padding: var(--space-8) var(--space-7);
     background: var(--ink-600); color: var(--cream-100);
     display: grid; grid-template-columns: 1.2fr 1fr; gap: var(--space-7);
+    max-width: 1320px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    box-sizing: border-box;
     align-items: center;
     position: relative; overflow: hidden;
   }
@@ -1722,6 +1748,7 @@ function mapEpisode(raw, idx) {
     isNew: !!raw.isNew,
     guest: raw.guest || null,
     episodeUrl: raw.episodeUrl || '',
+    appleEpisodeUrl: raw.appleEpisodeUrl || '',
     audioUrl: raw.audioUrl || '',
     imageUrl: raw.imageUrl || '',
   };
@@ -1948,13 +1975,14 @@ function expandEpisode(id) {
   const chapHtml = ep.chapters?.length ? `<h4>Kapitler</h4><ul>${ep.chapters.map(c => `<li>${c}</li>`).join('')}</ul>` : '';
   const SPOTIFY_SHOW = 'https://open.spotify.com/show/286EpL6ZfSuJVB47nXSQbZ';
   const APPLE_SHOW = 'https://podcasts.apple.com/us/podcast/the-edit/id1857930330';
+  const appleHref = ep.appleEpisodeUrl || APPLE_SHOW;
 
   expand.innerHTML = `
     <div>
       <h4>Vis i</h4>
       <div class="links" style="flex-direction: column; align-items: flex-start;">
         <a class="ext-link" href="${SPOTIFY_SHOW}" target="_blank" rel="noopener"><span class="dot"></span>Spotify</a>
-        <a class="ext-link" href="${APPLE_SHOW}" target="_blank" rel="noopener"><span class="dot"></span>Apple Podcasts</a>
+        <a class="ext-link" href="${appleHref}" target="_blank" rel="noopener"><span class="dot"></span>Apple Podcasts</a>
       </div>
     </div>
     <div>

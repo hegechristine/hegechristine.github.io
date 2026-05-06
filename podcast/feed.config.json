@@ -1,6 +1,8 @@
 {
   "rssUrl": "https://anchor.fm/s/4f734584/podcast/rss",
   "spotifyShowUrl": "https://open.spotify.com/show/286EpL6ZfSuJVB47nXSQbZ",
+  "appleShowId": "1857930330",
+  "appleShowUrl": "https://podcasts.apple.com/us/podcast/the-edit/id1857930330",
   "maxEpisodes": 50,
-  "_comment": "Endre rssUrl hvis podcasten flyttes. Auto-sync kjører via .github/workflows/sync-podcast.yml"
+  "_comment": "Endre rssUrl/showIds hvis podcasten flyttes. Auto-sync kjører via .github/workflows/sync-podcast.yml"
 }

@@ -182,6 +182,39 @@ const episodes = items.map((item, idx) => {
   };
 });
 
+// Hent Apple Podcasts per-episode-URLer via iTunes Lookup API (gratis, no auth)
+async function fetchAppleEpisodeUrls(showId) {
+  if (!showId) return new Map();
+  try {
+    const url = `https://itunes.apple.com/lookup?id=${encodeURIComponent(showId)}&entity=podcastEpisode&limit=200`;
+    const res = await fetch(url, { headers: { 'User-Agent': 'hegechristine.github.io podcast sync' } });
+    if (!res.ok) {
+      console.warn(`iTunes Lookup failed: ${res.status}`);
+      return new Map();
+    }
+    const data = await res.json();
+    const eps = (data.results || []).filter(r => r.wrapperType === 'podcastEpisode' || r.kind === 'podcast-episode');
+    // Map by lowercased trackName
+    const map = new Map();
+    for (const e of eps) {
+      if (e.trackName && e.trackViewUrl) {
+        map.set(e.trackName.trim().toLowerCase(), e.trackViewUrl);
+      }
+    }
+    console.log(`iTunes Lookup: ${map.size} episodes matched`);
+    return map;
+  } catch (err) {
+    console.warn('iTunes Lookup error:', err.message);
+    return new Map();
+  }
+}
+
+const appleMap = await fetchAppleEpisodeUrls(config.appleShowId);
+for (const ep of episodes) {
+  const key = ep.rawTitle.trim().toLowerCase();
+  ep.appleEpisodeUrl = appleMap.get(key) || '';
+}
+
 const output = {
   updatedAt: new Date().toISOString(),
   channel: {
@@ -189,6 +222,7 @@ const output = {
     description: stripHtml(getText(channel.description)),
     imageUrl: channel['itunes:image']?.href || channel.image?.url || '',
     spotifyShowUrl: config.spotifyShowUrl || '',
+    appleShowUrl: config.appleShowUrl || '',
     rssUrl: config.rssUrl,
     episodeCount: episodes.length,
     author: getText(channel['itunes:author']) || getText(channel['dc:creator']),
