@@ -1274,6 +1274,12 @@
     display: block;
   }
   .ep__art--has-image .ep__art-glyph { display: none; }
+
+  /* Player-art med ekte cover */
+  .player__art--has-image {
+    background-color: var(--soft-ink) !important;
+    color: transparent !important;
+  }
 </style>
 </head>
 <body>
@@ -1486,6 +1492,7 @@
 
 <!-- ========== FIXED PLAYER ========== -->
 <div class="player" id="player" role="region" aria-label="Avspiller">
+  <audio id="player-audio" preload="none"></audio>
   <div class="player__now">
     <div class="player__art" id="player-art">42</div>
     <div class="player__info">
@@ -1881,8 +1888,9 @@ document.querySelectorAll('[data-play-id]').forEach(b => {
   b.addEventListener('click', e => { e.stopPropagation(); playEpisode(b.dataset.playId); });
 });
 
-/* ---------- Player ---------- */
+/* ---------- Player (ekte HTML5 audio) ---------- */
 const player = document.getElementById('player');
+const audio = document.getElementById('player-audio');
 const playerPlay = document.getElementById('player-play');
 const playerArt = document.getElementById('player-art');
 const playerTitle = document.getElementById('player-title');
@@ -1893,39 +1901,49 @@ const playerFill = document.getElementById('player-fill');
 const playerBar = document.getElementById('player-bar');
 
 let isPlaying = false;
-let curSec = 12*60 + 4;
-let totalSec = 47*60;
-let timer = null;
+let totalSec = 0;
 
 function setPlayerEpisode(ep) {
-  playerArt.className = `player__art player__art--${ep.art}`;
-  playerArt.textContent = ep.glyph;
+  if (ep.imageUrl) {
+    playerArt.style.backgroundImage = `url('${ep.imageUrl}')`;
+    playerArt.style.backgroundSize = 'cover';
+    playerArt.style.backgroundPosition = 'center';
+    playerArt.textContent = '';
+    playerArt.className = 'player__art player__art--has-image';
+  } else {
+    playerArt.style.backgroundImage = '';
+    playerArt.className = `player__art player__art--${ep.art}`;
+    playerArt.textContent = ep.glyph;
+  }
   playerTitle.textContent = ep.title.replace(/<[^>]*>/g, '');
   playerSub.textContent = `EP ${ep.n} · Sesong 0${ep.season} · ${ep.dur}`;
-  totalSec = ep.durSec;
-  curSec = 0;
-  playerDur.textContent = fmtTime(totalSec);
-  playerCur.textContent = fmtTime(0);
+  totalSec = ep.durSec || 0;
+  playerDur.textContent = ep.durSec ? fmtTime(ep.durSec) : '–:––';
+  playerCur.textContent = '00:00';
   playerFill.style.width = '0%';
+
+  // Last ekte audio
+  audio.src = ep.audioUrl || '';
+  audio.load();
 }
 
 function playEpisode(id) {
   const ep = EPISODES.find(e => e.id === id);
   if (!ep) return;
-  // Open Spotify episode page i ny fane (ekte data har ekte URL)
-  if (ep.episodeUrl) {
-    window.open(ep.episodeUrl, '_blank', 'noopener');
+  if (!ep.audioUrl) {
+    // Ingen direkte mp3 — fall tilbake til Spotify
+    if (ep.episodeUrl) window.open(ep.episodeUrl, '_blank', 'noopener');
     return;
   }
-  // Fallback: in-page demo-spiller (brukes kun hvis episodeUrl mangler)
   if (activeEpId !== id) {
     setPlayerEpisode(ep);
     activeEpId = id;
   }
   document.body.classList.add('has-player');
   player.classList.add('is-open');
-  togglePlay(true);
-  syncEpButtons();
+  audio.play().catch(err => {
+    console.error('Audio playback failed:', err);
+  });
 }
 
 function syncEpButtons() {
@@ -1939,31 +1957,54 @@ function syncEpButtons() {
   playerPlay.classList.toggle('is-playing', isPlaying);
 }
 
-function togglePlay(force) {
-  isPlaying = (typeof force === 'boolean') ? force : !isPlaying;
-  if (isPlaying) {
-    timer = setInterval(() => {
-      curSec += 1;
-      if (curSec >= totalSec) { togglePlay(false); curSec = totalSec; }
-      playerCur.textContent = fmtTime(curSec);
-      playerFill.style.width = ((curSec/totalSec)*100).toFixed(2) + '%';
-    }, 1000);
+function togglePlay() {
+  if (audio.paused) {
+    audio.play().catch(() => {});
   } else {
-    clearInterval(timer);
+    audio.pause();
   }
-  syncEpButtons();
 }
 
-playerPlay.addEventListener('click', () => togglePlay());
-playerBar.addEventListener('click', (e) => {
-  const rect = playerBar.getBoundingClientRect();
-  const ratio = (e.clientX - rect.left) / rect.width;
-  curSec = Math.floor(totalSec * ratio);
-  playerFill.style.width = (ratio*100).toFixed(2) + '%';
-  playerCur.textContent = fmtTime(curSec);
+audio.addEventListener('play', () => { isPlaying = true; syncEpButtons(); });
+audio.addEventListener('pause', () => { isPlaying = false; syncEpButtons(); });
+audio.addEventListener('timeupdate', () => {
+  if (!audio.duration || !isFinite(audio.duration)) return;
+  const ratio = audio.currentTime / audio.duration;
+  playerFill.style.width = (ratio * 100).toFixed(2) + '%';
+  playerCur.textContent = fmtTime(audio.currentTime);
 });
+audio.addEventListener('loadedmetadata', () => {
+  if (audio.duration && isFinite(audio.duration)) {
+    totalSec = Math.floor(audio.duration);
+    playerDur.textContent = fmtTime(audio.duration);
+  }
+});
+audio.addEventListener('ended', () => {
+  isPlaying = false;
+  syncEpButtons();
+});
+
+playerPlay.addEventListener('click', togglePlay);
+playerBar.addEventListener('click', (e) => {
+  if (!audio.duration || !isFinite(audio.duration)) return;
+  const rect = playerBar.getBoundingClientRect();
+  const ratio = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
+  audio.currentTime = audio.duration * ratio;
+});
+
+// 15s tilbake / 30s frem-knapper
+const playerControlBtns = document.querySelectorAll('.player__controls .player__btn');
+if (playerControlBtns.length >= 2) {
+  playerControlBtns[0].addEventListener('click', () => {
+    audio.currentTime = Math.max(0, audio.currentTime - 15);
+  });
+  playerControlBtns[1].addEventListener('click', () => {
+    if (audio.duration) audio.currentTime = Math.min(audio.duration, audio.currentTime + 30);
+  });
+}
+
 document.getElementById('player-close').addEventListener('click', () => {
-  togglePlay(false);
+  audio.pause();
   player.classList.remove('is-open');
   document.body.classList.remove('has-player');
   activeEpId = null;
