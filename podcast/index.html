@@ -1571,11 +1571,14 @@
     color: var(--soft-yellow) !important;
   }
 
-  /* About-stats: gul stripe på toppen + stjerne-styling */
+  /* About-stats: gul stripe på toppen + sentrert innhold + stjerne-styling */
   body .about__stats .stat {
     border-top-color: var(--soft-yellow) !important;
     border-top-width: 3px !important;
+    align-items: center;
+    text-align: center;
   }
+  body .about__stats .stat__label { max-width: none; }
   .stat__star {
     font-size: 0.6em;
     color: var(--soft-ink);
