@@ -142,8 +142,9 @@ function isNew(dateStr, days = 14) {
 }
 
 function detectGuest(title) {
-  // Pattern: "X om ..." or "X: ..." or "fra X" — heuristics, optional
-  const m = title.match(/[:–—-]\s*([^:–—-]+?)\s+om\s+/i);
+  // Match "Fornavn Etternavn (Mellomnavn) om..." — krever minst to ord som starter med stor bokstav
+  // Slik at "Hva om..." (solo-episode) IKKE matcher, men "Vetle Valsgård om..." gjør
+  const m = title.match(/\b([A-ZÆØÅ][a-zæøåA-ZÆØÅ.\-]+(?:\s+[A-ZÆØÅ][a-zæøåA-ZÆØÅ.\-]+)+)\s+om\b/);
   if (m) return m[1].trim();
   return null;
 }
