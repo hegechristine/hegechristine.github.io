@@ -1210,12 +1210,64 @@
   @media (max-width: 980px) {
     .hero__inner { grid-template-columns: 1fr; }
     .about { grid-template-columns: 1fr; }
-    .newsletter { grid-template-columns: 1fr; }
+    .newsletter__inner { grid-template-columns: 1fr; }
+    .newsletter__form-wrap { justify-self: stretch; max-width: 100%; }
     .topbar__nav { display: none; }
     .ep { grid-template-columns: 64px 1fr auto; }
     .ep__num { display: none; }
     .player { grid-template-columns: 1fr auto; padding: 12px; }
     .player__center { grid-row: 2; grid-column: 1 / -1; }
+  }
+
+  /* Mobile (≤640px) — stack alt for å unngå at thumbnail klemmer tittelen */
+  @media (max-width: 640px) {
+    /* Topbar — mindre logo + brand */
+    .topbar__inner { padding: 10px var(--space-5); gap: var(--space-3); }
+    .topbar__brand .hc-mark { width: 32px; height: 32px; font-size: 13px; }
+    .topbar__brand .wordmark { font-size: 17px; }
+    .topbar__right { font-size: 10px; }
+
+    /* Hero — mindre tittel */
+    .hero { padding: var(--space-7) var(--space-5) var(--space-6); }
+    .hero__h { font-size: var(--text-4xl); }
+    .hero__lede { font-size: var(--text-base); }
+    .hero__meta { gap: var(--space-3); }
+
+    /* Episodeliste — stable kortet vertikalt */
+    .ep-list { padding: 0 var(--space-5) var(--space-7); }
+    .list-head { padding: var(--space-6) var(--space-5) var(--space-4); grid-template-columns: 1fr; }
+    .list-head h2 { font-size: var(--text-2xl); }
+    .controls { flex-wrap: wrap; }
+    .search input { width: 100%; }
+
+    .ep {
+      grid-template-columns: 1fr;
+      gap: var(--space-3);
+      padding: var(--space-5) 0;
+    }
+    .ep__art {
+      width: 100%; height: auto; aspect-ratio: 1;
+      max-width: 200px;
+    }
+    .ep__title { font-size: var(--text-lg); }
+    .ep__play, .ep__actions { justify-self: start; }
+
+    /* Platforms — mindre padding */
+    .platforms { padding: var(--space-5) var(--space-5); }
+
+    /* Bli gjest — mindre side-padding */
+    .guest-cta { padding: var(--space-6) var(--space-5); }
+    .guest-cta__inner { flex-wrap: wrap; gap: var(--space-4); }
+    .guest-cta__prompt { flex-basis: 100%; font-size: var(--text-base); }
+
+    /* About — mindre side-padding */
+    .about { padding: var(--space-7) var(--space-5); }
+    .about__h { font-size: var(--text-3xl); }
+
+    /* Nyhetsbrev — mindre side-padding */
+    .newsletter { padding: var(--space-7) var(--space-5); }
+    .newsletter__h { font-size: var(--text-3xl); }
+    .newsletter__form-wrap { justify-self: stretch; max-width: 100%; }
   }
 
   /* ============== KAJABI-SKJEMA-OVERRIDE ============== */
@@ -1515,7 +1567,6 @@
       <a href="#">Hovedside ↗</a>
     </nav>
     <div class="topbar__right">
-      <span class="live">Auto-sync</span>
       <span>Sesong 03</span>
     </div>
   </div>
