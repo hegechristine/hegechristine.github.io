@@ -625,6 +625,22 @@
   .ep__art--rust  { background: var(--rust-400); color: var(--cream-100); }
   .ep__art--olive { background: var(--olive-600); color: var(--cream-100); }
   .ep__art-glyph { position: relative; z-index: 1; line-height: 1; }
+  .ep__art .new {
+    position: absolute;
+    top: 6px;
+    left: 6px;
+    z-index: 2;
+    background: var(--soft-rust);
+    color: var(--soft-bg);
+    font-family: var(--font-mono);
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    padding: 3px 6px;
+    border-radius: 2px;
+    line-height: 1;
+  }
+  .ep__art .new::before { display: none; }
 
   .ep__body { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
   .ep__title {
@@ -2102,12 +2118,12 @@ function renderList(filter='all', q='') {
       <div class="ep__num">${epLabel}</div>
       <div class="ep__art ep__art--${ep.art}${ep.imageUrl ? ' ep__art--has-image' : ''}">
         ${artInner}
+        ${newBadge}
       </div>
       <div class="ep__body">
         <h3 class="ep__title">${ep.title}</h3>
         <p class="ep__desc">${ep.desc}</p>
         <div class="ep__meta">
-          ${newBadge}
           <span>${ep.date}</span>
           <span>${ep.dur}</span>
           ${guestBit}
