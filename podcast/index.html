@@ -701,8 +701,6 @@
     gap: var(--space-4);
     position: relative; overflow: hidden;
   }
-  .platforms__label { justify-content: center; }
-  .platforms__list { justify-content: center; }
   .platforms::before {
     content: ""; position: absolute; inset: 0;
     background-image:
@@ -715,12 +713,13 @@
     letter-spacing: 0.14em; text-transform: uppercase;
     color: var(--sand-200); font-weight: 600;
     position: relative;
-    display: flex; align-items: center; gap: var(--space-3);
+    display: flex; align-items: center; justify-content: center; gap: var(--space-3);
   }
   .platforms__label::before { content: ""; width: 30px; height: 2px; background: var(--sand-200); }
   .platforms__list {
     display: flex; gap: var(--space-3); flex-wrap: wrap;
     position: relative;
+    justify-content: center;
   }
   .plat-btn {
     display: inline-flex; align-items: center; gap: 10px;
@@ -1380,7 +1379,7 @@
     <a class="plat-btn" href="https://open.spotify.com/show/286EpL6ZfSuJVB47nXSQbZ" target="_blank" rel="noopener"><span class="icon">
       <svg width="14" height="14" viewBox="0 0 14 14" fill="currentColor"><circle cx="7" cy="7" r="7"/></svg>
     </span>Spotify</a>
-    <a class="plat-btn" href="#" target="_blank" rel="noopener"><span class="icon">
+    <a class="plat-btn" href="https://podcasts.apple.com/us/podcast/the-edit/id1857930330" target="_blank" rel="noopener"><span class="icon">
       <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="7" cy="7" r="6.25"/><path d="M7 1.5v11M1.5 7h11" /></svg>
     </span>Apple Podcasts</a>
     <a class="plat-btn" href="https://anchor.fm/s/4f734584/podcast/rss" target="_blank" rel="noopener"><span class="icon">
@@ -1761,7 +1760,10 @@ function updateFeatured(latest) {
 
   if (titleEl) titleEl.textContent = latest.title;
   if (metaEl) metaEl.textContent = `${latest.date} · ${latest.dur}`;
-  if (artNum) artNum.textContent = `EP ${String(latest.n).padStart(2,'0')} · Sesong ${String(latest.season).padStart(2,'0')}`;
+  if (artNum) {
+    const label = latest.n ? `EP ${String(latest.n).padStart(2,'0')}` : 'TRAILER';
+    artNum.textContent = `${label} · Sesong ${String(latest.season).padStart(2,'0')}`;
+  }
   if (playBtn) playBtn.dataset.playId = latest.id;
 
   // Sett episode-art som bakgrunn, gi den en mørk overlay så teksten leser
@@ -1821,8 +1823,10 @@ function renderList(filter='all', q='') {
       ? `<img src="${ep.imageUrl}" alt="${ep.title}" class="ep__art-img" loading="lazy" />`
       : `<span class="ep__art-glyph">${ep.glyph}</span>`;
 
+    const epLabel = ep.n ? `EP ${String(ep.n).padStart(2,'0')}` : 'TRAILER';
+
     el.innerHTML = `
-      <div class="ep__num">EP ${String(ep.n).padStart(2,'0')}</div>
+      <div class="ep__num">${epLabel}</div>
       <div class="ep__art ep__art--${ep.art}${ep.imageUrl ? ' ep__art--has-image' : ''}">
         ${artInner}
       </div>

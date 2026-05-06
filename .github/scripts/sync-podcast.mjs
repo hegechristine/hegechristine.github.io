@@ -161,7 +161,7 @@ const episodes = items.map((item, idx) => {
 
   return {
     id: guid || `ep-${idx}`,
-    n: epNumFromTitle || (items.length - idx),
+    n: epNumFromTitle, // null hvis ingen nummer i tittel (typisk trailer)
     title: cleanTitle(rawTitle),
     rawTitle,
     desc: shortDesc(description),
