@@ -1259,6 +1259,21 @@
   }
 
   .newsletter__form-wrap form.is-hidden { display: none; }
+
+  /* ============== EPISODE-ART MED EKTE BILDE ============== */
+  .ep__art--has-image {
+    position: relative;
+    overflow: hidden;
+  }
+  .ep__art-img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .ep__art--has-image .ep__art-glyph { display: none; }
 </style>
 </head>
 <body>
@@ -1629,6 +1644,7 @@ function mapEpisode(raw, idx) {
     title: raw.title,
     desc: raw.desc,
     date: raw.date,
+    pubDate: raw.pubDate,
     dur: raw.dur,
     durSec: raw.durationSeconds || 0,
     art: ART_VARIANTS[idx % ART_VARIANTS.length],
@@ -1664,12 +1680,44 @@ function updateHeroStats(episodes) {
     const heroMeta = document.querySelectorAll('.hero__meta b');
     if (heroMeta.length >= 4) heroMeta[3].textContent = display;
   }
+
+  // "Siden YYYY" — fra eldste episode
+  const dated = episodes.map(e => new Date(e.pubDate || 0)).filter(d => !isNaN(d.getTime()));
+  if (dated.length) {
+    const launchYear = Math.min(...dated.map(d => d.getFullYear()));
+    const sinceEl = document.querySelectorAll('.hero__meta b')[1];
+    if (sinceEl) sinceEl.textContent = String(launchYear);
+  }
+
+  // Topbar "Sesong XX" — bruk nyeste episodes sesongnummer
+  if (episodes.length) {
+    const latestSeason = episodes[0].season;
+    const topbarRight = document.querySelectorAll('.topbar__right span');
+    if (topbarRight.length >= 2) {
+      topbarRight[1].textContent = `Sesong ${String(latestSeason).padStart(2,'0')}`;
+    }
+  }
+
+  // About-stats: total antall episoder + antall sesonger
+  const seasonCount = new Set(episodes.map(e => e.season)).size;
+  const aboutStats = document.querySelectorAll('.about__stats .stat');
+  if (aboutStats.length >= 2) {
+    const epStat = aboutStats[1];
+    const num = epStat.querySelector('.stat__num');
+    const label = epStat.querySelector('.stat__label');
+    if (num) num.textContent = String(episodes.length);
+    if (label) {
+      const seasonWord = seasonCount === 1 ? 'sesong' : 'sesonger';
+      label.textContent = `Episoder, ${seasonCount} ${seasonWord}`;
+    }
+  }
 }
 
 function updateFeatured(latest) {
   if (!latest) return;
   const titleEl = document.getElementById('featured-art-title');
   const metaEl = document.getElementById('featured-meta');
+  const artEl = document.getElementById('featured-art');
   const artNum = document.querySelector('.featured__art-num');
   const playBtn = document.querySelector('.featured__play');
 
@@ -1677,6 +1725,14 @@ function updateFeatured(latest) {
   if (metaEl) metaEl.textContent = `${latest.date} · ${latest.dur}`;
   if (artNum) artNum.textContent = `EP ${String(latest.n).padStart(2,'0')} · Sesong ${String(latest.season).padStart(2,'0')}`;
   if (playBtn) playBtn.dataset.playId = latest.id;
+
+  // Sett episode-art som bakgrunn, gi den en mørk overlay så teksten leser
+  if (artEl && latest.imageUrl) {
+    artEl.style.backgroundImage =
+      `linear-gradient(135deg, rgba(48,48,48,0.55), rgba(80,61,48,0.65)), url('${latest.imageUrl}')`;
+    artEl.style.backgroundSize = 'cover';
+    artEl.style.backgroundPosition = 'center';
+  }
 }
 
 async function loadEpisodes() {
@@ -1724,10 +1780,14 @@ function renderList(filter='all', q='') {
     const guestBit = ep.guest ? `<span class="guest">m/ ${ep.guest}</span>` : '';
     const seasonBit = `<span>S0${ep.season}</span>`;
 
+    const artInner = ep.imageUrl
+      ? `<img src="${ep.imageUrl}" alt="${ep.title}" class="ep__art-img" loading="lazy" />`
+      : `<span class="ep__art-glyph">${ep.glyph}</span>`;
+
     el.innerHTML = `
       <div class="ep__num">EP ${String(ep.n).padStart(2,'0')}<span>S0${ep.season}</span></div>
-      <div class="ep__art ep__art--${ep.art}">
-        <span class="ep__art-glyph">${ep.glyph}</span>
+      <div class="ep__art ep__art--${ep.art}${ep.imageUrl ? ' ep__art--has-image' : ''}">
+        ${artInner}
       </div>
       <div class="ep__body">
         <h3 class="ep__title">${ep.title}</h3>
