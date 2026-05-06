@@ -515,7 +515,7 @@
 
   /* ---------- LIST CONTROLS ---------- */
   .list-head {
-    padding: var(--space-7) var(--space-7) var(--space-4);
+    padding: var(--space-7) var(--space-8) var(--space-4);
     display: grid; grid-template-columns: 1fr auto;
     gap: var(--space-5); align-items: end;
     border-bottom: 1px solid var(--ink-600);
@@ -572,7 +572,7 @@
 
   /* ---------- EPISODE LIST ---------- */
   .ep-list {
-    padding: 0 var(--space-7) var(--space-9);
+    padding: 0 var(--space-8) var(--space-9);
     max-width: 1320px;
     margin-left: auto;
     margin-right: auto;
@@ -766,7 +766,7 @@
 
   /* ---------- ABOUT BLOCK ---------- */
   .about {
-    padding: var(--space-9) var(--space-7);
+    padding: var(--space-9) var(--space-8);
     display: grid; grid-template-columns: 1fr 1fr;
     gap: var(--space-8); align-items: start;
     border-bottom: 1px solid var(--ink-600);
@@ -1180,7 +1180,7 @@
     grid-template-columns: 60px 1fr;
     align-items: start;
   }
-  body.layout-grid .ep-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: var(--space-5); padding: var(--space-7); }
+  body.layout-grid .ep-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: var(--space-5); padding: var(--space-7) var(--space-8); }
   body.layout-grid .ep {
     padding: 0; border: 1.5px solid var(--ink-600);
     background: var(--cream-50);
@@ -1331,72 +1331,71 @@
     color: transparent !important;
   }
 
-  /* "Bli gjest"-CTA-seksjon */
+  /* "Bli gjest"-CTA-seksjon — flex-row layout som platforms */
   .guest-cta {
     border-top: 1px solid var(--ink-600);
     border-bottom: 1px solid var(--ink-600);
-    padding: var(--space-8) var(--space-7);
+    padding: var(--space-7) var(--space-8);
     background: var(--soft-bg-deep);
   }
   .guest-cta__inner {
-    max-width: 720px;
+    max-width: 1320px;
     margin: 0 auto;
-    text-align: center;
+    width: 100%;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: var(--space-6);
   }
-  .guest-cta__eyebrow {
+  .guest-cta__label {
     font-family: 'JetBrains Mono', monospace;
     font-size: 11px;
     letter-spacing: 0.14em;
     text-transform: uppercase;
     color: var(--soft-ink-soft);
     font-weight: 600;
-    margin-bottom: var(--space-3);
-    display: inline-flex;
+    display: flex;
     align-items: center;
     gap: var(--space-3);
+    flex-shrink: 0;
   }
-  .guest-cta__eyebrow::before {
+  .guest-cta__label::before {
     content: "";
     width: 30px;
-    height: 3px;
+    height: 2px;
     background: var(--soft-yellow);
   }
-  .guest-cta__title {
-    font-family: 'Cormorant Garamond', 'Times New Roman', serif;
-    font-weight: 500;
-    font-size: var(--text-3xl);
-    line-height: 1.1;
-    letter-spacing: 0.005em;
-    color: var(--soft-ink);
-    margin: 0 0 var(--space-4);
-  }
-  .guest-cta__title em {
-    font-style: italic;
-    color: var(--soft-rust);
-    font-weight: 500;
-  }
-  .guest-cta__text {
+  .guest-cta__prompt {
     font-family: 'Newsreader', 'Cormorant Garamond', serif;
     font-style: italic;
     font-size: var(--text-lg);
-    line-height: 1.5;
-    color: var(--soft-ink-soft);
-    margin: 0 auto var(--space-5);
-    max-width: 52ch;
+    line-height: 1.4;
+    color: var(--soft-ink);
+    margin: 0;
+    flex: 1;
+    min-width: 240px;
+  }
+  .guest-cta__prompt em {
+    color: var(--soft-rust);
+    font-weight: 500;
   }
   .guest-cta__link {
     display: inline-flex;
     align-items: center;
     gap: 8px;
     font-family: 'JetBrains Mono', monospace;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     font-weight: 600;
     color: var(--soft-ink);
     text-decoration: none;
-    padding: 12px 22px;
+    padding: 12px 20px;
     border: 1.5px solid var(--soft-ink);
     border-radius: 3px;
     transition: all 0.18s ease;
+    flex-shrink: 0;
   }
   .guest-cta__link:hover {
     background: var(--soft-rust);
@@ -1650,9 +1649,8 @@
 <!-- ========== GJEST CTA ========== -->
 <section class="guest-cta">
   <div class="guest-cta__inner">
-    <div class="guest-cta__eyebrow">Bli gjest</div>
-    <h3 class="guest-cta__title">Vil du være med i en <em>samtale?</em></h3>
-    <p class="guest-cta__text">Send meg en e-post med noen ord om hvem du er og hva vi kunne snakket om. Jeg leser alle henvendelser selv.</p>
+    <div class="guest-cta__label"><span>Bli gjest</span></div>
+    <p class="guest-cta__prompt">Vil du være med i en <em>samtale?</em> Send meg en e-post med noen ord om hvem du er og hva vi kunne snakket om.</p>
     <a class="guest-cta__link" href="mailto:hegechristine@hegechristine.no?subject=S%C3%B8knad%20om%20%C3%A5%20v%C3%A6re%20gjest%20p%C3%A5%20The%20Edit">hegechristine@hegechristine.no <span aria-hidden="true">→</span></a>
   </div>
 </section>
