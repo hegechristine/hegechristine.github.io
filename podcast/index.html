@@ -1331,6 +1331,79 @@
     color: transparent !important;
   }
 
+  /* "Bli gjest"-CTA-seksjon */
+  .guest-cta {
+    border-top: 1px solid var(--ink-600);
+    border-bottom: 1px solid var(--ink-600);
+    padding: var(--space-8) var(--space-7);
+    background: var(--soft-bg-deep);
+  }
+  .guest-cta__inner {
+    max-width: 720px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  .guest-cta__eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--soft-ink-soft);
+    font-weight: 600;
+    margin-bottom: var(--space-3);
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-3);
+  }
+  .guest-cta__eyebrow::before {
+    content: "";
+    width: 30px;
+    height: 3px;
+    background: var(--soft-yellow);
+  }
+  .guest-cta__title {
+    font-family: 'Cormorant Garamond', 'Times New Roman', serif;
+    font-weight: 500;
+    font-size: var(--text-3xl);
+    line-height: 1.1;
+    letter-spacing: 0.005em;
+    color: var(--soft-ink);
+    margin: 0 0 var(--space-4);
+  }
+  .guest-cta__title em {
+    font-style: italic;
+    color: var(--soft-rust);
+    font-weight: 500;
+  }
+  .guest-cta__text {
+    font-family: 'Newsreader', 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: var(--text-lg);
+    line-height: 1.5;
+    color: var(--soft-ink-soft);
+    margin: 0 auto var(--space-5);
+    max-width: 52ch;
+  }
+  .guest-cta__link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--soft-ink);
+    text-decoration: none;
+    padding: 12px 22px;
+    border: 1.5px solid var(--soft-ink);
+    border-radius: 3px;
+    transition: all 0.18s ease;
+  }
+  .guest-cta__link:hover {
+    background: var(--soft-rust);
+    border-color: var(--soft-rust);
+    color: var(--soft-bg);
+  }
+
   /* Footer legal-lenker (personvern/cookies) */
   .ds-footer__legal {
     display: inline-flex;
@@ -1574,6 +1647,16 @@
   </div>
 </section>
 
+<!-- ========== GJEST CTA ========== -->
+<section class="guest-cta">
+  <div class="guest-cta__inner">
+    <div class="guest-cta__eyebrow">Bli gjest</div>
+    <h3 class="guest-cta__title">Vil du være med i en <em>samtale?</em></h3>
+    <p class="guest-cta__text">Send meg en e-post med noen ord om hvem du er og hva vi kunne snakket om. Jeg leser alle henvendelser selv.</p>
+    <a class="guest-cta__link" href="mailto:hegechristine@hegechristine.no?subject=S%C3%B8knad%20om%20%C3%A5%20v%C3%A6re%20gjest%20p%C3%A5%20The%20Edit">hegechristine@hegechristine.no <span aria-hidden="true">→</span></a>
+  </div>
+</section>
+
 <!-- ========== FOOTER ========== -->
 <footer class="ds-footer">
   <div style="max-width:1320px; margin:0 auto;">
@@ -1603,7 +1686,7 @@
         <ul>
           <li><a href="https://www.instagram.com/hegechristine.no/" target="_blank" rel="noopener">Instagram</a></li>
           <li><a href="https://www.linkedin.com/in/hegechristine/" target="_blank" rel="noopener">LinkedIn</a></li>
-          <li><a href="#" target="_blank" rel="noopener">YouTube</a></li>
+          <li><a href="https://www.youtube.com/@hegechristine" target="_blank" rel="noopener">YouTube</a></li>
         </ul>
       </div>
     </div>
