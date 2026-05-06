@@ -695,10 +695,14 @@
     background: var(--olive-600);
     color: var(--cream-100);
     padding: var(--space-5) var(--space-7);
-    display: grid; grid-template-columns: auto 1fr;
-    gap: var(--space-7); align-items: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-4);
     position: relative; overflow: hidden;
   }
+  .platforms__label { justify-content: center; }
+  .platforms__list { justify-content: center; }
   .platforms::before {
     content: ""; position: absolute; inset: 0;
     background-image:
@@ -1373,19 +1377,13 @@
 <section class="platforms">
   <div class="platforms__label"><span>Hør hvor du vil</span></div>
   <div class="platforms__list">
-    <a class="plat-btn" href="#"><span class="icon">
+    <a class="plat-btn" href="https://open.spotify.com/show/286EpL6ZfSuJVB47nXSQbZ" target="_blank" rel="noopener"><span class="icon">
       <svg width="14" height="14" viewBox="0 0 14 14" fill="currentColor"><circle cx="7" cy="7" r="7"/></svg>
     </span>Spotify</a>
-    <a class="plat-btn" href="#"><span class="icon">
+    <a class="plat-btn" href="#" target="_blank" rel="noopener"><span class="icon">
       <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="7" cy="7" r="6.25"/><path d="M7 1.5v11M1.5 7h11" /></svg>
     </span>Apple Podcasts</a>
-    <a class="plat-btn" href="#"><span class="icon">
-      <svg width="14" height="14" viewBox="0 0 14 14" fill="currentColor"><rect x="0" y="0" width="14" height="14" rx="2"/></svg>
-    </span>YouTube</a>
-    <a class="plat-btn" href="#"><span class="icon">
-      <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 4 L2 10 M5 2 L5 12 M8 4 L8 10 M11 6 L11 8" stroke-linecap="round"/></svg>
-    </span>Podimo</a>
-    <a class="plat-btn" href="#"><span class="icon">
+    <a class="plat-btn" href="https://anchor.fm/s/4f734584/podcast/rss" target="_blank" rel="noopener"><span class="icon">
       <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="2.5" cy="11.5" r="1.5"/><path d="M2.5 7.5 A4 4 0 0 1 6.5 11.5 M2.5 3.5 A8 8 0 0 1 10.5 11.5"/></svg>
     </span>RSS-feed</a>
   </div>
