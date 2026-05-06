@@ -1293,6 +1293,29 @@
     color: transparent !important;
   }
 
+  /* "Vis mer"-knapp */
+  .show-more-btn {
+    width: 100%;
+    margin-top: var(--space-5);
+    padding: 16px 24px;
+    background: transparent;
+    color: var(--soft-ink-soft);
+    border: 1.5px dashed rgba(80, 61, 48, 0.4);
+    border-radius: 4px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.78rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    cursor: pointer;
+    transition: all 0.18s ease;
+  }
+  .show-more-btn:hover {
+    border-color: var(--soft-rust);
+    color: var(--soft-rust);
+    background: rgba(160, 82, 45, 0.06);
+  }
+
   /* Show notes-formatering */
   .ep__shownotes p {
     margin: 0 0 var(--space-3, 12px);
@@ -1812,6 +1835,11 @@ function fmtTime(sec) {
   return `${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
 }
 
+/* Paginering — vis 10 episoder ad gangen, last flere ved klikk */
+const INITIAL_VISIBLE = 10;
+const PAGE_SIZE = 10;
+let visibleCount = INITIAL_VISIBLE;
+
 function renderList(filter='all', q='') {
   list.innerHTML = '';
   const ql = q.trim().toLowerCase();
@@ -1821,7 +1849,8 @@ function renderList(filter='all', q='') {
     return true;
   });
 
-  filtered.forEach(ep => {
+  const visible = filtered.slice(0, visibleCount);
+  visible.forEach(ep => {
     const el = document.createElement('article');
     el.className = 'ep';
     el.dataset.id = ep.id;
@@ -1860,9 +1889,24 @@ function renderList(filter='all', q='') {
 
   if (!filtered.length) {
     list.innerHTML = `<div style="padding: var(--space-7); text-align:center; color: var(--olive-600); font-family: var(--font-editorial); font-style: italic; font-size: var(--text-xl);">Ingen episoder matcher.</div>`;
+  } else if (filtered.length > visibleCount) {
+    const remaining = filtered.length - visibleCount;
+    const showMore = document.createElement('button');
+    showMore.type = 'button';
+    showMore.className = 'show-more-btn';
+    showMore.textContent = `Vis ${Math.min(remaining, PAGE_SIZE)} flere · ${remaining} igjen`;
+    showMore.addEventListener('click', () => {
+      visibleCount += PAGE_SIZE;
+      renderList(currentFilter, document.getElementById('search').value);
+    });
+    list.appendChild(showMore);
   }
 
   epCountEl.textContent = EPISODES.length;
+}
+
+function resetPagination() {
+  visibleCount = INITIAL_VISIBLE;
 }
 
 loadEpisodes();
@@ -1874,10 +1918,12 @@ document.querySelectorAll('.filter-pills button').forEach(b => {
     document.querySelectorAll('.filter-pills button').forEach(x => x.classList.remove('is-active'));
     b.classList.add('is-active');
     currentFilter = b.dataset.filter;
+    resetPagination();
     renderList(currentFilter, document.getElementById('search').value);
   });
 });
 document.getElementById('search').addEventListener('input', e => {
+  resetPagination();
   renderList(currentFilter, e.target.value);
 });
 
