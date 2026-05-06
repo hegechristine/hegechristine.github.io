@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-05-06T11:51:43.426Z",
+  "updatedAt": "2026-05-06T11:59:32.691Z",
   "channel": {
     "title": "The Edit",
     "description": "The Edit er podkasten for deg som vil bygge en business som passer livet du vil leve – uten at alt hviler på deg. Her deler Hege Christine ærlige refleksjoner, praktiske strategier og små edits som gjør businessen din enklere å drive. Du får korte episoder om strategi, systemer, salg og smart arbeid – og dypere samtaler med gjester som deler sine reiser, valg og erfaringer. Dette er podkasten for deg som vil jobbe smartere, ta bedre beslutninger og bygge en bærekraftig business med mer ro og bedre struktur. Strategisk. Ærlig. Praktisk. Velkommen til The Edit!",
@@ -8,7 +8,11 @@
     "appleShowUrl": "https://podcasts.apple.com/us/podcast/the-edit/id1857930330",
     "rssUrl": "https://anchor.fm/s/4f734584/podcast/rss",
     "episodeCount": 24,
-    "author": "Hege Christine"
+    "author": "Hege Christine",
+    "stats": {
+      "rating": "5",
+      "ratingPlatform": "Spotify"
+    }
   },
   "episodes": [
     {
@@ -95,7 +99,7 @@
       "imageUrl": "https://d3t3ozftmdmh3i.cloudfront.net/staging/podcast_uploaded_nologo/13229545/13229545-1764775912328-a3788a7dba0e8.jpg",
       "season": "2026",
       "episode": "15",
-      "guest": "Hva",
+      "guest": null,
       "type": "samtale",
       "appleEpisodeUrl": "https://podcasts.apple.com/us/podcast/20-hva-om-du-kan-sitte-igjen-med-mer-ved-%C3%A5-gj%C3%B8re-mindre/id1857930330?i=1000761220333&uo=4"
     },
@@ -161,7 +165,7 @@
       "imageUrl": "https://d3t3ozftmdmh3i.cloudfront.net/staging/podcast_uploaded_episode/13229545/13229545-1774273094444-f55a7c02d0755.jpg",
       "season": "2026",
       "episode": "12",
-      "guest": null,
+      "guest": "Ane Hagen",
       "type": "samtale",
       "appleEpisodeUrl": "https://podcasts.apple.com/us/podcast/17-fra-sms-chat-til-ai-automatisering-ane-hagen-bygde/id1857930330?i=1000756917974&uo=4"
     },

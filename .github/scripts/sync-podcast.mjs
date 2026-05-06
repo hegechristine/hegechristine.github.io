@@ -178,7 +178,11 @@ const episodes = items.map((item, idx) => {
     imageUrl,
     season: getText(item['itunes:season']),
     episode: getText(item['itunes:episode']),
-    guest: detectGuest(rawTitle),
+    guest: (() => {
+      const override = config.guestOverrides?.[String(epNumFromTitle)];
+      if (override !== undefined) return override || null;
+      return detectGuest(rawTitle);
+    })(),
     type: 'samtale',
   };
 });
@@ -227,6 +231,7 @@ const output = {
     rssUrl: config.rssUrl,
     episodeCount: episodes.length,
     author: getText(channel['itunes:author']) || getText(channel['dc:creator']),
+    stats: config.stats || {},
   },
   episodes: episodes.slice(0, config.maxEpisodes || 50),
 };

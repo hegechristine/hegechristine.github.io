@@ -1206,11 +1206,16 @@
   }
 
   /* ============== KAJABI-SKJEMA-OVERRIDE ============== */
-  .newsletter__form-wrap { position: relative; }
+  .newsletter__form-wrap {
+    position: relative;
+    max-width: 420px;
+    width: 100%;
+    justify-self: end;
+  }
 
   body .newsletter__form.hc-kajabi-form {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+    display: flex;
+    flex-direction: column;
     gap: var(--space-3);
     align-items: stretch;
   }
@@ -1762,7 +1767,7 @@ function parseSeasonFromDate(pubDate) {
   return Math.max(1, d.getFullYear() - launchYear + 1);
 }
 
-function updateHeroStats(episodes) {
+function updateHeroStats(episodes, channel = {}) {
   const epCount = document.getElementById('ep-count');
   if (epCount) epCount.textContent = String(episodes.length);
 
@@ -1785,7 +1790,7 @@ function updateHeroStats(episodes) {
     if (sinceEl) sinceEl.textContent = String(launchYear);
   }
 
-  // Topbar "Sesong XX" — bruk nyeste episodes sesongnummer
+  // Topbar "Sesong XX"
   if (episodes.length) {
     const latestSeason = episodes[0].season;
     const topbarRight = document.querySelectorAll('.topbar__right span');
@@ -1794,17 +1799,38 @@ function updateHeroStats(episodes) {
     }
   }
 
-  // About-stats: total antall episoder + antall sesonger
-  const seasonCount = new Set(episodes.map(e => e.season)).size;
+  // About-stats: 3 stats — timer med innhold, episoder, rating
   const aboutStats = document.querySelectorAll('.about__stats .stat');
-  if (aboutStats.length >= 2) {
-    const epStat = aboutStats[1];
-    const num = epStat.querySelector('.stat__num');
-    const label = epStat.querySelector('.stat__label');
+
+  // Stat 0: Total timer innhold (auto fra RSS)
+  if (aboutStats[0]) {
+    const totalSec = episodes.reduce((a, e) => a + (e.durSec || 0), 0);
+    const totalHours = Math.max(1, Math.round(totalSec / 3600));
+    const num = aboutStats[0].querySelector('.stat__num');
+    const label = aboutStats[0].querySelector('.stat__label');
+    if (num) num.textContent = String(totalHours);
+    if (label) label.textContent = totalHours === 1 ? 'Time med innhold' : 'Timer med innhold';
+  }
+
+  // Stat 1: Episode count + sesonger (auto)
+  if (aboutStats[1]) {
+    const seasonCount = new Set(episodes.map(e => e.season)).size;
+    const num = aboutStats[1].querySelector('.stat__num');
+    const label = aboutStats[1].querySelector('.stat__label');
     if (num) num.textContent = String(episodes.length);
     if (label) {
       const seasonWord = seasonCount === 1 ? 'sesong' : 'sesonger';
       label.textContent = `Episoder, ${seasonCount} ${seasonWord}`;
+    }
+  }
+
+  // Stat 2: Rating (manuell, fra feed.config.json)
+  if (aboutStats[2] && channel.stats) {
+    const num = aboutStats[2].querySelector('.stat__num');
+    const label = aboutStats[2].querySelector('.stat__label');
+    if (num && channel.stats.rating) num.textContent = channel.stats.rating;
+    if (label && channel.stats.ratingPlatform) {
+      label.textContent = `På ${channel.stats.ratingPlatform}`;
     }
   }
 }
@@ -1840,7 +1866,7 @@ async function loadEpisodes() {
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     const data = await res.json();
     EPISODES = (data.episodes || []).map(mapEpisode);
-    updateHeroStats(EPISODES);
+    updateHeroStats(EPISODES, data.channel || {});
     if (EPISODES.length) updateFeatured(EPISODES[0]);
     renderList();
   } catch (err) {

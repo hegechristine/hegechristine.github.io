@@ -4,5 +4,12 @@
   "appleShowId": "1857930330",
   "appleShowUrl": "https://podcasts.apple.com/us/podcast/the-edit/id1857930330",
   "maxEpisodes": 50,
-  "_comment": "Endre rssUrl/showIds hvis podcasten flyttes. Auto-sync kjører via .github/workflows/sync-podcast.yml"
+  "guestOverrides": {
+    "17": "Ane Hagen"
+  },
+  "stats": {
+    "rating": "5",
+    "ratingPlatform": "Spotify"
+  },
+  "_comment": "guestOverrides: episode-nr som key. stats.rating: oppdater manuelt når den endres."
 }
