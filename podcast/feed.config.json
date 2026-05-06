@@ -1,0 +1,6 @@
+{
+  "rssUrl": "https://anchor.fm/s/4f734584/podcast/rss",
+  "spotifyShowUrl": "https://open.spotify.com/show/286EpL6ZfSuJVB47nXSQbZ",
+  "maxEpisodes": 50,
+  "_comment": "Endre rssUrl hvis podcasten flyttes. Auto-sync kjører via .github/workflows/sync-podcast.yml"
+}

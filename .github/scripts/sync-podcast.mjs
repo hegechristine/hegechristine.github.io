@@ -1,0 +1,177 @@
+#!/usr/bin/env node
+import fs from 'fs/promises';
+import path from 'path';
+import { XMLParser } from 'fast-xml-parser';
+
+const ROOT = path.resolve(path.dirname(new URL(import.meta.url).pathname), '..', '..');
+const CONFIG_PATH = path.join(ROOT, 'podcast', 'feed.config.json');
+const OUTPUT_PATH = path.join(ROOT, 'podcast', 'episodes.json');
+
+const config = JSON.parse(await fs.readFile(CONFIG_PATH, 'utf-8'));
+
+if (!config.rssUrl || config.rssUrl.startsWith('REPLACE_')) {
+  console.log('No RSS URL configured. Update podcast/feed.config.json');
+  process.exit(0);
+}
+
+console.log(`Fetching ${config.rssUrl}...`);
+const res = await fetch(config.rssUrl, {
+  headers: { 'User-Agent': 'hegechristine.github.io podcast sync' },
+});
+if (!res.ok) {
+  console.error(`Fetch failed: ${res.status} ${res.statusText}`);
+  process.exit(1);
+}
+const xml = await res.text();
+
+const parser = new XMLParser({
+  ignoreAttributes: false,
+  attributeNamePrefix: '',
+  textNodeName: '_text',
+  cdataPropName: '_cdata',
+  parseAttributeValue: false,
+  trimValues: true,
+  processEntities: false,
+});
+
+const data = parser.parse(xml);
+const channel = data?.rss?.channel;
+if (!channel) {
+  console.error('No <channel> found in RSS');
+  process.exit(1);
+}
+
+const items = Array.isArray(channel.item) ? channel.item : (channel.item ? [channel.item] : []);
+console.log(`Found ${items.length} items`);
+
+function getText(node) {
+  if (node === undefined || node === null) return '';
+  if (typeof node === 'string') return node;
+  if (typeof node === 'number') return String(node);
+  if (node._cdata) return Array.isArray(node._cdata) ? node._cdata.join('') : node._cdata;
+  if (node._text) return String(node._text);
+  return '';
+}
+
+function stripHtml(html) {
+  if (!html) return '';
+  return html
+    .replace(/<[^>]+>/g, ' ')
+    .replace(/&nbsp;/g, ' ')
+    .replace(/&amp;/g, '&')
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>')
+    .replace(/&quot;/g, '"')
+    .replace(/&#39;/g, "'")
+    .replace(/[⁠​-‍﻿]/g, '')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+function shortDesc(html, maxLen = 220) {
+  const text = stripHtml(html);
+  if (text.length <= maxLen) return text;
+  const cut = text.slice(0, maxLen).replace(/\s+\S*$/, '');
+  return cut + '…';
+}
+
+function parseEpisodeNumber(title) {
+  const m = title.match(/^(\d+)\s*[-–—.:]/);
+  return m ? parseInt(m[1], 10) : null;
+}
+
+function cleanTitle(title) {
+  return title.replace(/^\d+\s*[-–—.:]\s*/, '').trim();
+}
+
+function parseDuration(d) {
+  if (!d) return { display: '', seconds: 0 };
+  const str = String(d).trim();
+  if (/^\d+$/.test(str)) {
+    const total = parseInt(str, 10);
+    return { display: formatDuration(total), seconds: total };
+  }
+  const parts = str.split(':').map(p => parseInt(p, 10));
+  let seconds = 0;
+  if (parts.length === 3) seconds = parts[0] * 3600 + parts[1] * 60 + parts[2];
+  else if (parts.length === 2) seconds = parts[0] * 60 + parts[1];
+  return { display: formatDuration(seconds), seconds };
+}
+
+function formatDuration(s) {
+  if (!s) return '';
+  const h = Math.floor(s / 3600);
+  const m = Math.floor((s % 3600) / 60);
+  if (h > 0) return `${h}t ${m}m`;
+  return `${m} min`;
+}
+
+function formatDate(dateStr) {
+  const d = new Date(dateStr);
+  if (isNaN(d.getTime())) return dateStr;
+  const months = ['jan.', 'feb.', 'mar.', 'apr.', 'mai', 'jun.', 'jul.', 'aug.', 'sep.', 'okt.', 'nov.', 'des.'];
+  return `${d.getDate()}. ${months[d.getMonth()]} ${d.getFullYear()}`;
+}
+
+function isNew(dateStr, days = 14) {
+  const d = new Date(dateStr);
+  if (isNaN(d.getTime())) return false;
+  return (Date.now() - d.getTime()) < days * 24 * 60 * 60 * 1000;
+}
+
+function detectGuest(title) {
+  // Pattern: "X om ..." or "X: ..." or "fra X" — heuristics, optional
+  const m = title.match(/[:–—-]\s*([^:–—-]+?)\s+om\s+/i);
+  if (m) return m[1].trim();
+  return null;
+}
+
+const episodes = items.map((item, idx) => {
+  const rawTitle = getText(item.title);
+  const description = getText(item.description) || getText(item['itunes:summary']);
+  const epNumFromTitle = parseEpisodeNumber(rawTitle);
+  const dur = parseDuration(item['itunes:duration']);
+  const guid = getText(item.guid);
+  const pubDate = getText(item.pubDate);
+  const audioUrl = item.enclosure?.url || '';
+  const episodeUrl = getText(item.link);
+  const imageUrl = item['itunes:image']?.href || channel['itunes:image']?.href || '';
+
+  return {
+    id: guid || `ep-${idx}`,
+    n: epNumFromTitle || (items.length - idx),
+    title: cleanTitle(rawTitle),
+    rawTitle,
+    desc: shortDesc(description),
+    fullDesc: stripHtml(description),
+    date: formatDate(pubDate),
+    pubDate,
+    isNew: isNew(pubDate),
+    dur: dur.display,
+    durationSeconds: dur.seconds,
+    audioUrl,
+    episodeUrl,
+    imageUrl,
+    season: getText(item['itunes:season']),
+    episode: getText(item['itunes:episode']),
+    guest: detectGuest(rawTitle),
+    type: 'samtale',
+  };
+});
+
+const output = {
+  updatedAt: new Date().toISOString(),
+  channel: {
+    title: getText(channel.title),
+    description: stripHtml(getText(channel.description)),
+    imageUrl: channel['itunes:image']?.href || channel.image?.url || '',
+    spotifyShowUrl: config.spotifyShowUrl || '',
+    rssUrl: config.rssUrl,
+    episodeCount: episodes.length,
+    author: getText(channel['itunes:author']) || getText(channel['dc:creator']),
+  },
+  episodes: episodes.slice(0, config.maxEpisodes || 50),
+};
+
+await fs.writeFile(OUTPUT_PATH, JSON.stringify(output, null, 2) + '\n', 'utf-8');
+console.log(`✓ Wrote ${output.episodes.length} episodes to ${path.relative(ROOT, OUTPUT_PATH)}`);

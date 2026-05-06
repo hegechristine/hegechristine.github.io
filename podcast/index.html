@@ -1609,81 +1609,93 @@
      SCRIPTS
      ======================================================== -->
 <script>
-/* ---------- Episode data (would come from RSS in real app) ---------- */
-const EPISODES = [
-  { id: 'ep-42', n: 42, season: 3, type: 'solo',  title: 'Når <em>nok</em> er nok',
-    desc: 'Om signalene som forteller deg at det er på tide å skjære, ikke skalere. En episode om å redigere — i business og i livet.',
-    date: '5. mai 2026', dur: '47 min', durSec: 47*60, art: 'rust', glyph: '42',
-    notes: 'Vi snakker om hvordan «mer» har blitt en refleks for de fleste gründere — og hvor langt du faktisk kommer ved å gjøre det motsatte. Når du bør stoppe et tilbud, slutte å ta nye kunder, og hva som skjer på den andre siden av mindre.',
-    chapters: ['00:00 Intro — den nye refleksen', '04:12 Tre signaler om å skjære', '17:30 Case: kunden som halverte tilbudet sitt', '31:00 Hvordan slutte uten å miste fart', '42:00 Avsluttende refleksjon'],
-    isNew: true },
+/* ---------- Episode data: synced fra RSS via .github/scripts/sync-podcast.mjs ---------- */
+let EPISODES = [];
 
-  { id: 'ep-41', n: 41, season: 3, type: 'guest', title: 'Linn Holter om å bygge sakte',
-    desc: 'Forfatter og strategirådgiver Linn Holter om hvorfor de fleste skalerer for fort — og hvordan de som lykkes på lang sikt gjør det motsatte.',
-    date: '28. april 2026', dur: '52 min', durSec: 52*60, art: 'sage', glyph: '41', guest: 'Linn Holter',
-    notes: 'Linn har rådgitt over 80 selskaper i 15 år. I denne samtalen deler hun hva hun ser går igjen hos de som faktisk tjener penger lenge — og hvorfor det sjelden ligner på LinkedIn-feeden.',
-    chapters: ['00:00 Hvem er Linn?', '03:45 Sakte vs. fort: hva data viser', '21:00 «Compounding» i tjeneste-businesser', '38:00 Tre spørsmål før du skalerer', '49:30 Anbefalinger'],
-    isNew: true },
-
-  { id: 'ep-40', n: 40, season: 3, type: 'series', title: 'Pris-arkitektur · Del 3',
-    desc: 'Tredje og siste episode i miniserien om pris. Denne uken: hvordan kommunisere prisendring til eksisterende kunder uten at det blir kleint.',
-    date: '21. april 2026', dur: '38 min', durSec: 38*60, art: 'sand', glyph: '40',
-    notes: 'Avslutter miniserien med praktiske maler for hvordan du faktisk skriver e-posten. Inkluderer tre eksempler — for B2B, B2C og kursvirksomheter.',
-    chapters: ['00:00 Oppsummering del 1 + 2', '06:00 Tre måter å kommunisere oppgang', '19:00 Mal-eksempel: B2B-konsulent', '28:00 Hva som NESTEN alltid funker', '34:00 Avslutning'] },
-
-  { id: 'ep-39', n: 39, season: 3, type: 'series', title: 'Pris-arkitektur · Del 2',
-    desc: 'Hvorfor de fleste prismodeller er bygget feil vei — og hvordan du designer en som faktisk gjenspeiler verdien du leverer.',
-    date: '14. april 2026', dur: '44 min', durSec: 44*60, art: 'olive', glyph: '39',
-    notes: 'Andre del av miniserien. Vi går fra «timer × rate» til verdi-basert prising — uten å lande i konsulentspråk.',
-    chapters: ['00:00 Oppsummering del 1', '08:00 Verdi-stigen: 4 nivåer', '22:00 Når timepris faktisk er riktig', '36:00 Vanlige feller'] },
-
-  { id: 'ep-38', n: 38, season: 3, type: 'series', title: 'Pris-arkitektur · Del 1',
-    desc: 'Vi starter en tredelt serie om pris. Denne uken: hvorfor pris er strategi — ikke tall — og hva det betyr i praksis.',
-    date: '7. april 2026', dur: '41 min', durSec: 41*60, art: 'rust', glyph: '38',
-    notes: 'Første del av miniserien. Vi etablerer rammeverket før vi går inn i detaljene de neste to ukene.',
-    chapters: ['00:00 Hvorfor pris-serie?', '06:00 Pris som signal', '17:00 Tre vanlige misforståelser', '29:00 Rammeverk for serien', '38:00 Forventninger'] },
-
-  { id: 'ep-37', n: 37, season: 3, type: 'guest', title: 'Marte Kopperud om å si nei',
-    desc: 'Designer og gründer Marte Kopperud om kunsten å takke nei til den gode muligheten — og hvorfor det er det som har gjort henne fri.',
-    date: '31. mars 2026', dur: '49 min', durSec: 49*60, art: 'sage', glyph: '37', guest: 'Marte Kopperud',
-    notes: 'Marte takket nei til to investeringsrunder og en oppkjøpsmulighet. I denne samtalen forteller hun hvorfor — og hva som måtte være på plass før hun kunne gjøre det.',
-    chapters: ['00:00 Bakgrunn', '07:00 Første nei: investorrunde', '24:00 Hva som måtte være på plass', '38:00 Andre nei: oppkjøpet', '46:00 Hva hun ville sagt til seg selv'] },
-
-  { id: 'ep-36', n: 36, season: 3, type: 'solo', title: 'Tre vaner som gir meg energi',
-    desc: 'En kortere episode om de tre vanene som faktisk har holdt etter fem år — og som har formet hvordan jeg jobber.',
-    date: '24. mars 2026', dur: '28 min', durSec: 28*60, art: 'sand', glyph: '36' },
-
-  { id: 'ep-35', n: 35, season: 3, type: 'guest', title: 'Tor Erik om bærekraftig vekst',
-    desc: 'Tor Erik Solheim, CFO og gründer, om hva som faktisk skjer med en business når man velger 20% i stedet for 80% vekst.',
-    date: '17. mars 2026', dur: '54 min', durSec: 54*60, art: 'olive', glyph: '35', guest: 'Tor Erik Solheim' },
-
-  { id: 'ep-34', n: 34, season: 3, type: 'solo', title: 'Hva jeg lærte av et halvt år offline',
-    desc: 'Jeg tok et halvt sabbatsår fra alle SoMe og e-post. Her er hva som overrasket meg — og hva jeg tar med tilbake.',
-    date: '10. mars 2026', dur: '36 min', durSec: 36*60, art: 'rust', glyph: '34' },
-
-  { id: 'ep-33', n: 33, season: 3, type: 'guest', title: 'Sigrid Bonde Tusvik om humor og strategi',
-    desc: 'Komiker og forretningskvinne Sigrid Bonde Tusvik om hva stand-up har lært henne om publikum, posisjonering og prising.',
-    date: '3. mars 2026', dur: '58 min', durSec: 58*60, art: 'sage', glyph: '33', guest: 'Sigrid Bonde Tusvik' },
-
-  { id: 'ep-32', n: 32, season: 2, type: 'series', title: 'Sesong 02 · Avslutning',
-    desc: 'Sesongavslutning. Tre tanker jeg sitter igjen med — og hva som kommer i sesong tre.',
-    date: '24. feb 2026', dur: '32 min', durSec: 32*60, art: 'sand', glyph: '32' },
-
-  { id: 'ep-31', n: 31, season: 2, type: 'guest', title: 'Anne Berit om å lede uten å mase',
-    desc: 'Lederutvikler Anne Berit Røstad om hvordan de beste lederne hun har fulgt klarer det motsatte av det mange tenker.',
-    date: '17. feb 2026', dur: '46 min', durSec: 46*60, art: 'olive', glyph: '31', guest: 'Anne Berit Røstad' },
-
-  { id: 'ep-30', n: 30, season: 2, type: 'solo', title: 'Mitt enkleste produktivitetsgrep',
-    desc: 'Det som har hatt størst effekt på dypere arbeid hos meg er ett enkelt grep. Hvorfor det funker, og hvordan jeg gjør det.',
-    date: '10. feb 2026', dur: '24 min', durSec: 24*60, art: 'rust', glyph: '30' },
-];
-
+const ART_VARIANTS = ['rust', 'sage', 'sand', 'olive'];
 const ART_GLYPHS = {
   rust: ['◆','◢','■','▲'],
   sage: ['◐','○','◑','◇'],
   sand: ['◈','◉','□','◊'],
   olive: ['◮','▣','◧','▦']
 };
+
+function mapEpisode(raw, idx) {
+  return {
+    id: raw.id,
+    n: raw.n,
+    season: parseSeasonFromDate(raw.pubDate),
+    type: raw.guest ? 'guest' : 'solo',
+    title: raw.title,
+    desc: raw.desc,
+    date: raw.date,
+    dur: raw.dur,
+    durSec: raw.durationSeconds || 0,
+    art: ART_VARIANTS[idx % ART_VARIANTS.length],
+    glyph: String(raw.n || idx + 1),
+    notes: raw.fullDesc,
+    chapters: [],
+    isNew: !!raw.isNew,
+    guest: raw.guest || null,
+    episodeUrl: raw.episodeUrl || '',
+    audioUrl: raw.audioUrl || '',
+    imageUrl: raw.imageUrl || '',
+  };
+}
+
+function parseSeasonFromDate(pubDate) {
+  const d = new Date(pubDate);
+  if (isNaN(d.getTime())) return 1;
+  const launchYear = 2024;
+  return Math.max(1, d.getFullYear() - launchYear + 1);
+}
+
+function updateHeroStats(episodes) {
+  const epCount = document.getElementById('ep-count');
+  if (epCount) epCount.textContent = String(episodes.length);
+
+  const valid = episodes.filter(e => e.durSec > 0);
+  if (valid.length) {
+    const avg = Math.round(valid.reduce((a, e) => a + e.durSec, 0) / valid.length);
+    const h = Math.floor(avg / 3600);
+    const m = Math.floor((avg % 3600) / 60);
+    const s = avg % 60;
+    const display = `${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+    const heroMeta = document.querySelectorAll('.hero__meta b');
+    if (heroMeta.length >= 4) heroMeta[3].textContent = display;
+  }
+}
+
+function updateFeatured(latest) {
+  if (!latest) return;
+  const titleEl = document.getElementById('featured-art-title');
+  const metaEl = document.getElementById('featured-meta');
+  const artNum = document.querySelector('.featured__art-num');
+  const playBtn = document.querySelector('.featured__play');
+
+  if (titleEl) titleEl.textContent = latest.title;
+  if (metaEl) metaEl.textContent = `${latest.date} · ${latest.dur}`;
+  if (artNum) artNum.textContent = `EP ${String(latest.n).padStart(2,'0')} · Sesong ${String(latest.season).padStart(2,'0')}`;
+  if (playBtn) playBtn.dataset.playId = latest.id;
+}
+
+async function loadEpisodes() {
+  try {
+    const res = await fetch('episodes.json?t=' + Date.now());
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const data = await res.json();
+    EPISODES = (data.episodes || []).map(mapEpisode);
+    updateHeroStats(EPISODES);
+    if (EPISODES.length) updateFeatured(EPISODES[0]);
+    renderList();
+  } catch (err) {
+    console.error('Could not load episodes:', err);
+    const list = document.getElementById('ep-list');
+    if (list) {
+      list.innerHTML = `<div style="padding: var(--space-7); text-align:center; color: var(--olive-600); font-family: var(--font-editorial); font-style: italic; font-size: var(--text-xl);">Kunne ikke laste episoder akkurat nå.</div>`;
+    }
+  }
+}
 
 /* ---------- Render episode list ---------- */
 const list = document.getElementById('ep-list');
@@ -1744,7 +1756,7 @@ function renderList(filter='all', q='') {
   epCountEl.textContent = EPISODES.length;
 }
 
-renderList();
+loadEpisodes();
 
 /* ---------- Filter pills + search ---------- */
 let currentFilter = 'all';
@@ -1840,6 +1852,12 @@ function setPlayerEpisode(ep) {
 function playEpisode(id) {
   const ep = EPISODES.find(e => e.id === id);
   if (!ep) return;
+  // Open Spotify episode page i ny fane (ekte data har ekte URL)
+  if (ep.episodeUrl) {
+    window.open(ep.episodeUrl, '_blank', 'noopener');
+    return;
+  }
+  // Fallback: in-page demo-spiller (brukes kun hvis episodeUrl mangler)
   if (activeEpId !== id) {
     setPlayerEpisode(ep);
     activeEpId = id;
