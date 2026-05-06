@@ -1346,9 +1346,8 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: var(--space-5);
+    justify-content: space-between;
+    gap: var(--space-6);
   }
   .guest-cta__label {
     font-family: 'JetBrains Mono', monospace;
@@ -1371,11 +1370,20 @@
   .guest-cta__prompt {
     font-family: 'Newsreader', 'Cormorant Garamond', serif;
     font-style: italic;
-    font-size: var(--text-xl);
-    line-height: 1.3;
+    font-size: var(--text-lg);
+    line-height: 1.4;
     color: var(--soft-ink);
     margin: 0;
+    flex: 1;
+    min-width: 0;
     text-wrap: balance;
+  }
+  @media (max-width: 768px) {
+    .guest-cta__inner {
+      flex-wrap: wrap;
+      gap: var(--space-4);
+    }
+    .guest-cta__prompt { flex-basis: 100%; }
   }
   .guest-cta__prompt em {
     color: var(--soft-rust);
