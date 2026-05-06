@@ -823,15 +823,10 @@
 
   /* ---------- NEWSLETTER ---------- */
   .newsletter {
-    padding: var(--space-8) var(--space-7);
+    padding: var(--space-8) var(--space-8);
     background: var(--ink-600); color: var(--cream-100);
-    display: grid; grid-template-columns: 1.2fr 1fr; gap: var(--space-6);
-    max-width: 1080px;
-    margin-left: auto;
-    margin-right: auto;
     width: 100%;
     box-sizing: border-box;
-    align-items: center;
     position: relative; overflow: hidden;
   }
   .newsletter::before {
@@ -840,6 +835,17 @@
       linear-gradient(rgba(239,230,212,0.06) 1px, transparent 1px),
       linear-gradient(90deg, rgba(239,230,212,0.06) 1px, transparent 1px);
     background-size: 40px 40px;
+  }
+  .newsletter__inner {
+    max-width: 1080px;
+    margin: 0 auto;
+    width: 100%;
+    box-sizing: border-box;
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: var(--space-6);
+    align-items: center;
+    position: relative;
   }
   .newsletter__text { position: relative; }
   .newsletter__eyebrow {
@@ -1594,25 +1600,27 @@
 
 <!-- ========== NEWSLETTER ========== -->
 <section class="newsletter" id="newsletter">
-  <div class="newsletter__text">
-    <div class="newsletter__eyebrow">Nyhetsbrev</div>
-    <h2 class="newsletter__h">Hold deg <em>oppdatert.</em></h2>
-    <p class="newsletter__p">Få beskjed når en ny episode slippes — og noen ærlige tanker rett i innboksen hver uke.</p>
-  </div>
+  <div class="newsletter__inner">
+    <div class="newsletter__text">
+      <div class="newsletter__eyebrow">Nyhetsbrev</div>
+      <h2 class="newsletter__h">Hold deg <em>oppdatert.</em></h2>
+      <p class="newsletter__p">Få beskjed når en ny episode slippes — og noen ærlige tanker rett i innboksen hver uke.</p>
+    </div>
 
-  <div class="newsletter__form-wrap" id="podcast-newsletter-wrap">
-    <form class="newsletter__form hc-kajabi-form" id="podcast-newsletter-form" data-kajabi-form-id="349307" novalidate>
-      <input type="text" name="name" placeholder="Navn" required autocomplete="name" />
-      <input type="email" name="email" placeholder="navn@e-post.no" required autocomplete="email" />
-      <button type="submit">Meld meg på</button>
-      <div class="newsletter__msg" data-form-message></div>
-    </form>
+    <div class="newsletter__form-wrap" id="podcast-newsletter-wrap">
+      <form class="newsletter__form hc-kajabi-form" id="podcast-newsletter-form" data-kajabi-form-id="349307" novalidate>
+        <input type="text" name="name" placeholder="Navn" required autocomplete="name" />
+        <input type="email" name="email" placeholder="navn@e-post.no" required autocomplete="email" />
+        <button type="submit">Meld meg på</button>
+        <div class="newsletter__msg" data-form-message></div>
+      </form>
 
-    <div class="newsletter__success" id="podcast-newsletter-success" aria-live="polite">
-      <div class="newsletter__success-mark" aria-hidden="true">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+      <div class="newsletter__success" id="podcast-newsletter-success" aria-live="polite">
+        <div class="newsletter__success-mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        <p class="newsletter__success-text">Takk! Du er på listen — sjekk innboksen din om litt.</p>
       </div>
-      <p class="newsletter__success-text">Takk! Du er på listen — sjekk innboksen din om litt.</p>
     </div>
   </div>
 
