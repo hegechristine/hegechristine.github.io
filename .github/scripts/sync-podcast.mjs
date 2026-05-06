@@ -68,6 +68,28 @@ function stripHtml(html) {
     .trim();
 }
 
+// Behold HTML, fjern bare farlige tags + sett alle lenker til target=_blank.
+// Konverter dash-only avsnitt til <hr>.
+function sanitizeHtml(html) {
+  if (!html) return '';
+  let out = html
+    // Fjern usikre tagger
+    .replace(/<script[\s\S]*?<\/script>/gi, '')
+    .replace(/<style[\s\S]*?<\/style>/gi, '')
+    .replace(/<iframe[\s\S]*?<\/iframe>/gi, '')
+    // Fjern usynlige tegn (zero-width)
+    .replace(/[⁠​-‍﻿]/g, '')
+    // Konverter dash-paragrafer til <hr>
+    .replace(/<p>\s*<strong>\s*-{4,}\s*<\/strong>\s*<\/p>/g, '<hr>')
+    .replace(/<p>\s*-{4,}\s*<\/p>/g, '<hr>')
+    // Sørg for target=_blank på lenker (la det stå hvis allerede satt)
+    .replace(/<a\s+([^>]*?)>/gi, (m, attrs) => {
+      if (/target\s*=/.test(attrs)) return m;
+      return `<a ${attrs} target="_blank" rel="noopener noreferrer">`;
+    });
+  return out.trim();
+}
+
 function shortDesc(html, maxLen = 220) {
   const text = stripHtml(html);
   if (text.length <= maxLen) return text;
@@ -144,6 +166,7 @@ const episodes = items.map((item, idx) => {
     rawTitle,
     desc: shortDesc(description),
     fullDesc: stripHtml(description),
+    descriptionHtml: sanitizeHtml(description),
     date: formatDate(pubDate),
     pubDate,
     isNew: isNew(pubDate),

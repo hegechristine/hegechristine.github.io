@@ -444,7 +444,7 @@
     padding: 5px 9px;
   }
   .featured__art {
-    aspect-ratio: 16 / 11;
+    aspect-ratio: 1 / 1;
     background: var(--ink-600);
     color: var(--cream-100);
     position: relative; overflow: hidden;
@@ -1280,6 +1280,37 @@
     background-color: var(--soft-ink) !important;
     color: transparent !important;
   }
+
+  /* Show notes-formatering */
+  .ep__shownotes p {
+    margin: 0 0 var(--space-3, 12px);
+    line-height: 1.55;
+  }
+  .ep__shownotes p:last-child { margin-bottom: 0; }
+  .ep__shownotes a {
+    color: var(--soft-rust);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    text-decoration-thickness: 1px;
+  }
+  .ep__shownotes a:hover { color: var(--soft-rust-deep); }
+  .ep__shownotes strong { font-weight: 600; }
+  .ep__shownotes em {
+    font-family: 'Cormorant Garamond', 'Newsreader', serif;
+    font-style: italic;
+    font-weight: 500;
+  }
+  .ep__shownotes hr {
+    border: none;
+    height: 1px;
+    background: rgba(46, 50, 48, 0.18);
+    margin: var(--space-4, 16px) 0;
+  }
+  .ep__shownotes ul, .ep__shownotes ol {
+    margin: 0 0 var(--space-3, 12px);
+    padding-left: 1.4em;
+  }
+  .ep__shownotes li { margin-bottom: 4px; }
 </style>
 </head>
 <body>
@@ -1657,6 +1688,7 @@ function mapEpisode(raw, idx) {
     art: ART_VARIANTS[idx % ART_VARIANTS.length],
     glyph: String(raw.n || idx + 1),
     notes: raw.fullDesc,
+    notesHtml: raw.descriptionHtml || '',
     chapters: [],
     isNew: !!raw.isNew,
     guest: raw.guest || null,
@@ -1852,7 +1884,11 @@ function expandEpisode(id) {
   if (!ep || !epEl) return;
   const expand = document.createElement('div');
   expand.className = 'ep__expand';
-  const notesHtml = ep.notes ? `<p>${ep.notes}</p>` : '<p style="color: var(--olive-500); font-style: italic;">Show notes legges automatisk til når episoden synker neste gang.</p>';
+  const notesHtml = ep.notesHtml
+    ? `<div class="ep__shownotes">${ep.notesHtml}</div>`
+    : (ep.notes
+        ? `<div class="ep__shownotes"><p>${ep.notes}</p></div>`
+        : '<p style="color: var(--olive-500); font-style: italic;">Show notes legges automatisk til når episoden synker neste gang.</p>');
   const chapHtml = ep.chapters?.length ? `<h4>Kapitler</h4><ul>${ep.chapters.map(c => `<li>${c}</li>`).join('')}</ul>` : '';
   expand.innerHTML = `
     <div>
