@@ -1701,7 +1701,8 @@ function mapEpisode(raw, idx) {
 function parseSeasonFromDate(pubDate) {
   const d = new Date(pubDate);
   if (isNaN(d.getTime())) return 1;
-  const launchYear = 2024;
+  // The Edit startet i 2025 (få episoder), 2026 ble egen sesong 2
+  const launchYear = 2025;
   return Math.max(1, d.getFullYear() - launchYear + 1);
 }
 
@@ -1817,14 +1818,13 @@ function renderList(filter='all', q='') {
     el.dataset.id = ep.id;
     const newBadge = ep.isNew ? `<span class="new">NY</span>` : '';
     const guestBit = ep.guest ? `<span class="guest">m/ ${ep.guest}</span>` : '';
-    const seasonBit = `<span>S0${ep.season}</span>`;
 
     const artInner = ep.imageUrl
       ? `<img src="${ep.imageUrl}" alt="${ep.title}" class="ep__art-img" loading="lazy" />`
       : `<span class="ep__art-glyph">${ep.glyph}</span>`;
 
     el.innerHTML = `
-      <div class="ep__num">EP ${String(ep.n).padStart(2,'0')}<span>S0${ep.season}</span></div>
+      <div class="ep__num">EP ${String(ep.n).padStart(2,'0')}</div>
       <div class="ep__art ep__art--${ep.art}${ep.imageUrl ? ' ep__art--has-image' : ''}">
         ${artInner}
       </div>
@@ -1834,7 +1834,6 @@ function renderList(filter='all', q='') {
         <div class="ep__meta">
           ${newBadge}
           ${guestBit}
-          ${seasonBit}
           <span>${ep.date}</span>
           <span>${ep.dur}</span>
         </div>
