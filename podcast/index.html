@@ -1900,13 +1900,15 @@ function expandEpisode(id) {
         ? `<div class="ep__shownotes"><p>${ep.notes}</p></div>`
         : '<p style="color: var(--olive-500); font-style: italic;">Show notes legges automatisk til når episoden synker neste gang.</p>');
   const chapHtml = ep.chapters?.length ? `<h4>Kapitler</h4><ul>${ep.chapters.map(c => `<li>${c}</li>`).join('')}</ul>` : '';
+  const SPOTIFY_SHOW = 'https://open.spotify.com/show/286EpL6ZfSuJVB47nXSQbZ';
+  const APPLE_SHOW = 'https://podcasts.apple.com/us/podcast/the-edit/id1857930330';
+
   expand.innerHTML = `
     <div>
       <h4>Vis i</h4>
       <div class="links" style="flex-direction: column; align-items: flex-start;">
-        <a class="ext-link" href="#"><span class="dot"></span>Spotify</a>
-        <a class="ext-link" href="#"><span class="dot"></span>Apple</a>
-        <a class="ext-link" href="#"><span class="dot"></span>YouTube</a>
+        <a class="ext-link" href="${SPOTIFY_SHOW}" target="_blank" rel="noopener"><span class="dot"></span>Spotify</a>
+        <a class="ext-link" href="${APPLE_SHOW}" target="_blank" rel="noopener"><span class="dot"></span>Apple Podcasts</a>
       </div>
     </div>
     <div>
