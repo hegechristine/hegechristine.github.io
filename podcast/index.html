@@ -1324,6 +1324,19 @@
     color: transparent !important;
   }
 
+  /* About-stats: gul stripe på toppen + stjerne-styling */
+  body .about__stats .stat {
+    border-top-color: var(--soft-yellow) !important;
+    border-top-width: 3px !important;
+  }
+  .stat__star {
+    font-size: 0.6em;
+    color: var(--soft-yellow);
+    margin-left: 0.15em;
+    vertical-align: 0.2em;
+    font-family: 'Archivo', sans-serif;
+  }
+
   /* "Vis mer"-knapp */
   .show-more-btn {
     width: 100%;
@@ -1828,9 +1841,11 @@ function updateHeroStats(episodes, channel = {}) {
   if (aboutStats[2] && channel.stats) {
     const num = aboutStats[2].querySelector('.stat__num');
     const label = aboutStats[2].querySelector('.stat__label');
-    if (num && channel.stats.rating) num.textContent = channel.stats.rating;
+    if (num && channel.stats.rating) {
+      num.innerHTML = `${channel.stats.rating}<span class="stat__star" aria-hidden="true">★</span>`;
+    }
     if (label && channel.stats.ratingPlatform) {
-      label.textContent = `På ${channel.stats.ratingPlatform}`;
+      label.textContent = `Vurdering på ${channel.stats.ratingPlatform}`;
     }
   }
 }
