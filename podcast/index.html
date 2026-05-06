@@ -625,22 +625,25 @@
   .ep__art--rust  { background: var(--rust-400); color: var(--cream-100); }
   .ep__art--olive { background: var(--olive-600); color: var(--cream-100); }
   .ep__art-glyph { position: relative; z-index: 1; line-height: 1; }
-  .ep__art .new {
-    position: absolute;
-    top: 6px;
-    left: 6px;
-    z-index: 2;
-    background: var(--soft-rust);
-    color: var(--soft-bg);
+  .ep > .new {
+    color: var(--soft-rust);
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
     font-family: var(--font-mono);
-    font-size: 9px;
-    font-weight: 700;
-    letter-spacing: 0.12em;
-    padding: 3px 6px;
-    border-radius: 2px;
-    line-height: 1;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    justify-self: start;
+    align-self: end;
   }
-  .ep__art .new::before { display: none; }
+  .ep > .new::before {
+    content: "";
+    width: 6px; height: 6px;
+    background: var(--soft-rust);
+    border-radius: 999px;
+  }
 
   .ep__body { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
   .ep__title {
@@ -1258,15 +1261,17 @@
 
     .ep {
       grid-template-columns: 72px 1fr auto;
-      grid-template-rows: auto auto;
+      grid-template-rows: auto auto auto;
       grid-template-areas:
+        "badge .        ."
         "art   title    actions"
         "meta  meta     meta";
       column-gap: var(--space-4);
-      row-gap: var(--space-3);
+      row-gap: var(--space-2);
       padding: var(--space-4) 0;
       align-items: center;
     }
+    .ep > .new { grid-area: badge; margin-bottom: 2px; }
     .ep__art {
       grid-area: art;
       width: 72px; height: 72px;
@@ -2116,9 +2121,9 @@ function renderList(filter='all', q='') {
 
     el.innerHTML = `
       <div class="ep__num">${epLabel}</div>
+      ${newBadge}
       <div class="ep__art ep__art--${ep.art}${ep.imageUrl ? ' ep__art--has-image' : ''}">
         ${artInner}
-        ${newBadge}
       </div>
       <div class="ep__body">
         <h3 class="ep__title">${ep.title}</h3>
