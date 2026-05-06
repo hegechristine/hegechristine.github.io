@@ -544,9 +544,9 @@
     background: var(--cream-50);
     border: 1.5px solid var(--ink-600);
     color: var(--ink-600);
-    font-family: var(--font-body); font-size: var(--text-sm);
-    padding: 10px 14px 10px 38px;
-    width: 240px;
+    font-family: var(--font-body); font-size: var(--text-base);
+    padding: 12px 16px 12px 42px;
+    width: 320px;
     border-radius: var(--radius-1);
     outline: none;
   }
@@ -1259,8 +1259,8 @@
     .ep__body { grid-area: body; gap: 4px; }
     .ep__actions { grid-area: actions; justify-self: end; align-self: center; }
     .ep__title {
-      font-size: var(--text-sm);
-      line-height: 1.25;
+      font-size: var(--text-xs);
+      line-height: 1.3;
       display: -webkit-box;
       -webkit-line-clamp: 2;
       -webkit-box-orient: vertical;
@@ -1287,11 +1287,29 @@
       padding: 7px 10px;
     }
 
-    /* Platforms — venstrestilt stripe + label, mindre padding */
+    /* Platforms — venstrestilt stripe + label, knapper på én linje */
     .platforms {
       padding: var(--space-5) var(--space-5);
       justify-content: flex-start;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: var(--space-4);
     }
+    .platforms__list {
+      width: 100%;
+      flex-wrap: nowrap;
+      justify-content: flex-start;
+      gap: 6px;
+    }
+    .plat-btn {
+      flex: 1;
+      justify-content: center;
+      padding: 9px 8px;
+      font-size: 12px;
+      gap: 6px;
+      min-width: 0;
+    }
+    .plat-btn .icon { width: 14px; height: 14px; flex-shrink: 0; }
 
     /* Bli gjest — venstrestilt stripe + label, mindre side-padding */
     .guest-cta { padding: var(--space-6) var(--space-5); }
@@ -1690,12 +1708,6 @@
         <line x1="9.5" y1="9.5" x2="13" y2="13" stroke="#5E5F4C" stroke-width="1.5" stroke-linecap="round"/>
       </svg>
       <input type="text" placeholder="Søk episoder…" id="search" />
-    </div>
-    <div class="filter-pills" role="tablist">
-      <button class="is-active" data-filter="all">Alle</button>
-      <button data-filter="solo">Solo</button>
-      <button data-filter="guest">Gjester</button>
-      <button data-filter="series">Serie</button>
     </div>
   </div>
 </section>
