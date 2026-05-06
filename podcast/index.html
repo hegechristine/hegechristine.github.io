@@ -1270,6 +1270,23 @@
     .ep__meta { font-size: 9px; gap: var(--space-3); flex-wrap: wrap; }
     .ep__play { width: 36px; height: 36px; }
 
+    /* Utvidet episode-visning — stable kolonner */
+    .ep__expand {
+      grid-template-columns: 1fr;
+      gap: var(--space-4);
+      padding: var(--space-4) 0 var(--space-3);
+    }
+    .ep__expand p {
+      font-size: var(--text-sm);
+      max-width: 100%;
+      word-wrap: break-word;
+    }
+    .ep__expand .links { gap: var(--space-2); }
+    .ep__expand .ext-link {
+      font-size: 10px;
+      padding: 7px 10px;
+    }
+
     /* Platforms — venstrestilt stripe + label, mindre padding */
     .platforms {
       padding: var(--space-5) var(--space-5);
