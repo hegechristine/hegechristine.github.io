@@ -168,18 +168,25 @@
     color: var(--soft-accent);
     letter-spacing: 0;
   }
-  /* Wordmarks — same wide tracking as cover */
-  .topbar__brand .wordmark, .ds-footer__wordmark {
+  /* Wordmark i topbar — Hege Christines brand-logo:
+     "Hege" i Archivo Black, "Christine" i Newsreader Italic Rust */
+  .topbar__brand .wordmark {
+    font-family: 'Archivo', sans-serif;
+    font-weight: 900;
+    letter-spacing: -0.02em;
+    color: var(--soft-ink);
+  }
+  .topbar__brand .wordmark em {
+    font-family: 'Newsreader', serif;
+    font-style: italic;
+    font-weight: 500;
+    color: var(--soft-rust) !important;
+    letter-spacing: -0.01em;
+  }
+  .ds-footer__wordmark {
     font-family: 'CS Calory', 'Cormorant Garamond', serif;
     font-weight: 400;
     letter-spacing: 0.08em;
-  }
-  .topbar__brand .wordmark em {
-    font-family: 'Cormorant Garamond', serif;
-    font-style: italic;
-    font-weight: 500;
-    color: var(--soft-accent);
-    letter-spacing: 0;
   }
   /* Episode titles — slightly less tracking, since they're smaller */
   body .ep__title {
