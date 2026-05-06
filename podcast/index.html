@@ -1739,7 +1739,8 @@
 
 <div class="page-scroll-spacer"></div>
 
-<!-- ========== ADMIN DRAWER ========== -->
+<!-- ========== ADMIN DRAWER (REMOVED — was design-tool mock) ========== -->
+<!--
 <button class="admin-toggle" id="admin-toggle" title="Admin / Auto-sync">
   <span class="dot"></span> Auto-sync
 </button>
@@ -1836,6 +1837,7 @@
 
   </div>
 </aside>
+-->
 
 <!-- ========================================================
      SCRIPTS
@@ -2280,175 +2282,10 @@ document.getElementById('player-close').addEventListener('click', () => {
   syncEpButtons();
 });
 
-/* ---------- Admin drawer ---------- */
-const admin = document.getElementById('admin');
-const overlay = document.getElementById('admin-overlay');
-const openAdmin = () => { admin.classList.add('is-open'); overlay.classList.add('is-open'); };
-const closeAdmin = () => { admin.classList.remove('is-open'); overlay.classList.remove('is-open'); };
-document.getElementById('admin-toggle').addEventListener('click', openAdmin);
-document.getElementById('admin-close').addEventListener('click', closeAdmin);
-overlay.addEventListener('click', closeAdmin);
+/* Admin drawer fjernet — var design-tool mock */
 
-document.getElementById('autosync-toggle').addEventListener('click', e => {
-  e.currentTarget.classList.toggle('is-on');
-});
+/* Sync button + rebuild button fjernet — var design-tool mock. Ekte sync kjører via .github/workflows/sync-podcast.yml */
 
-/* Sync button — simulate Claude Code job */
-const syncBtn = document.getElementById('sync-btn');
-const log = document.getElementById('log');
-const lastSyncStatus = document.getElementById('last-sync-status');
-
-function logLine(html) {
-  const ts = new Date().toLocaleTimeString('nb-NO', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
-  log.innerHTML += `<span class="ts">${ts}</span>${html}<br/>`;
-  log.scrollTop = log.scrollHeight;
-}
-
-const SYNC_STEPS = [
-  { delay: 200,  html: '<span class="info">→ claude-code sync-feed --source rss</span>' },
-  { delay: 800,  html: '<span class="info">→ Henter https://feeds.transistor.fm/hege-christine</span>' },
-  { delay: 600,  html: '<span class="ok">✓ 200 OK · 18.4 KB · 43 items</span>' },
-  { delay: 500,  html: '<span class="info">→ Diff mot /content/episodes/*.md</span>' },
-  { delay: 700,  html: '<span class="new">+ Ny episode oppdaget: «Pris-arkitektur · Etterord»</span>' },
-  { delay: 600,  html: '<span class="info">→ Genererer show notes (Claude · Sonnet 4.5)</span>' },
-  { delay: 1400, html: '<span class="ok">✓ Show notes + kapitler ferdig (1.2k tokens)</span>' },
-  { delay: 500,  html: '<span class="info">→ git add . && git commit -m "ep-43 published"</span>' },
-  { delay: 600,  html: '<span class="ok">✓ commit a4b1c92 · push origin main</span>' },
-  { delay: 900,  html: '<span class="ok">✓ Deploy hegechristine.no · 4.1s</span>' },
-  { delay: 400,  html: '<span class="info">— Ferdig. 1 ny episode publisert.</span>' },
-];
-
-syncBtn.addEventListener('click', async () => {
-  if (syncBtn.classList.contains('is-syncing')) return;
-  syncBtn.classList.add('is-syncing');
-  syncBtn.innerHTML = '<span class="spin"></span> Synker…';
-  lastSyncStatus.textContent = 'Synker…';
-  lastSyncStatus.className = 'panel__status panel__status--warn';
-
-  for (const step of SYNC_STEPS) {
-    await new Promise(r => setTimeout(r, step.delay));
-    logLine(step.html);
-  }
-
-  syncBtn.classList.remove('is-syncing');
-  syncBtn.innerHTML = '<span class="glyph">⚡</span> Sync nå';
-  lastSyncStatus.textContent = 'Synket nå';
-  lastSyncStatus.className = 'panel__status panel__status--ok';
-});
-
-document.getElementById('rebuild-btn').addEventListener('click', () => {
-  logLine('<span class="info">→ npm run build && deploy</span>');
-  setTimeout(() => logLine('<span class="ok">✓ Site rebuilt · 4.3s</span>'), 800);
-});
-
-/* ---------- Tweaks panel wiring ---------- */
-const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
-  "accent": "#6B4A30",
-  "layout": "list",
-  "showAdmin": true,
-  "heroStyle": "editorial"
-}/*EDITMODE-END*/;
-
-let tweaks = { ...TWEAK_DEFAULTS };
-
-function applyTweaks() {
-  // Accent
-  document.documentElement.style.setProperty('--rust-400', tweaks.accent);
-  // Compute strong shade simply
-  document.documentElement.style.setProperty('--rust-500', tweaks.accent);
-
-  // Layout
-  document.body.classList.toggle('layout-grid', tweaks.layout === 'grid');
-
-  // Admin visibility
-  document.getElementById('admin-toggle').style.display = tweaks.showAdmin ? '' : 'none';
-}
-applyTweaks();
-
-window.addEventListener('message', (e) => {
-  if (!e.data) return;
-  if (e.data.type === '__activate_edit_mode') openTweaks();
-  if (e.data.type === '__deactivate_edit_mode') closeTweaks();
-});
-
-let tweaksRoot = null;
-function openTweaks() {
-  if (!tweaksRoot) buildTweaksPanel();
-  tweaksRoot.style.display = '';
-}
-function closeTweaks() { if (tweaksRoot) tweaksRoot.style.display = 'none'; }
-
-function buildTweaksPanel() {
-  tweaksRoot = document.createElement('div');
-  tweaksRoot.style.cssText = `position: fixed; right: 20px; top: 80px; z-index: 100;
-    width: 280px; background: var(--cream-50); border: 1.5px solid var(--ink-600);
-    box-shadow: 8px 8px 0 var(--ink-600); padding: 16px; font-family: var(--font-body);`;
-  tweaksRoot.innerHTML = `
-    <div style="display:flex; justify-content:space-between; align-items:center; padding-bottom:10px; border-bottom: 1.5px solid var(--ink-600); margin-bottom: 14px;">
-      <strong style="font-family: var(--font-display); font-weight: 800; letter-spacing: -0.01em;">Tweaks</strong>
-      <button id="tw-close" style="background:transparent; border: 1.5px solid var(--ink-600); width:24px; height:24px; cursor:pointer; line-height:1;">×</button>
-    </div>
-
-    <div style="margin-bottom: 14px;">
-      <div style="font-family: var(--font-mono); font-size:10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--olive-600); margin-bottom: 8px;">Aksentfarge</div>
-      <div id="tw-colors" style="display:flex; gap: 6px;"></div>
-    </div>
-
-    <div style="margin-bottom: 14px;">
-      <div style="font-family: var(--font-mono); font-size:10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--olive-600); margin-bottom: 8px;">Layout</div>
-      <div id="tw-layout" style="display:grid; grid-template-columns: 1fr 1fr; gap: 4px; padding: 3px; border: 1.5px solid var(--ink-600);"></div>
-    </div>
-
-    <div style="margin-bottom: 14px; display:flex; justify-content: space-between; align-items: center;">
-      <span style="font-family: var(--font-mono); font-size:10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--olive-600);">Vis admin-panel</span>
-      <button id="tw-admin" class="toggle ${tweaks.showAdmin ? 'is-on' : ''}"></button>
-    </div>
-  `;
-  document.body.appendChild(tweaksRoot);
-
-  const colorsEl = tweaksRoot.querySelector('#tw-colors');
-  const COLORS = ['#6B4A30', '#4A3322', '#8B5E3C', '#A0703D'];
-  COLORS.forEach(c => {
-    const b = document.createElement('button');
-    b.style.cssText = `width: 36px; height: 36px; border: 2px solid ${c === tweaks.accent ? 'var(--ink-600)' : 'transparent'}; background: ${c}; cursor: pointer; padding: 0;`;
-    b.addEventListener('click', () => { setTweak('accent', c); rebuildTweaks(); });
-    colorsEl.appendChild(b);
-  });
-
-  const layoutEl = tweaksRoot.querySelector('#tw-layout');
-  ['list','grid'].forEach(opt => {
-    const b = document.createElement('button');
-    b.textContent = opt === 'list' ? 'Liste' : 'Grid';
-    b.style.cssText = `padding: 8px; border: 0; cursor: pointer; font-family: var(--font-mono); font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; ${tweaks.layout === opt ? 'background: var(--ink-600); color: var(--cream-100);' : 'background: transparent; color: var(--olive-600);'}`;
-    b.addEventListener('click', () => { setTweak('layout', opt); rebuildTweaks(); });
-    layoutEl.appendChild(b);
-  });
-
-  tweaksRoot.querySelector('#tw-admin').addEventListener('click', () => {
-    setTweak('showAdmin', !tweaks.showAdmin);
-    rebuildTweaks();
-  });
-
-  tweaksRoot.querySelector('#tw-close').addEventListener('click', () => {
-    closeTweaks();
-    window.parent.postMessage({type: '__edit_mode_dismissed'}, '*');
-  });
-}
-
-function rebuildTweaks() {
-  if (!tweaksRoot) return;
-  tweaksRoot.remove(); tweaksRoot = null;
-  buildTweaksPanel();
-}
-
-function setTweak(key, value) {
-  tweaks[key] = value;
-  applyTweaks();
-  window.parent.postMessage({type: '__edit_mode_set_keys', edits: { [key]: value }}, '*');
-}
-
-// Announce after listener is set up
-window.parent.postMessage({type: '__edit_mode_available'}, '*');
 </script>
 
 <!-- ===== KAJABI NEWSLETTER FORM ===== -->
