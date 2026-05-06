@@ -626,9 +626,9 @@
   .ep__art--rust  { background: var(--rust-400); color: var(--cream-100); }
   .ep__art--olive { background: var(--olive-600); color: var(--cream-100); }
   .ep__art-glyph { position: relative; z-index: 1; line-height: 1; }
-  .ep > .new {
+  .ep__new-top {
     color: var(--soft-rust);
-    display: inline-flex;
+    display: none;
     align-items: center;
     gap: 5px;
     font-family: var(--font-mono);
@@ -639,7 +639,20 @@
     justify-self: start;
     align-self: end;
   }
-  .ep > .new::before {
+  .ep__new-top::before {
+    content: "";
+    width: 6px; height: 6px;
+    background: var(--soft-rust);
+    border-radius: 999px;
+    animation: pulse 1.8s var(--ease-out) infinite;
+  }
+  .ep__meta .ep__new-inline {
+    color: var(--soft-rust);
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+  }
+  .ep__meta .ep__new-inline::before {
     content: "";
     width: 6px; height: 6px;
     background: var(--soft-rust);
@@ -1273,7 +1286,12 @@
       padding: var(--space-4) 0;
       align-items: center;
     }
-    .ep > .new { grid-area: badge; margin-bottom: 2px; }
+    .ep__new-top {
+      display: inline-flex;
+      grid-area: badge;
+      margin-bottom: 2px;
+    }
+    .ep__meta .ep__new-inline { display: none; }
     .ep__art {
       grid-area: art;
       width: 72px; height: 72px;
@@ -2121,9 +2139,12 @@ function renderList(filter='all', q='') {
 
     const epLabel = ep.n ? `EP ${String(ep.n).padStart(2,'0')}` : 'TRAILER';
 
+    const newTop = ep.isNew ? `<span class="new ep__new-top">NY</span>` : '';
+    const newInline = ep.isNew ? `<span class="new ep__new-inline">NY</span>` : '';
+
     el.innerHTML = `
       <div class="ep__num">${epLabel}</div>
-      ${newBadge}
+      ${newTop}
       <div class="ep__art ep__art--${ep.art}${ep.imageUrl ? ' ep__art--has-image' : ''}">
         ${artInner}
       </div>
@@ -2131,6 +2152,7 @@ function renderList(filter='all', q='') {
         <h3 class="ep__title">${ep.title}</h3>
         <p class="ep__desc">${ep.desc}</p>
         <div class="ep__meta">
+          ${newInline}
           <span>${ep.date}</span>
           <span>${ep.dur}</span>
           ${guestBit}
