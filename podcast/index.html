@@ -1335,7 +1335,7 @@
   .guest-cta {
     border-top: 1px solid var(--ink-600);
     border-bottom: 1px solid var(--ink-600);
-    padding: var(--space-7) var(--space-8);
+    padding: var(--space-6) var(--space-8);
     background: var(--soft-bg-deep);
   }
   .guest-cta__inner {
@@ -1346,9 +1346,9 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
     flex-wrap: wrap;
-    gap: var(--space-6);
+    gap: var(--space-5);
   }
   .guest-cta__label {
     font-family: 'JetBrains Mono', monospace;
@@ -1371,12 +1371,11 @@
   .guest-cta__prompt {
     font-family: 'Newsreader', 'Cormorant Garamond', serif;
     font-style: italic;
-    font-size: var(--text-lg);
-    line-height: 1.4;
+    font-size: var(--text-xl);
+    line-height: 1.3;
     color: var(--soft-ink);
     margin: 0;
-    flex: 1;
-    min-width: 240px;
+    text-wrap: balance;
   }
   .guest-cta__prompt em {
     color: var(--soft-rust);
@@ -1385,17 +1384,18 @@
   .guest-cta__link {
     display: inline-flex;
     align-items: center;
-    gap: 8px;
+    gap: 10px;
     font-family: 'JetBrains Mono', monospace;
-    font-size: 0.85rem;
+    font-size: 0.8rem;
     font-weight: 600;
     color: var(--soft-ink);
     text-decoration: none;
-    padding: 12px 20px;
+    padding: 10px 16px;
     border: 1.5px solid var(--soft-ink);
     border-radius: 3px;
     transition: all 0.18s ease;
     flex-shrink: 0;
+    letter-spacing: 0.02em;
   }
   .guest-cta__link:hover {
     background: var(--soft-rust);
@@ -1737,105 +1737,7 @@
 
 <div class="page-scroll-spacer"></div>
 
-<!-- ========== ADMIN DRAWER (REMOVED — was design-tool mock) ========== -->
-<!--
-<button class="admin-toggle" id="admin-toggle" title="Admin / Auto-sync">
-  <span class="dot"></span> Auto-sync
-</button>
-
-<div class="admin__overlay" id="admin-overlay"></div>
-
-<aside class="admin" id="admin" aria-label="Admin">
-  <div class="admin__head">
-    <h3>
-      <span class="glyph">⌘</span>
-      Auto-sync · Claude Code
-    </h3>
-    <button class="admin__close" id="admin-close">×</button>
-  </div>
-  <div class="admin__body">
-
-    <!-- Feed status -->
-    <div class="panel">
-      <div class="panel__head">
-        <h4 class="panel__title"><b>01</b> RSS-feed</h4>
-        <span class="panel__status panel__status--ok">Tilkoblet</span>
-      </div>
-      <div class="feed-row"><span class="k">Kilde</span><span class="v">https://feeds.transistor.fm/<b>hege-christine</b></span></div>
-      <div class="feed-row"><span class="k">Format</span><span class="v">RSS 2.0 · iTunes-namespace</span></div>
-      <div class="feed-row"><span class="k">Sist sjekket</span><span class="v">For 12 min siden · 200 OK</span></div>
-      <div class="feed-row"><span class="k">Episoder</span><span class="v"><b>42</b> publisert · 0 i kø</span></div>
-    </div>
-
-    <!-- Schedule -->
-    <div class="panel">
-      <div class="panel__head">
-        <h4 class="panel__title"><b>02</b> Schedule</h4>
-        <button class="toggle is-on" id="autosync-toggle" aria-label="Aktiver auto-sync"></button>
-      </div>
-      <div class="next-run">
-        <span>Neste kjøring</span>
-        <b>I dag · 18:00 CET</b>
-      </div>
-      <div>
-        <div class="schedule-row">
-          <span class="what">claude-code sync-feed</span>
-          <span class="when">Hver time</span>
-        </div>
-        <div class="schedule-row">
-          <span class="what">generer show notes (AI)</span>
-          <span class="when">Ved ny episode</span>
-        </div>
-        <div class="schedule-row">
-          <span class="what">post til socials</span>
-          <span class="when">Tirsdager 09:00</span>
-        </div>
-        <div class="schedule-row">
-          <span class="what">commit + deploy</span>
-          <span class="when">Ved endringer</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- Sync action -->
-    <div class="panel">
-      <div class="panel__head">
-        <h4 class="panel__title"><b>03</b> Manuell sync</h4>
-        <span class="panel__status panel__status--ok" id="last-sync-status">Synket nå</span>
-      </div>
-      <p style="margin:0; font-size: var(--text-sm); color: var(--olive-700); line-height: 1.5;">Kjør Claude Code-jobben nå for å hente eventuelle nye episoder fra RSS-feeden, generere show notes og publisere.</p>
-      <div class="sync-actions">
-        <button class="sync-btn" id="sync-btn">
-          <span class="glyph">⚡</span> Sync nå
-        </button>
-        <button class="sync-btn sync-btn--ghost" id="rebuild-btn">
-          Re-build site
-        </button>
-      </div>
-    </div>
-
-    <!-- Activity log -->
-    <div class="panel">
-      <div class="panel__head">
-        <h4 class="panel__title"><b>04</b> Aktivitetslogg</h4>
-        <span class="panel__status panel__status--ok">Live</span>
-      </div>
-      <div class="log" id="log">
-<span class="ts">14:32:08</span><span class="info">→ claude-code sync-feed --source rss</span><br/>
-<span class="ts">14:32:09</span><span class="ok">✓ Hentet feed (42 items, 200 OK, 18 KB)</span><br/>
-<span class="ts">14:32:10</span><span class="info">→ Sammenligner med /content/episodes/*.md</span><br/>
-<span class="ts">14:32:10</span><span class="warn">! Ingen nye episoder. 42/42 publisert.</span><br/>
-<span class="ts">14:32:11</span><span class="ok">✓ Sjekket transcripts — 3 ble ferdig</span><br/>
-<span class="ts">14:32:12</span><span class="info">→ Genererer show notes for ep-39, 40, 41…</span><br/>
-<span class="ts">14:32:18</span><span class="ok">✓ Show notes lagret · git commit a3f9b21</span><br/>
-<span class="ts">14:32:19</span><span class="ok">✓ Deploy til hegechristine.no · 4.2s</span><br/>
-<span class="ts">14:32:19</span><span class="info">— Ferdig. Neste kjøring: 15:32:08</span>
-      </div>
-    </div>
-
-  </div>
-</aside>
--->
+<!-- Admin drawer fjernet — var en design-tool mockup. Ekte auto-sync kjører via GitHub Actions. -->
 
 <!-- ========================================================
      SCRIPTS
