@@ -55,8 +55,9 @@ https://www.hegechristine.no/forms/[FORM_ID]/embed.js
 
 For å finne FORM_ID: Logg inn i Kajabi → Marketing → Forms → klikk skjemaet → "Embed" → kopier URL.
 
-Aktive skjemaer (per nov 2026):
+Aktive skjemaer (per mai 2026):
 - `349307` — Nyhetsbrev (hovedliste)
+- `2149575768` — 150K Business Challenge (opt-in på sider.hegechristine.no/150k/)
 - _Legg til flere her etter hvert som de opprettes_
 
 ### Steg 2: Legg HTML-strukturen på sida
