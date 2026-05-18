@@ -337,6 +337,35 @@
   [data-form-message][data-state="success"] { color: var(--sand); }
   [data-form-message][data-state="error"] { color: var(--rust); }
 
+  /* ============ FOOTER ============ */
+  .page-foot {
+    position: relative;
+    z-index: 2;
+    background: var(--ink);
+    border-top: 1px solid rgba(239,230,212,0.1);
+    padding: 1rem 2.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  .kicker {
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 600;
+    font-size: 0.65rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--cream-soft);
+    text-decoration: none;
+    transition: color 0.15s;
+  }
+  a.kicker:hover { color: var(--sand); }
+  .page-foot-right { display: flex; gap: 1.5rem; }
+
+  /* Adjust .page to fit with footer */
+  .page { height: auto; min-height: calc(100vh - 50px); }
+
   /* ============ RESPONSIVE ============ */
   @media (max-width: 900px) {
     body { overflow-y: auto; }
@@ -432,11 +461,19 @@
     <!-- Skjult iframe for response -->
     <iframe name="kajabi-response-frame" class="kajabi-response-frame" aria-hidden="true"></iframe>
 
-    <p class="fine"><em>Disclaimer:</em> Uavhengig Kajabi-partner. Provisjon ved bestilling via lenke. Ikke ansatt, agent eller representant for Kajabi, LLC.</p>
+    <p class="fine">Ved å sende inn samtykker du til at navn og e-post lagres for å levere bonusene. Du kan melde deg av når som helst. <em>Disclaimer:</em> Uavhengig Kajabi-partner. Provisjon ved bestilling via lenke. Ikke ansatt, agent eller representant for Kajabi, LLC.</p>
 
   </main>
 
 </div>
+
+<footer class="page-foot">
+  <span class="kicker">© 2026 HEGECHRISTINE.NO</span>
+  <div class="page-foot-right">
+    <a href="/personvern" class="kicker">PERSONVERN</a>
+    <a href="/cookies" class="kicker">COOKIES</a>
+  </div>
+</footer>
 
 <script>
 (function() {
