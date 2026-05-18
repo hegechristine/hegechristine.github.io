@@ -278,7 +278,28 @@
     background: rgba(239,230,212,0.1);
   }
   input::placeholder { color: rgba(239,230,212,0.4); }
-  select { appearance: none; cursor: pointer; }
+  select {
+    width: 100%;
+    padding: 0.75rem 0.9rem;
+    background: rgba(239,230,212,0.06);
+    border: 1px solid rgba(239,230,212,0.2);
+    color: var(--cream);
+    font-family: 'Archivo', sans-serif;
+    font-size: 0.95rem;
+    border-radius: 3px;
+    appearance: none;
+    cursor: pointer;
+    background-image: linear-gradient(45deg, transparent 50%, var(--cream-soft) 50%), linear-gradient(135deg, var(--cream-soft) 50%, transparent 50%);
+    background-position: calc(100% - 18px) 50%, calc(100% - 13px) 50%;
+    background-size: 5px 5px, 5px 5px;
+    background-repeat: no-repeat;
+    padding-right: 2.2rem;
+  }
+  select:focus {
+    outline: none;
+    border-color: var(--sand);
+    background-color: rgba(239,230,212,0.1);
+  }
   select option { background: var(--ink); color: var(--cream); }
 
   button[type="submit"] {
@@ -449,6 +470,17 @@
         <input type="email" id="email" name="email" placeholder="navn@domene.no" required autocomplete="email">
       </div>
 
+      <div class="field-full">
+        <label for="plan">Plan du valgte</label>
+        <select id="plan" name="plan" required>
+          <option value="">Velg...</option>
+          <option value="Basic">Basic ($89,50/mnd)</option>
+          <option value="Growth">Growth ($124,50/mnd)</option>
+          <option value="Pro">Pro ($249,50/mnd)</option>
+          <option value="Annet">Annet</option>
+        </select>
+      </div>
+
       <button type="submit">Aktiver bonusene mine →</button>
       <div class="form-message" data-form-message></div>
     </form>
@@ -514,6 +546,8 @@
 
       const userName = customForm.querySelector('input[name="name"]').value.trim();
       const userEmail = customForm.querySelector('input[name="email"]').value.trim();
+      const planSelect = customForm.querySelector('select[name="plan"]');
+      const userPlan = planSelect ? planSelect.value : '';
 
       const emailInput = kajabiForm.querySelector('input[type="email"]');
       if (emailInput) emailInput.value = userEmail;
@@ -524,6 +558,18 @@
         if (inp.name && inp.name.toLowerCase().indexOf('name') !== -1) {
           inp.value = userName;
           break;
+        }
+      }
+
+      // Map plan to Kajabi field (looks for text input or select containing "plan" in name)
+      if (userPlan) {
+        const kajabiInputs = kajabiForm.querySelectorAll('input[type="text"], select');
+        for (let i = 0; i < kajabiInputs.length; i++) {
+          const inp = kajabiInputs[i];
+          if (inp.name && inp.name.toLowerCase().indexOf('plan') !== -1) {
+            inp.value = userPlan;
+            break;
+          }
         }
       }
 
